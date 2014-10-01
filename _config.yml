@@ -1,6 +1,6 @@
 markdown: kramdown
 highlighter: pygments
-permalink: posts/:year/:month/:day/:title.html
+permalink: posts/:title.html
 paginate: 6
 paginate_path: page/:num
 
