@@ -16,7 +16,7 @@ author:
     email: xiajie9916@gmail.com # 邮箱地址
     weibo: http://weibo.com/u/5142885740 # 微博地址
     github: https://github.com/Jerry9916 # GitHub地址
-    logo: https://avatars0.githubusercontent.com/u/5382759?v=2&s=460 # logo地址
+    logo: /assets/img/avatar.jpg # logo地址
     douban:
         name: # 豆瓣地址名称
         key:  # 豆瓣API Key
