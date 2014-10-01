@@ -22,12 +22,11 @@
 
 	blog:
 		name:                  # 博客名称
+		sign:                  # 博客签名
 		description:           # 博客描述
 		title:                 # 网页标题
 		url:                   # 博客地址
 		duoshuo:               # 多说ID
-		tongji:                # 百度统计ID
-		qiniu:                 # 七牛云地址
 	author:
 		name:                  # 作者名称
 		email:                 # 邮箱地址
@@ -62,7 +61,7 @@ _posts文章可以在开头设置`duoshuo: false`来关闭。
 定位到博客目录，可以运行以下命令
 
 * 创建文章：`rake post title="Post Name"` 
-* 创建简版页面：`rake life title="Page Name"`
+* 创建简版页面：`rake simple title="Page Name"`
 * 创建页面： `rake page title="Page name"`
 
 ### 页面的使用
@@ -71,9 +70,9 @@ _posts文章可以在开头设置`duoshuo: false`来关闭。
 * 普通页面  
 layout项改为`blog`
 * 简版页面  
-layout项改为`life`
+layout项改为`simple`
 * 文章  
-_posts文件夹下的markdown文件的layout项改为`post`，使用简版页面就改成`life`
+_posts文件夹下的markdown文件的layout项改为`post`，使用简版页面就改成`simple`
 
 ### 生成静态博客
 把你的博客推送到GitHub或者其它支持Jekyll的代码托管网站就可以了。  

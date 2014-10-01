@@ -1,23 +1,22 @@
 markdown: kramdown
 highlighter: pygments
 permalink: posts/:title.html
-paginate: 6
+paginate: 4
 paginate_path: page/:num
 
 blog:
-    name: Jerry's Blog                                        # 博客名称
-    description:                                         # 博客描述
-    title: Jerry's Blog                                              # 网页标题
-    url: http://xiajie.org                                            # 博客地址
-    duoshuo: jerry9916                                             # 多说ID
-    tongji:                                              # 百度统计ID
-    qiniu:                                               # 七牛云地址
+    name: Jerry's Blog # 博客名称
+    sign: To strive to become a habit # 博客签名
+    description: This is Jerry's Blog # 博客描述
+    title: Jerry's Blog # 网页标题
+    url: http://xiajie.org # 博客地址
+    duoshuo: jerry9916 # 多说ID
 author:
-    name: Jerry Hsia                                                # 作者名称
-    email: xiajie9916@gmail.com                                              # 邮箱地址
-    weibo: http://weibo.com/u/5142885740                                              # 微博地址
-    github: https://github.com/Jerry9916                                            # GitHub地址
-    logo: https://avatars0.githubusercontent.com/u/5382759?v=2&s=460                                              # logo地址
+    name: Jerry Hsia # 作者名称
+    email: xiajie9916@gmail.com # 邮箱地址
+    weibo: http://weibo.com/u/5142885740 # 微博地址
+    github: https://github.com/Jerry9916 # GitHub地址
+    logo: https://avatars0.githubusercontent.com/u/5382759?v=2&s=460 # logo地址
     douban:
-        name:                                            # 豆瓣地址名称
-        key:                                             # 豆瓣API Key
+        name: # 豆瓣地址名称
+        key:  # 豆瓣API Key
