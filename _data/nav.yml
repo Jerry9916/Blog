@@ -1,0 +1,15 @@
+- href: /pages/timing.html
+  icon: fa fa-clock-o
+  title: 时间轴
+
+- href: /pages/category.html
+  icon: fa fa-tags
+  title: 分类
+
+- href: /pages/read.html
+  icon:  fa fa-book
+  title: 阅读
+
+- href: /pages/about.html
+  icon: fa fa-paper-plane-o
+  title: 关于
