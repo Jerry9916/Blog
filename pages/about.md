@@ -2,7 +2,7 @@
 author: Jerry Hsia
 title: 关于我
 excerpt:
-layout: blog
+layout: main
 views:
   - 100
 ---
