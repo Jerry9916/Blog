@@ -20,22 +20,22 @@
 ### 站点配置
 在`_config.yml`配置你的站点信息，详细配置如下：
 
-	blog:
-		name:                  # 博客名称
-		sign:                  # 博客签名
-		description:           # 博客描述
-		title:                 # 网页标题
-		url:                   # 博客地址
-		duoshuo:               # 多说ID
-	author:
-		name:                  # 作者名称
-		email:                 # 邮箱地址
-		weibo:                 # 微博地址
-		github:                # GitHub地址
-		logo:                  # logo地址
-		douban:
-			name:              # 豆瓣地址名称
-			key:               # 豆瓣API Key
+    blog:
+        name:                  # 博客名称
+        sign:                  # 博客签名
+        description:           # 博客描述
+        title:                 # 网页标题
+        url:                   # 博客地址
+        duoshuo:               # 多说ID
+    author:
+        name:                  # 作者名称
+        email:                 # 邮箱地址
+        weibo:                 # 微博地址
+        github:                # GitHub地址
+        logo:                  # logo地址
+        douban:
+            name:              # 豆瓣地址名称
+            key:               # 豆瓣API Key
 
 把以上这些选项的信息全改成你自己的，就配置完成了。
 
@@ -51,18 +51,11 @@ _posts文章可以在开头设置`duoshuo: false`来关闭。
 
 例如：
 
-	行内公式：
-	\\E=mc^2\\
-
-	行间公式：
-	$$E=mc^2$$
-
-### 创建文章/页面
-定位到博客目录，可以运行以下命令
-
-* 创建文章：`rake post title="Post Name"` 
-* 创建简版页面：`rake simple title="Page Name"`
-* 创建页面： `rake page title="Page name"`
+    行内公式：
+    \\E=mc^2\\
+    
+    行间公式：
+    $$E=mc^2$$
 
 ### 页面的使用
 修改的都是`markdown文件`
