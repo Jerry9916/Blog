@@ -148,7 +148,7 @@
     animEasingIn: 'linear',
     // the item(s) will be replaced every 3 seconds
     // note: for performance issues, the time "can't" be < 300 ms
-    interval: 3000,
+    interval: 1000,
     // if false the animations will not start
     // use false if onhover is true for example
     slideshow: true,
