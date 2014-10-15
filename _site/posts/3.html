@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="This is Jerry's Blog">
+  <meta name="author" content="Jerry Hsia">
+  
+  <meta name="keywords" content="我改进的ThinkPHP分页类, Jerry's Blog, Jerry Hsia">
+  
+  
+  <title>我改进的ThinkPHP分页类 - Jerry's Blog</title>
+  
+  
+  <link rel="canonical" href="http://xiajie.me/posts/3.html">
+  
+  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/public.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/light.js"></script>
+</head>
+<body>
+  <div id="blog">
+    <div class="sidebar">
+  <div class="profilepic">
+    <a href="/"><img src="/assets/img/avatar.jpg" alt="logo"></img></a>
+  </div>
+  <h1 class="title"><a href="/">Jerry's Blog</a></h1>
+  <h2 class="sub-title">To strive to become a habit</h2>
+  <nav id="nav">
+    <ul>
+    
+      <li><a href="/pages/timing.html"><i class="fa fa-clock-o"></i>&nbsp;时间轴</a></li>
+    
+      <li><a href="/pages/category.html"><i class="fa fa-tags"></i>&nbsp;分类</a></li>
+    
+      <li><a href="/pages/read.html"><i class="fa fa-book"></i>&nbsp;阅读</a></li>
+    
+      <li><a href="/pages/about.html"><i class="fa fa-paper-plane-o"></i>&nbsp;关于</a></li>
+    
+    </ul>
+  </nav>  
+  <nav id="sub-nav">
+    <a class="weibo " href="http://weibo.com/u/5142885740" title="新浪微博" target="_blank"><i class="fa fa-weibo"></i></a>
+    <a class="github" href="https://github.com/Jerry9916" title="GitHub" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    <a class="rss" href="/page/feed.xml" title="RSS订阅" target="_blank"><i class="fa fa-rss"></i></a>
+  </nav>
+</div>
+
+    <div class="main">
+    <header class="post-header">
+  <h1 class="post-title"><a href="/posts/3.html">我改进的ThinkPHP分页类</a></h2>
+  <p class="post-meta">
+    <i class="fa fa-calendar"></i>
+    2013年12月30日
+    <i class="space"></i>
+    <i class="fa fa-tags"></i>
+    <a class="post-category" href="/pages/category.html#php">php</a>	
+  </p>
+</header>
+<div class="post-main">
+<p>ThinkPHP是国内流行的MVC框架，官方的分页类 是把分页的显示字符串硬编码到函数中了，这在MVC开发模式中显然不合适，我在此进行了改进，改进的分页类Page.class.php如下：</p>
+
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// +----------------------------------------------------------------------</span>
+<span class="c1">// | ThinkPHP [ WE CAN DO IT JUST THINK IT ]</span>
+<span class="c1">// +----------------------------------------------------------------------</span>
+<span class="c1">// | Copyright (c) 2006-2012 http://thinkphp.cn All rights reserved.</span>
+<span class="c1">// +----------------------------------------------------------------------</span>
+<span class="c1">// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )</span>
+<span class="c1">// +----------------------------------------------------------------------</span>
+<span class="c1">// | Author: Jerry &lt;xiajie9916@gmail.com&gt;</span>
+<span class="c1">// +----------------------------------------------------------------------</span>
+<span class="c1">// | Blog: www.xiajie.org</span>
+<span class="c1">// +----------------------------------------------------------------------</span>
+
+<span class="k">class</span> <span class="nc">Page</span> <span class="p">{</span>
+    <span class="c1">// 分页栏每页显示的页数</span>
+    <span class="k">public</span> <span class="nv">$rollPage</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="c1">// 页数跳转时要带的参数</span>
+    <span class="k">public</span> <span class="nv">$parameter</span><span class="p">;</span>
+    <span class="c1">// 分页URL地址</span>
+    <span class="k">public</span> <span class="nv">$url</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="c1">// 默认列表每页显示行数</span>
+    <span class="k">public</span> <span class="nv">$listRows</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="c1">// 起始行数</span>
+    <span class="k">public</span> <span class="nv">$firstRow</span><span class="p">;</span>
+    <span class="c1">// 分页总页面数</span>
+    <span class="k">public</span> <span class="nv">$totalPages</span><span class="p">;</span>
+    <span class="c1">// 总行数</span>
+    <span class="k">public</span> <span class="nv">$totalRows</span><span class="p">;</span>
+    <span class="c1">// 当前页数</span>
+    <span class="k">public</span> <span class="nv">$nowPage</span><span class="p">;</span>
+    <span class="c1">// 分页的栏的总页数</span>
+    <span class="k">public</span> <span class="nv">$coolPages</span><span class="p">;</span>
+    <span class="c1">// 默认分页变量名</span>
+    <span class="k">public</span> <span class="nv">$varPage</span><span class="p">;</span>
+    <span class="c1">// 链接地址容器</span>
+    <span class="k">public</span> <span class="nv">$urls</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * 架构函数</span>
+<span class="sd">     * </span>
+<span class="sd">     * @access public</span>
+<span class="sd">     * @param array $totalRows</span>
+<span class="sd">     *            总的记录数</span>
+<span class="sd">     * @param array $listRows</span>
+<span class="sd">     *            每页显示记录数</span>
+<span class="sd">     * @param array $parameter</span>
+<span class="sd">     *            分页跳转的参数</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$totalRows</span><span class="p">,</span> <span class="nv">$listRows</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$parameter</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totalRows</span> <span class="o">=</span> <span class="nv">$totalRows</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parameter</span> <span class="o">=</span> <span class="nv">$parameter</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">varPage</span> <span class="o">=</span> <span class="nx">C</span><span class="p">(</span><span class="s1">&#39;VAR_PAGE&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="nx">C</span><span class="p">(</span><span class="s1">&#39;VAR_PAGE&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="s1">&#39;p&#39;</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$listRows</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">listRows</span> <span class="o">=</span> <span class="nb">intval</span><span class="p">(</span><span class="nv">$listRows</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totalPages</span> <span class="o">=</span> <span class="nb">ceil</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totalRows</span> <span class="o">/</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">listRows</span><span class="p">);</span> <span class="c1">// 总页数</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">coolPages</span> <span class="o">=</span> <span class="nb">ceil</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totalPages</span> <span class="o">/</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rollPage</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nowPage</span> <span class="o">=</span> <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">varPage</span><span class="p">])</span> <span class="o">?</span> <span class="nb">intval</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">varPage</span><span class="p">])</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nowPage</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nowPage</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totalPages</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nowPage</span> <span class="o">&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totalPages</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nowPage</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totalPages</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">firstRow</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">listRows</span> <span class="o">*</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nowPage</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">creatUrls</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * 生成需要的URL</span>
+<span class="sd">     * </span>
+<span class="sd">     * @return string</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">creatUrls</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totalRows</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+        <span class="nv">$p</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">varPage</span><span class="p">;</span>
+        <span class="nv">$nowCoolPage</span> <span class="o">=</span> <span class="nb">ceil</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nowPage</span> <span class="o">/</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rollPage</span><span class="p">);</span>
+        <span class="nv">$url</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parameter</span> <span class="o">&amp;&amp;</span> <span class="nb">is_string</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parameter</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nb">parse_str</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parameter</span><span class="p">,</span> <span class="nv">$parameter</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nb">is_array</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parameter</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$parameter</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parameter</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parameter</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nb">unset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="nx">C</span><span class="p">(</span><span class="s1">&#39;VAR_URL_PARAMS&#39;</span><span class="p">)]);</span>
+            <span class="nv">$var</span> <span class="o">=</span> <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$_POST</span> <span class="o">:</span> <span class="nv">$_GET</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$var</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$parameter</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nv">$parameter</span> <span class="o">=</span> <span class="nv">$var</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="nv">$parameter</span><span class="p">[</span><span class="nv">$p</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;__PAGE__&#39;</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">GROUP_NAME</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$url</span> <span class="o">=</span> <span class="nx">U</span><span class="p">(</span><span class="nx">GROUP_NAME</span> <span class="o">.</span> <span class="s2">&quot;/&quot;</span> <span class="o">.</span> <span class="nx">MODULE_NAME</span> <span class="o">.</span> <span class="s2">&quot;/&quot;</span> <span class="o">.</span> <span class="nx">ACTION_NAME</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$url</span> <span class="o">=</span> <span class="nx">U</span><span class="p">(</span><span class="nx">MODULE_NAME</span> <span class="o">.</span> <span class="s2">&quot;/&quot;</span> <span class="o">.</span> <span class="nx">ACTION_NAME</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nv">$parameter</span> <span class="o">=</span> <span class="nb">http_build_query</span><span class="p">(</span><span class="nv">$parameter</span><span class="p">);</span>
+        <span class="nv">$url</span> <span class="o">=</span> <span class="nv">$url</span> <span class="o">.</span> <span class="s2">&quot;?&quot;</span> <span class="o">.</span> <span class="nv">$parameter</span><span class="p">;</span>
+        <span class="nv">$upRow</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nowPage</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="nv">$downRow</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nowPage</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;up&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span> <span class="c1">// 上一页链接</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$upRow</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;up&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;__PAGE__&#39;</span><span class="p">,</span> <span class="nv">$upRow</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;down&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span> <span class="c1">// 下一页链接</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$downRow</span> <span class="o">&lt;=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totalPages</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;down&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;__PAGE__&#39;</span><span class="p">,</span> <span class="nv">$downRow</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span> <span class="c1">// 第1页链接</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;preRoll&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span> <span class="c1">// 上n页链接</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$nowCoolPage</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$preRow</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nowPage</span> <span class="o">-</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rollPage</span><span class="p">;</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;preRoll&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;__PAGE__&#39;</span><span class="p">,</span> <span class="nv">$preRow</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;__PAGE__&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;nextRoll&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span> <span class="c1">// 下n页</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;end&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span> <span class="c1">// 最后页</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$nowCoolPage</span> <span class="o">!=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">coolPages</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$nextRow</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nowPage</span> <span class="o">+</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rollPage</span><span class="p">;</span>
+            <span class="nv">$theEndRow</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totalPages</span><span class="p">;</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;nextRoll&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;__PAGE__&#39;</span><span class="p">,</span> <span class="nv">$nextRow</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;end&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;__PAGE__&#39;</span><span class="p">,</span> <span class="nv">$theEndRow</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">// 页码链接</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;nums&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rollPage</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$page</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$nowCoolPage</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rollPage</span> <span class="o">+</span> <span class="nv">$i</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$page</span> <span class="o">&lt;=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totalPages</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urls</span><span class="p">[</span><span class="s1">&#39;nums&#39;</span><span class="p">][</span><span class="nv">$page</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;__PAGE__&#39;</span><span class="p">,</span> <span class="nv">$page</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>控制器Action测试代码：</p>
+
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nx">import</span><span class="p">(</span><span class="s1">&#39;ORG.Util.Page&#39;</span><span class="p">);</span><span class="c1">// 导入分页类</span>
+<span class="nv">$count</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span><span class="c1">// 这里是结果总数，一般是查询数据库表得到</span>
+<span class="nv">$Page</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Page</span><span class="p">(</span><span class="nv">$count</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span><span class="c1">// 实例化分页类 传入总记录数和每页显示的记录数</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assign</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">,</span><span class="nv">$Page</span><span class="p">);</span><span class="c1">//将分页对象传入模板</span></code></pre></div>
+
+<p>有了模版中有了page对象后，就可以任意发挥啦：</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">共有{$page:totalRows}条记录，每页{$page:listRows}条 页码：{$page:nowPage}/{$page:totalPages}
+<span class="c">&lt;!--{neq name=&quot;page:urls[&#39;first&#39;]&quot; value=&quot;&quot;}--&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{$page-&gt;urls[&#39;first&#39;]}&quot;</span><span class="nt">&gt;</span>首页<span class="nt">&lt;/a&gt;</span>
+<span class="c">&lt;!--{/neq}--&gt;</span>
+<span class="c">&lt;!--{neq name=&quot;page:urls[&#39;preRoll&#39;]&quot; value=&quot;&quot;}--&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{$page-&gt;urls[&#39;preRoll&#39;]}&quot;</span><span class="nt">&gt;</span>前{$page:rollPage}页<span class="nt">&lt;/a&gt;</span>
+<span class="c">&lt;!--{/neq}--&gt;</span>
+<span class="c">&lt;!--{neq name=&quot;page:urls[&#39;up&#39;]&quot; value=&quot;&quot;}--&gt;</span>
+   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{$page-&gt;urls[&#39;up&#39;]}&quot;</span><span class="nt">&gt;</span>上一页<span class="nt">&lt;/a&gt;</span>
+<span class="c">&lt;!--{/neq}--&gt;</span>
+<span class="c">&lt;!--{volist name=&quot;page:urls[&#39;nums&#39;]&quot; id=&quot;data&quot;}--&gt;</span>
+<span class="ni">&amp;nbsp;&amp;nbsp;</span> <span class="ni">&amp;nbsp;</span><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{$data}&quot;</span> <span class="err">&lt;!</span><span class="na">--</span><span class="err">{</span><span class="na">eq</span> <span class="na">name=</span><span class="s">&quot;page:nowPage&quot;</span> <span class="na">value=</span><span class="s">&quot;$key&quot;</span><span class="err">}</span><span class="na">--</span><span class="nt">&gt;</span> style=&quot;font-weight:bold;&quot;<span class="c">&lt;!--{/eq}--&gt;</span>&gt;{$key}<span class="nt">&lt;/a&gt;</span>
+<span class="c">&lt;!--{/volist}--&gt;</span>
+<span class="c">&lt;!--{neq name=&quot;page:urls[&#39;down&#39;]&quot; value=&quot;&quot;}--&gt;</span>
+   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{$page-&gt;urls[&#39;down&#39;]}&quot;</span><span class="nt">&gt;</span>下一页<span class="nt">&lt;/a&gt;</span>
+<span class="c">&lt;!--{/neq}--&gt;</span>
+<span class="c">&lt;!--{neq name=&quot;page:urls[&#39;nextRoll&#39;]&quot; value=&quot;&quot;}--&gt;</span>
+   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{$page-&gt;urls[&#39;nextRoll&#39;]}&quot;</span><span class="nt">&gt;</span>后{$page:rollPage}页<span class="nt">&lt;/a&gt;</span>
+<span class="c">&lt;!--{/neq}--&gt;</span>
+<span class="c">&lt;!--{neq name=&quot;page:urls[&#39;end&#39;]&quot; value=&quot;&quot;}--&gt;</span>
+ <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{$page-&gt;urls[&#39;end&#39;]}&quot;</span><span class="nt">&gt;</span>尾页<span class="nt">&lt;/a&gt;</span>
+<span class="c">&lt;!--{/neq}--&gt;</span></code></pre></div>
+
+<p>注意：我使用的模版标签格式是&lt;!—-&gt;，别忘了换成你的哦！</p>
+
+<p>是不是更灵活、更好用了呢，当然适合自己的才是最好的，大家可以根据自己的喜好DIY吧！</p>
+
+</div>
+<div class="pagination">
+
+<a class="pagination-item newer" href="/posts/2.html"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;git常用命令</a>
+
+
+<a class="pagination-item older" href="/posts/4.html">一个好用的PHP字符串截取函数&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+
+</div>
+<style>#ds-reset .ds-avatar img{border-radius:50%;}</style>
+<div class="comments">
+  <div class="ds-thread" data-title="我改进的ThinkPHP分页类" data-thread-key="/posts/3" data-url="http://xiajie.me/posts/3.html"></div>
+  <script type="text/javascript">var duoshuoQuery = {short_name:"jerry9916"};(function(){var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = '/assets/js/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+</div>
+
+    
+    <footer>Copyright&nbsp;&copy;&nbsp;2014 <a href="http://xiajie.me">Jerry's Blog</a></footer>
+
+    
+    </div>
+  </div>    
+  <div id="top">
+    <a id="rocket" href="javascript:void(0);" title="返回顶部"><i></i></a>
+  </div>
+  
+</body>
+</html>

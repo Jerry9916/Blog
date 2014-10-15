@@ -1,0 +1,358 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="This is Jerry's Blog">
+  <meta name="author" content="Jerry Hsia">
+  
+  <meta name="keywords" content="Jerry's Blog, Jerry's Blog, This is Jerry's Blog, Jerry Hsia">
+  
+  
+  <title>Jerry's Blog</title>
+  
+  
+  <link rel="canonical" href="http://xiajie.me">
+  
+  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/public.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/light.js"></script>
+</head>
+<body>
+  <div id="blog">
+    <div class="sidebar">
+  <div class="profilepic">
+    <a href="/"><img src="/assets/img/avatar.jpg" alt="logo"></img></a>
+  </div>
+  <h1 class="title"><a href="/">Jerry's Blog</a></h1>
+  <h2 class="sub-title">To strive to become a habit</h2>
+  <nav id="nav">
+    <ul>
+    
+      <li><a href="/pages/timing.html"><i class="fa fa-clock-o"></i>&nbsp;时间轴</a></li>
+    
+      <li><a href="/pages/category.html"><i class="fa fa-tags"></i>&nbsp;分类</a></li>
+    
+      <li><a href="/pages/read.html"><i class="fa fa-book"></i>&nbsp;阅读</a></li>
+    
+      <li><a href="/pages/about.html"><i class="fa fa-paper-plane-o"></i>&nbsp;关于</a></li>
+    
+    </ul>
+  </nav>  
+  <nav id="sub-nav">
+    <a class="weibo " href="http://weibo.com/u/5142885740" title="新浪微博" target="_blank"><i class="fa fa-weibo"></i></a>
+    <a class="github" href="https://github.com/Jerry9916" title="GitHub" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    <a class="rss" href="/page/feed.xml" title="RSS订阅" target="_blank"><i class="fa fa-rss"></i></a>
+  </nav>
+</div>
+
+    <div class="main">
+    
+<div class="posts">
+  <section class="post">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/posts/7.html">wordpress手动升级方法</a></h1>
+      <p class="post-meta">
+        <i class="fa fa-calendar"></i>
+        2013年12月31日
+        <i class="space"></i>
+        <i class="fa fa-tags"></i>
+        <a class="post-category" href="/page/category.html#php">php</a>
+      </p>
+    </header>
+    <div class="post-main">
+      <p>在对wordpress进行自动升级时，常常升级不成功，最主要是网速慢执行时间长超过PHP脚本运行最大时间，上一次版本的升级，我采用了手动的方式，有以下几个步骤：</p>
+
+<p>1、备份wordpress资料，主要是备份下数据库，虽然没有出现问题，万一有问题也不怕了。<br />
+2、删除旧版本的wp-includes和wp-admin目录。<br />
+3、把新版本中除了wp-content目录外的所有文件都上传并覆盖到博客主机相对应的位置。遇到是否覆盖时，选择全部覆盖就是了。<br />
+4、运行http://博客域名/wp-admin/upgrade.php，执行升级就行了。</p>
+
+      <div class="readall"><a href="/posts/7.html" id="post-readall">阅读全文&nbsp;<i class="fa fa-chevron-right"></i></a></div>
+    </div>
+  </section>
+</div>
+
+<div class="posts">
+  <section class="post">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/posts/6.html">PHPExcel的常用用法</a></h1>
+      <p class="post-meta">
+        <i class="fa fa-calendar"></i>
+        2013年12月31日
+        <i class="space"></i>
+        <i class="fa fa-tags"></i>
+        <a class="post-category" href="/page/category.html#php">php</a>
+      </p>
+    </header>
+    <div class="post-main">
+      <p>最近由于项目需求要使用PHPExcel，之前也使用过，不过很多都忘掉了，这里写下一些常用的用法并长期更新。</p>
+
+<pre><code>&lt;?php
+// +----------------------------------------------------------------------
+// | PHPExcel几个实用方法
+// +----------------------------------------------------------------------
+// | Author: Jerry &lt;xiajie9916@gmail.com&gt;
+// +----------------------------------------------------------------------
+// | Blog: www.xiajie.org
+// +----------------------------------------------------------------------
+
+// 将PHPExcel的路径设置为自动包含
+set_include_path(get_include_path() . dirname(__FILE__) . '/../PHPExcel/');
+
+class ExcelTools {
+
+    /**
+     * 将Excel解析为数组
+     * @param string $filePath
+     * @return array
+     */
+    public static function ExcelToArray($filePath) {
+        include 'PHPExcel/IOFactory.php';
+        if (substr($filePath, -3) == 'xls') {
+            $inputFileType = 'Excel5';
+        } else if (substr($filePath, -4) == 'xlsx') {
+            $inputFileType = 'Excel2007';
+        }
+        $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+        $objPHPExcel = $objReader-&gt;load($filePath);
+        $sheetData = $objPHPExcel-&gt;getActiveSheet()-&gt;toArray(null,true,true,true);
+        return $sheetData;
+    }
+
+    /**
+     * 将数组输出到Excel
+     * @param array $array
+     */
+    public static function ArrayToExcel ($array, $fileName, $title = '这是一个测试文档') {
+        require_once 'PHPExcel.php';
+        $objPHPExcel = new PHPExcel();
+        //下面的属性按照自己的信息设置
+        $objPHPExcel-&gt;getProperties()-&gt;setCreator("阿杰")
+        -&gt;setLastModifiedBy("阿杰")
+        -&gt;setTitle($title)
+        -&gt;setSubject($title)
+        -&gt;setDescription($title)
+        -&gt;setKeywords($title)
+        -&gt;setCategory($title);
+        $i = 1;
+        foreach ($array as $row) {
+            $j = 65;
+            $temp = 0;
+            foreach ($row as $col_key =&gt; $col) {
+                if ($j &gt;= 91) {
+                    $j = 97;
+                }
+                // Excel中XYZ后为AA AB AC
+                if ($j &gt;= 97) {
+                    $objPHPExcel-&gt;setActiveSheetIndex(0)
+                    -&gt;setCellValue('A'.strtoupper(chr($j)).$i, $col);
+                } else {
+                    $objPHPExcel-&gt;setActiveSheetIndex(0)-&gt;setCellValue(chr($j).$i, $col);
+                }
+                $j++;
+            }
+            $i++;
+        }
+        $objPHPExcel-&gt;getActiveSheet()-&gt;setTitle('test'); //工作表名称，按自己的要求设置
+        $objPHPExcel-&gt;setActiveSheetIndex(0);
+
+        //输出文件
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$fileName.'"');
+        header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+
+        header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+        header ('Cache-Control: cache, must-revalidate');
+        header ('Pragma: public');
+        if (substr($fileName, -3) == 'xls') {
+            $outFileType = 'Excel5';
+        } else if (substr($fileName, -4) == 'xlsx') {
+            $outFileType = 'Excel2007';
+        }
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, $outFileType);
+        $objWriter-&gt;save('php://output');
+    }
+}
+</code></pre>
+
+<p> </p>
+
+      <div class="readall"><a href="/posts/6.html" id="post-readall">阅读全文&nbsp;<i class="fa fa-chevron-right"></i></a></div>
+    </div>
+  </section>
+</div>
+
+<div class="posts">
+  <section class="post">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/posts/5.html">wordpress使用心得</a></h1>
+      <p class="post-meta">
+        <i class="fa fa-calendar"></i>
+        2013年12月31日
+        <i class="space"></i>
+        <i class="fa fa-tags"></i>
+        <a class="post-category" href="/page/category.html#php">php</a>
+      </p>
+    </header>
+    <div class="post-main">
+      <p>使用wordpress一段时间了，不得不说现在wordpress是越来越赞了。很多次都在考虑是否用wordpress，作为一个Web开发者，自己也曾经自主开发过博客系统，不过最终没有坚持用下去，觉得代码写得不好的有，设计做得不好的都(设计这块是硬伤啊)，还有就是自己偷懒了，不坚持更新自己的博客。纠结了一大圈后还是选择伟大的wordpress，现在也不考虑去自己开发博客了，还是多花时间来学习新的技术吧。</p>
+
+<p>这里我整理下自己使用wordpress的心得(长期保持更新)：</p>
+
+<p>插件：</p>
+
+<p>TSP Disable Auto-Save：关闭自动保存草稿</p>
+
+<p>TW Disable Revisions：关掉自动保存版本功能</p>
+
+<p>Simple Local Avatars：资料头像上传</p>
+
+<p>Category Order：分类排序</p>
+
+<p>Configure SMTP：配置邮件服务器</p>
+
+<p>Crayon Syntax Highlighter：代码排版高亮，这个绝对是神器啊，作为伟大的程序猿必备</p>
+
+<p>Link Manager：友情链接插件</p>
+
+<p>Hyper Cache：用过几款缓存插件后才发现这个是最好用的</p>
+
+<p>待续。。。。</p>
+
+      <div class="readall"><a href="/posts/5.html" id="post-readall">阅读全文&nbsp;<i class="fa fa-chevron-right"></i></a></div>
+    </div>
+  </section>
+</div>
+
+<div class="posts">
+  <section class="post">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/posts/4.html">一个好用的PHP字符串截取函数</a></h1>
+      <p class="post-meta">
+        <i class="fa fa-calendar"></i>
+        2013年12月30日
+        <i class="space"></i>
+        <i class="fa fa-tags"></i>
+        <a class="post-category" href="/page/category.html#php">php</a>
+      </p>
+    </header>
+    <div class="post-main">
+      <p>在没有mb_string扩展的支持下，中文字符的截取显得不方便了，有乱码的出现，这里奉献上我使用过的一个函数。</p>
+
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="sd">/**</span>
+<span class="sd"> * 字符串截取函数</span>
+<span class="sd"> * @param String $string</span>
+<span class="sd"> * @param Int $length</span>
+<span class="sd"> * @param String $dot</span>
+<span class="sd"> * @return String</span>
+<span class="sd"> */</span>
+<span class="k">function</span> <span class="nf">cutstr</span><span class="p">(</span><span class="nv">$string</span><span class="p">,</span> <span class="nv">$length</span><span class="p">,</span> <span class="nv">$dot</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$charset</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">strlen</span><span class="p">(</span><span class="nv">$string</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nv">$length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$string</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nv">$string</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;&amp;amp;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&amp;quot;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&lt;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&gt;&#39;</span>
+    <span class="p">),</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;&amp;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&lt;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&gt;&#39;</span>
+    <span class="p">),</span> <span class="nv">$string</span><span class="p">);</span>
+    <span class="nv">$strcut</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">strtolower</span><span class="p">(</span><span class="nv">$charset</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$n</span> <span class="o">=</span> <span class="nv">$tn</span> <span class="o">=</span> <span class="nv">$noc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nv">$n</span> <span class="o">&lt;</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$string</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$t</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="nv">$string</span><span class="p">[</span><span class="nv">$n</span><span class="p">]);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$t</span> <span class="o">==</span> <span class="mi">9</span> <span class="o">||</span> <span class="nv">$t</span> <span class="o">==</span> <span class="mi">10</span> <span class="o">||</span> <span class="p">(</span><span class="mi">32</span> <span class="o">&lt;=</span> <span class="nv">$t</span> <span class="o">&amp;&amp;</span> <span class="nv">$t</span> <span class="o">&lt;=</span> <span class="mi">126</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$tn</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="nv">$n</span><span class="o">++</span><span class="p">;</span>
+                <span class="nv">$noc</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="mi">194</span> <span class="o">&lt;=</span> <span class="nv">$t</span> <span class="o">&amp;&amp;</span> <span class="nv">$t</span> <span class="o">&lt;=</span> <span class="mi">223</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$tn</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+                <span class="nv">$n</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+                <span class="nv">$noc</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="mi">224</span> <span class="o">&lt;=</span> <span class="nv">$t</span> <span class="o">&amp;&amp;</span> <span class="nv">$t</span> <span class="o">&lt;</span> <span class="mi">239</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$tn</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+                <span class="nv">$n</span> <span class="o">+=</span> <span class="mi">3</span><span class="p">;</span>
+                <span class="nv">$noc</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="mi">240</span> <span class="o">&lt;=</span> <span class="nv">$t</span> <span class="o">&amp;&amp;</span> <span class="nv">$t</span> <span class="o">&lt;=</span> <span class="mi">247</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$tn</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+                <span class="nv">$n</span> <span class="o">+=</span> <span class="mi">4</span><span class="p">;</span>
+                <span class="nv">$noc</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="mi">248</span> <span class="o">&lt;=</span> <span class="nv">$t</span> <span class="o">&amp;&amp;</span> <span class="nv">$t</span> <span class="o">&lt;=</span> <span class="mi">251</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$tn</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+                <span class="nv">$n</span> <span class="o">+=</span> <span class="mi">5</span><span class="p">;</span>
+                <span class="nv">$noc</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$t</span> <span class="o">==</span> <span class="mi">252</span> <span class="o">||</span> <span class="nv">$t</span> <span class="o">==</span> <span class="mi">253</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$tn</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+                <span class="nv">$n</span> <span class="o">+=</span> <span class="mi">6</span><span class="p">;</span>
+                <span class="nv">$noc</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nv">$n</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$noc</span> <span class="o">&gt;=</span> <span class="nv">$length</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$noc</span> <span class="o">&gt;</span> <span class="nv">$length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$n</span> <span class="o">-=</span> <span class="nv">$tn</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$strcut</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$string</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$n</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$length</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$strcut</span> <span class="o">.=</span> <span class="nb">ord</span><span class="p">(</span><span class="nv">$string</span><span class="p">[</span><span class="nv">$i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">127</span> <span class="o">?</span> <span class="nv">$string</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">.</span> <span class="nv">$string</span><span class="p">[</span><span class="o">++</span><span class="nv">$i</span><span class="p">]</span> <span class="o">:</span> <span class="nv">$string</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nv">$strcut</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;&amp;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&lt;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&gt;&#39;</span>
+    <span class="p">),</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;&amp;amp;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&amp;quot;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&lt;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&gt;&#39;</span>
+    <span class="p">),</span> <span class="nv">$strcut</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$strcut</span> <span class="o">.</span> <span class="nv">$dot</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+
+      <div class="readall"><a href="/posts/4.html" id="post-readall">阅读全文&nbsp;<i class="fa fa-chevron-right"></i></a></div>
+    </div>
+  </section>
+</div>
+
+<div class="pagination">
+  
+  
+  <a class="pagination-item newer" href="/page/8"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;上一页</a>
+  
+    
+  
+  <a class="pagination-item older" href="/page/10">下一页&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+  
+</div>
+
+    
+    <footer>Copyright&nbsp;&copy;&nbsp;2014 <a href="http://xiajie.me">Jerry's Blog</a></footer>
+
+    
+    </div>
+  </div>    
+  <div id="top">
+    <a id="rocket" href="javascript:void(0);" title="返回顶部"><i></i></a>
+  </div>
+  
+</body>
+</html>

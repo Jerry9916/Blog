@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="This is Jerry's Blog">
+  <meta name="author" content="Jerry Hsia">
+  
+  <meta name="keywords" content="ThinkPHP连续插入数据时的BUG, Jerry's Blog, Jerry Hsia">
+  
+  
+  <title>ThinkPHP连续插入数据时的BUG - Jerry's Blog</title>
+  
+  
+  <link rel="canonical" href="http://xiajie.me/posts/30.html">
+  
+  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/public.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/light.js"></script>
+</head>
+<body>
+  <div id="blog">
+    <div class="sidebar">
+  <div class="profilepic">
+    <a href="/"><img src="/assets/img/avatar.jpg" alt="logo"></img></a>
+  </div>
+  <h1 class="title"><a href="/">Jerry's Blog</a></h1>
+  <h2 class="sub-title">To strive to become a habit</h2>
+  <nav id="nav">
+    <ul>
+    
+      <li><a href="/pages/timing.html"><i class="fa fa-clock-o"></i>&nbsp;时间轴</a></li>
+    
+      <li><a href="/pages/category.html"><i class="fa fa-tags"></i>&nbsp;分类</a></li>
+    
+      <li><a href="/pages/read.html"><i class="fa fa-book"></i>&nbsp;阅读</a></li>
+    
+      <li><a href="/pages/about.html"><i class="fa fa-paper-plane-o"></i>&nbsp;关于</a></li>
+    
+    </ul>
+  </nav>  
+  <nav id="sub-nav">
+    <a class="weibo " href="http://weibo.com/u/5142885740" title="新浪微博" target="_blank"><i class="fa fa-weibo"></i></a>
+    <a class="github" href="https://github.com/Jerry9916" title="GitHub" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    <a class="rss" href="/page/feed.xml" title="RSS订阅" target="_blank"><i class="fa fa-rss"></i></a>
+  </nav>
+</div>
+
+    <div class="main">
+    <header class="post-header">
+  <h1 class="post-title"><a href="/posts/30.html">ThinkPHP连续插入数据时的BUG</a></h2>
+  <p class="post-meta">
+    <i class="fa fa-calendar"></i>
+    2014年03月06日
+    <i class="space"></i>
+    <i class="fa fa-tags"></i>
+    <a class="post-category" href="/pages/category.html#php">php</a>	
+  </p>
+</header>
+<div class="post-main">
+<p>今天在使用Thinkphp的时候发现一个BUG，我需要往表里连续插入数据，结果发现中间某一条数据(A数据)如果验证不通过，后面正确的数据也不能插入，并且出错的信息与A数据都相同，查看源码后发现Model.class.php中autoValidation函数末有这样一代码片段</p>
+
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// 批量验证的时候最后返回错误</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">))</span> <span class="k">return</span> <span class="k">false</span><span class="p">;</span></code></pre></div>
+
+<p>由于模型对象已经被处理为了单例，这里的出错信息将是A数据的出错信息，下一条数据(正确的一条数据)验证时这里并未释放A数据的出错信息，这里将直接判定为false造成逻辑错误，我理解的是这样。修改方法是在autoValidation开始时加上$this-&gt;error = null先进行释放，这样完美解决了。</p>
+
+</div>
+<div class="pagination">
+
+<a class="pagination-item newer" href="/posts/29.html"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;MySQL索引类型和优缺点</a>
+
+
+<a class="pagination-item older" href="/posts/31.html">Cocos2d-x学习笔记：01-开发环境搭建
+&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+
+</div>
+<style>#ds-reset .ds-avatar img{border-radius:50%;}</style>
+<div class="comments">
+  <div class="ds-thread" data-title="ThinkPHP连续插入数据时的BUG" data-thread-key="/posts/30" data-url="http://xiajie.me/posts/30.html"></div>
+  <script type="text/javascript">var duoshuoQuery = {short_name:"jerry9916"};(function(){var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = '/assets/js/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+</div>
+
+    
+    <footer>Copyright&nbsp;&copy;&nbsp;2014 <a href="http://xiajie.me">Jerry's Blog</a></footer>
+
+    
+    </div>
+  </div>    
+  <div id="top">
+    <a id="rocket" href="javascript:void(0);" title="返回顶部"><i></i></a>
+  </div>
+  
+</body>
+</html>

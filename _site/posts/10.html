@@ -1,0 +1,297 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="This is Jerry's Blog">
+  <meta name="author" content="Jerry Hsia">
+  
+  <meta name="keywords" content="Objective-c学习笔记：03-面向对象基础, Jerry's Blog, Jerry Hsia">
+  
+  
+  <title>Objective-c学习笔记：03-面向对象基础 - Jerry's Blog</title>
+  
+  
+  <link rel="canonical" href="http://xiajie.me/posts/10.html">
+  
+  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/public.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/light.js"></script>
+</head>
+<body>
+  <div id="blog">
+    <div class="sidebar">
+  <div class="profilepic">
+    <a href="/"><img src="/assets/img/avatar.jpg" alt="logo"></img></a>
+  </div>
+  <h1 class="title"><a href="/">Jerry's Blog</a></h1>
+  <h2 class="sub-title">To strive to become a habit</h2>
+  <nav id="nav">
+    <ul>
+    
+      <li><a href="/pages/timing.html"><i class="fa fa-clock-o"></i>&nbsp;时间轴</a></li>
+    
+      <li><a href="/pages/category.html"><i class="fa fa-tags"></i>&nbsp;分类</a></li>
+    
+      <li><a href="/pages/read.html"><i class="fa fa-book"></i>&nbsp;阅读</a></li>
+    
+      <li><a href="/pages/about.html"><i class="fa fa-paper-plane-o"></i>&nbsp;关于</a></li>
+    
+    </ul>
+  </nav>  
+  <nav id="sub-nav">
+    <a class="weibo " href="http://weibo.com/u/5142885740" title="新浪微博" target="_blank"><i class="fa fa-weibo"></i></a>
+    <a class="github" href="https://github.com/Jerry9916" title="GitHub" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    <a class="rss" href="/page/feed.xml" title="RSS订阅" target="_blank"><i class="fa fa-rss"></i></a>
+  </nav>
+</div>
+
+    <div class="main">
+    <header class="post-header">
+  <h1 class="post-title"><a href="/posts/10.html">Objective-c学习笔记：03-面向对象基础</a></h2>
+  <p class="post-meta">
+    <i class="fa fa-calendar"></i>
+    2014年01月01日
+    <i class="space"></i>
+    <i class="fa fa-tags"></i>
+    <a class="post-category" href="/pages/category.html#objective-c">objective-c</a>	
+  </p>
+</header>
+<div class="post-main">
+<p>之前有过Java、PHP的基础，面向对象已经是非常熟悉了，主要是要来熟悉Objective-c的不同之处。</p>
+
+<p>User.h</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  User.h</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="k">@interface</span> <span class="nc">User</span> : <span class="bp">NSObject</span> <span class="p">{</span>
+<span class="c1">//声明两个实例变量 访问权限控制规则和Java相同</span>
+<span class="k">@protected</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+<span class="k">@public</span>
+    <span class="kt">int</span> <span class="n">height</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//如果要在外部使用点记语法，需对属性进行如下声明，这样省去了getter setter方法的编写，非常方便。</span>
+<span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">readwrite</span><span class="p">)</span> <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+<span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">)</span> <span class="kt">int</span> <span class="n">height</span><span class="p">;</span>
+
+<span class="c1">//自定义方法</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">print</span><span class="p">;</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>User.m</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  User.m</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;User.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">User</span>
+
+<span class="c1">//若要使用点记语言，需对属性进行声明</span>
+<span class="k">@synthesize</span> <span class="n">age</span><span class="p">;</span>
+<span class="k">@synthesize</span> <span class="n">height</span><span class="p">;</span>
+
+<span class="c1">//实现自定义方法</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">print</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;User&#39;s age is %i and height is %i&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>Student.h</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  Student.h</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;User.h&quot;</span>
+
+<span class="c1">//继承User</span>
+<span class="k">@interface</span> <span class="nc">Student</span> : <span class="nc">User</span> <span class="p">{</span>
+    <span class="c1">//这里还继承父类可访问的属性</span>
+    <span class="kt">int</span> <span class="n">student_sno</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">)</span> <span class="kt">int</span> <span class="n">student_sno</span><span class="p">;</span>
+
+<span class="c1">//重写父类方法</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">print</span><span class="p">;</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>Student.m</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  Student.m</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;Student.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">Student</span>
+
+<span class="k">@synthesize</span> <span class="n">student_sno</span><span class="p">;</span>
+
+<span class="c1">//重写父类方法</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">print</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nb">super</span> <span class="n">print</span><span class="p">];</span><span class="c1">//super关键字为父类对象，跟Java一样</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Student&#39;s age is %i and height is %i and student_sno is %i&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">student_sno</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>Teacher.h</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  Teacher.h</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;User.h&quot;</span>
+
+<span class="k">@interface</span> <span class="nc">Teacher</span> : <span class="nc">User</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">teacher_sno</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">)</span> <span class="kt">int</span> <span class="n">teacher_sno</span><span class="p">;</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>Teacher.m</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  Teacher.m</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;Teacher.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">Teacher</span>
+
+<span class="k">@synthesize</span> <span class="n">teacher_sno</span><span class="p">;</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">print</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Teacher&#39;s age is %i and height is %i and teacher_sno is %i&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">teacher_sno</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>main.m</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  main.m</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+<span class="cp">#import &quot;User.h&quot;</span>
+<span class="cp">#import &quot;Student.h&quot;</span>
+<span class="cp">#import &quot;Teacher.h&quot;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+    <span class="k">@autoreleasepool</span> <span class="p">{</span>
+        <span class="n">User</span> <span class="o">*</span><span class="n">user</span> <span class="o">=</span> <span class="p">[[</span><span class="n">User</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="n">user</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span><span class="c1">//点记语法等价于[user setAge:10];</span>
+        <span class="p">[</span><span class="n">user</span> <span class="nl">setHeight</span><span class="p">:</span><span class="mi">170</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">user</span> <span class="n">print</span><span class="p">];</span>
+
+        <span class="n">User</span> <span class="o">*</span><span class="n">student</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Student</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">student</span> <span class="nl">setAge</span><span class="p">:</span><span class="mi">23</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">student</span> <span class="nl">setHeight</span><span class="p">:</span><span class="mi">172</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">student</span> <span class="n">print</span><span class="p">];</span><span class="c1">//这里是多态的实现，注意掌握多态三要素</span>
+
+        <span class="n">User</span> <span class="o">*</span><span class="n">teacher</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Teacher</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">teacher</span> <span class="nl">setAge</span><span class="p">:</span><span class="mi">24</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">teacher</span> <span class="nl">setHeight</span><span class="p">:</span><span class="mi">173</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">teacher</span> <span class="n">print</span><span class="p">];</span>
+
+        <span class="c1">// isKindOfClass 判断是不是这个类或子类的实例</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">student</span> <span class="nl">isKindOfClass</span><span class="p">:[</span><span class="n">User</span> <span class="k">class</span><span class="p">]])</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;student isKindOfClass User&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// isKindOfClass 判断是不是这个类的实例</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">student</span> <span class="nl">isMemberOfClass</span><span class="p">:[</span><span class="n">Student</span> <span class="k">class</span><span class="p">]])</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;student is member of Student&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// isKindOfClass 判断是不是类的子类</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">Student</span> <span class="nl">isSubclassOfClass</span><span class="p">:[</span><span class="n">User</span> <span class="k">class</span><span class="p">]])</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;student is subclass of user&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">([</span><span class="n">user</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">print</span><span class="p">)])</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;user can responds to print&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">//响应方法</span>
+        <span class="p">[</span><span class="n">user</span> <span class="nl">performSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">print</span><span class="p">)];</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+
+</div>
+<div class="pagination">
+
+<a class="pagination-item newer" href="/posts/9.html"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Objective-c学习笔记：02-数据类型与转换
+</a>
+
+
+<a class="pagination-item older" href="/posts/11.html">Objective-C学习笔记：04-NS系列类&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+
+</div>
+<style>#ds-reset .ds-avatar img{border-radius:50%;}</style>
+<div class="comments">
+  <div class="ds-thread" data-title="Objective-c学习笔记：03-面向对象基础" data-thread-key="/posts/10" data-url="http://xiajie.me/posts/10.html"></div>
+  <script type="text/javascript">var duoshuoQuery = {short_name:"jerry9916"};(function(){var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = '/assets/js/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+</div>
+
+    
+    <footer>Copyright&nbsp;&copy;&nbsp;2014 <a href="http://xiajie.me">Jerry's Blog</a></footer>
+
+    
+    </div>
+  </div>    
+  <div id="top">
+    <a id="rocket" href="javascript:void(0);" title="返回顶部"><i></i></a>
+  </div>
+  
+</body>
+</html>
