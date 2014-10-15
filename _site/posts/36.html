@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="This is Jerry's Blog">
+  <meta name="author" content="Jerry Hsia">
+  
+  <meta name="keywords" content="编译安装PHP扩展, Jerry's Blog, Jerry Hsia">
+  
+  
+  <title>编译安装PHP扩展 - Jerry's Blog</title>
+  
+  
+  <link rel="canonical" href="http://xiajie.me/posts/36.html">
+  
+  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/public.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/light.js"></script>
+</head>
+<body>
+  <div id="blog">
+    <div class="sidebar">
+  <div class="profilepic">
+    <a href="/"><img src="/assets/img/avatar.jpg" alt="logo"></img></a>
+  </div>
+  <h1 class="title"><a href="/">Jerry's Blog</a></h1>
+  <h2 class="sub-title">To strive to become a habit</h2>
+  <nav id="nav">
+    <ul>
+    
+      <li><a href="/pages/timing.html"><i class="fa fa-clock-o"></i>&nbsp;时间轴</a></li>
+    
+      <li><a href="/pages/category.html"><i class="fa fa-tags"></i>&nbsp;分类</a></li>
+    
+      <li><a href="/pages/read.html"><i class="fa fa-book"></i>&nbsp;阅读</a></li>
+    
+      <li><a href="/pages/about.html"><i class="fa fa-paper-plane-o"></i>&nbsp;关于</a></li>
+    
+    </ul>
+  </nav>  
+  <nav id="sub-nav">
+    <a class="weibo " href="http://weibo.com/u/5142885740" title="新浪微博" target="_blank"><i class="fa fa-weibo"></i></a>
+    <a class="github" href="https://github.com/Jerry9916" title="GitHub" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    <a class="rss" href="/page/feed.xml" title="RSS订阅" target="_blank"><i class="fa fa-rss"></i></a>
+  </nav>
+</div>
+
+    <div class="main">
+    <header class="post-header">
+  <h1 class="post-title"><a href="/posts/36.html">编译安装PHP扩展</a></h2>
+  <p class="post-meta">
+    <i class="fa fa-calendar"></i>
+    2014年05月17日
+    <i class="space"></i>
+    <i class="fa fa-tags"></i>
+    <a class="post-category" href="/pages/category.html#php">php</a>	
+  </p>
+</header>
+<div class="post-main">
+<p>之前主要是在windows平台上做开发，现在把开发平台转移到了mac平台上，发现安装扩展不像windows那样方便，之前也在mac上编译安装过，时间久了也忘记了，这里做个备份。</p>
+
+<p> </p>
+
+<p>1、首先要安装autoconf。</p>
+
+<p>下载地址：<a href="http://ftp.gnu.org/gnu/autoconf/" title="http://ftp.gnu.org/gnu/autoconf/">http://ftp.gnu.org/gnu/autoconf/</a></p>
+
+<p>解压并进入autoconf目录，依次执行如下命令：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">./configure
+make
+sudo make install</code></pre></div>
+
+<p>2、安装mcrpty扩展。</p>
+
+<p>Mcrypt是一个功能强大的加密算法扩展库，它持20多种加密算法和8种加密模式。Mac OS X中，需要先安装这个库然后再安装PHP扩展。</p>
+
+<p>首先是下载扩展库的源文件，下载地址：<a href="http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/" title="http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/">http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/</a></p>
+
+<p>下载到本地之后，解压缩，进入目录，请依次执行如下命令：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">./configure --disable-posix-threads --enable-static
+make
+sudo make install</code></pre></div>
+
+<p>安装好扩展库之后，下载PHP的源代码，（php -v 命令查看版本，我的是5.4.24）。</p>
+
+<p>下载地址：<a href="http://cn2.php.net/get/php-5.4.24.tar.bz2/from/a/mirror" title="http://cn2.php.net/get/php-5.4.24.tar.bz2/from/a/mirror">http://cn2.php.net/get/php-5.4.24.tar.bz2/from/a/mirror</a><br />
+完成下载之后，请解包进入代码目录，再cd ext/mcrypt/，然后依次执行如下命令：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">phpize
+./configure
+make
+sudo make install</code></pre></div>
+
+<p>正确完成安装之后，会显示说明</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Installing shared extensions:     /usr/lib/php/extensions/no-debug-non-zts-20100525/</code></pre></div>
+
+<p>编辑/etc/php.ini文件，加入如下配置行：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">extension</span><span class="o">=</span>/usr/lib/php/extensions/no-debug-non-zts-20100525/mcrypt.so</code></pre></div>
+
+<p> </p>
+
+<p><strong>注：在mac mavericks下可能有下列问题</strong></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">grep: /usr/include/php/main/php.h: No such file or directory
+
+grep: /usr/include/php/Zend/zend_modules.h: No such file or directory
+
+grep: /usr/include/php/Zend/zend_extensions.h: No such file or directory
+
+Configuring <span class="k">for</span>:
+
+PHP Api Version:
+
+Zend Module Api No:
+
+Zend Extension Api No:</code></pre></div>
+
+<p>解决方法：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ln -s /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/include /usr/include</code></pre></div>
+
+
+</div>
+<div class="pagination">
+
+<a class="pagination-item newer" href="/posts/35.html"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;RESTful API 设计最佳实践</a>
+
+
+<a class="pagination-item older" href="/posts/37.html">vi编辑器的常用配置&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+
+</div>
+<style>#ds-reset .ds-avatar img{border-radius:50%;}</style>
+<div class="comments">
+  <div class="ds-thread" data-title="编译安装PHP扩展" data-thread-key="/posts/36" data-url="http://xiajie.me/posts/36.html"></div>
+  <script type="text/javascript">var duoshuoQuery = {short_name:"jerry9916"};(function(){var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = '/assets/js/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+</div>
+
+    
+    <footer>Copyright&nbsp;&copy;&nbsp;2014 <a href="http://xiajie.me">Jerry's Blog</a></footer>
+
+    
+    </div>
+  </div>    
+  <div id="top">
+    <a id="rocket" href="javascript:void(0);" title="返回顶部"><i></i></a>
+  </div>
+  
+</body>
+</html>

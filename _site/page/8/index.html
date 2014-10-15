@@ -1,0 +1,682 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="This is Jerry's Blog">
+  <meta name="author" content="Jerry Hsia">
+  
+  <meta name="keywords" content="Jerry's Blog, Jerry's Blog, This is Jerry's Blog, Jerry Hsia">
+  
+  
+  <title>Jerry's Blog</title>
+  
+  
+  <link rel="canonical" href="http://xiajie.me">
+  
+  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/public.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/light.js"></script>
+</head>
+<body>
+  <div id="blog">
+    <div class="sidebar">
+  <div class="profilepic">
+    <a href="/"><img src="/assets/img/avatar.jpg" alt="logo"></img></a>
+  </div>
+  <h1 class="title"><a href="/">Jerry's Blog</a></h1>
+  <h2 class="sub-title">To strive to become a habit</h2>
+  <nav id="nav">
+    <ul>
+    
+      <li><a href="/pages/timing.html"><i class="fa fa-clock-o"></i>&nbsp;时间轴</a></li>
+    
+      <li><a href="/pages/category.html"><i class="fa fa-tags"></i>&nbsp;分类</a></li>
+    
+      <li><a href="/pages/read.html"><i class="fa fa-book"></i>&nbsp;阅读</a></li>
+    
+      <li><a href="/pages/about.html"><i class="fa fa-paper-plane-o"></i>&nbsp;关于</a></li>
+    
+    </ul>
+  </nav>  
+  <nav id="sub-nav">
+    <a class="weibo " href="http://weibo.com/u/5142885740" title="新浪微博" target="_blank"><i class="fa fa-weibo"></i></a>
+    <a class="github" href="https://github.com/Jerry9916" title="GitHub" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    <a class="rss" href="/page/feed.xml" title="RSS订阅" target="_blank"><i class="fa fa-rss"></i></a>
+  </nav>
+</div>
+
+    <div class="main">
+    
+<div class="posts">
+  <section class="post">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/posts/11.html">Objective-C学习笔记：04-NS系列类</a></h1>
+      <p class="post-meta">
+        <i class="fa fa-calendar"></i>
+        2014年01月01日
+        <i class="space"></i>
+        <i class="fa fa-tags"></i>
+        <a class="post-category" href="/page/category.html#objective-c">objective-c</a>
+      </p>
+    </header>
+    <div class="post-main">
+      <p>NSNumber</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  main.m</span>
+<span class="c1">//  NSNumber</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 12/28/13.</span>
+<span class="c1">//  Copyright (c) 2013 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+    <span class="k">@autoreleasepool</span> <span class="p">{</span>
+
+        <span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="c1">//注意规律 包装initWith(类型)或numWith(类型)，解包是(类型)Value</span>
+        <span class="c1">//NSNumber *obj = [[NSNumber alloc] initWithInt:number];//需要对obj进行内存管理（alloc）</span>
+        <span class="bp">NSNumber</span> <span class="o">*</span><span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSNumber</span> <span class="nl">numberWithInt</span><span class="p">:</span><span class="n">number</span><span class="p">];</span><span class="c1">//无需对obj进行内存管理</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%i&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">obj</span> <span class="n">intValue</span><span class="p">]);</span>
+
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>NSString</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  main.m</span>
+<span class="c1">//  NSString</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 12/28/13.</span>
+<span class="c1">//  Copyright (c) 2013 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+    <span class="k">@autoreleasepool</span> <span class="p">{</span>
+<span class="c1">//        不可变字符串</span>
+<span class="c1">//        字符串创建方法</span>
+<span class="c1">//        以Format创建的都存在堆内存区，以String结尾的都存在常量区且等效于@&quot;string&quot;</span>
+<span class="c1">//        NSString *str1 = @&quot;string&quot;;</span>
+<span class="c1">//        NSString *str2 = [[NSString alloc] initWithFormat:@&quot;string&quot;];</span>
+<span class="c1">//        NSString *str3 = [[NSString alloc] initWithString:@&quot;string&quot;];</span>
+<span class="c1">//        NSString *str4 = [NSString stringWithFormat:@&quot;string&quot;];</span>
+<span class="c1">//        NSString *str5 = [NSString stringWithString:@&quot;string&quot;];</span>
+<span class="c1">//        //比较两个字符串的内容是否相同</span>
+<span class="c1">//        if ([str1 isEqualToString:str2]) {</span>
+<span class="c1">//            NSLog(@&quot;str1,str2 is same content&quot;);</span>
+<span class="c1">//        }</span>
+<span class="c1">//        //比较两个字符串是否在同一地址</span>
+<span class="c1">//        if (str5 == str3) {</span>
+<span class="c1">//            NSLog(@&quot;str1,str2 is same address&quot;);</span>
+<span class="c1">//        }</span>
+<span class="c1">//        NSLog(@&quot;%ld&quot;,[str1 length]);</span>
+<span class="c1">//        NSLog(@&quot;%i&quot;, [str1 intValue]);</span>
+<span class="c1">//        </span>
+<span class="c1">//        NSString *a = @&quot;aa|bb|cc&quot;;</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, [a componentsSeparatedByString:@&quot;|&quot;]);</span>
+<span class="c1">//        可变字符串(可执行增删改查)</span>
+        <span class="bp">NSMutableString</span> <span class="o">*</span><span class="n">str1</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSMutableString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFormat</span><span class="p">:</span><span class="s">@&quot;abc&quot;</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">str1</span> <span class="nl">insertString</span><span class="p">:</span><span class="s">@&quot;234234234&quot;</span> <span class="nl">atIndex</span><span class="p">:</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">str1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>NSArray</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  main.m</span>
+<span class="c1">//  NSArray</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 12/29/13.</span>
+<span class="c1">//  Copyright (c) 2013 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+    <span class="k">@autoreleasepool</span> <span class="p">{</span>
+<span class="c1">//        //-----不可变数组-----</span>
+<span class="c1">//        //初始化方法</span>
+<span class="c1">//        NSArray *arr1 = [NSArray arrayWithObject:@&quot;111&quot;];</span>
+<span class="c1">//        NSArray *arr2 = [NSArray arrayWithObjects:@&quot;111&quot;, @&quot;222&quot;, @&quot;333&quot;, nil];</span>
+<span class="c1">//        NSArray *arr3 = [NSArray arrayWithArray:arr2];</span>
+<span class="c1">//        </span>
+<span class="c1">//        NSArray *arr4 = [[NSArray alloc] initWithArray:arr1];</span>
+<span class="c1">//        NSArray *arr5 = [[NSArray alloc] initWithObjects:@&quot;11&quot;, @&quot;22&quot;, nil];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, arr5);</span>
+<span class="c1">//        </span>
+<span class="c1">//        //访问元素个数</span>
+<span class="c1">//        NSLog(@&quot;%ld&quot;, [arr5 count]);</span>
+<span class="c1">//        //访问元素</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, [arr5 objectAtIndex:1]);</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, [arr5 arrayByAddingObject:@&quot;333&quot;]);</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, [arr5 arrayByAddingObjectsFromArray:arr2]);</span>
+<span class="c1">//        //将数组以分隔符变为字符串</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, [arr2 componentsJoinedByString:@&quot;#&quot;]);</span>
+<span class="c1">//        NSLog(@&quot;%i&quot;, [arr2 containsObject:@&quot;110&quot;]);</span>
+<span class="c1">//        NSLog(@&quot;%ld&quot;, [arr2 indexOfObject:@&quot;222&quot;]);</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, [arr2 lastObject]);</span>
+
+        <span class="c1">//-----可变数组-----</span>
+        <span class="bp">NSMutableArray</span> <span class="o">*</span><span class="n">arr1</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSMutableArray</span> <span class="nl">arrayWithCapacity</span><span class="p">:</span><span class="mi">5</span><span class="p">];</span>
+        <span class="bp">NSMutableArray</span> <span class="o">*</span><span class="n">arr2</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSMutableArray</span> <span class="nl">arrayWithObjects</span><span class="p">:</span><span class="s">@&quot;111&quot;</span><span class="p">,</span> <span class="s">@&quot;222&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+<span class="c1">//        [arr2 addObject:@&quot;888&quot;];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, arr2);</span>
+<span class="c1">//        [arr2 removeObject:@&quot;111&quot;];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, arr2);</span>
+<span class="c1">//        [arr2 removeObjectAtIndex:0];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, arr2);</span>
+        <span class="c1">//遍历数组</span>
+        <span class="c1">// 第一种(性能较低)</span>
+        <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="p">[</span><span class="n">arr2</span> <span class="n">count</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;obj : %@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">arr2</span> <span class="nl">objectAtIndex</span><span class="p">:</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// 第二种(效率较高)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="n">str</span> <span class="k">in</span> <span class="n">arr2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;obj : %@&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>NSDictionary</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  main.m</span>
+<span class="c1">//  NSDictionary</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 12/29/13.</span>
+<span class="c1">//  Copyright (c) 2013 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+    <span class="k">@autoreleasepool</span> <span class="p">{</span>
+        <span class="c1">//不可变字典NSDictionary</span>
+<span class="c1">//        NSNumber *numObj = [NSNumber numberWithInt:100];</span>
+<span class="c1">//        NSDictionary *dic = [NSDictionary dictionaryWithObject:numObj forKey:@&quot;k1&quot;];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, dic);</span>
+<span class="c1">//        NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:@&quot;v1&quot;, @&quot;k1&quot;, @&quot;v2&quot;, @&quot;k2&quot;, @&quot;v3&quot;, @&quot;k3&quot;, nil];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, dic2);</span>
+<span class="c1">//        NSDictionary *dic3 = [NSDictionary dictionaryWithDictionary:dic2];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, dic3);</span>
+<span class="c1">//        </span>
+<span class="c1">//        NSInteger count = [dic2 count];//键值对个数</span>
+<span class="c1">//        NSLog(@&quot;%ld&quot;, count);</span>
+<span class="c1">//        </span>
+<span class="c1">//        NSString *str = [dic2 objectForKey:@&quot;k1&quot;];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, str);</span>
+<span class="c1">//        </span>
+<span class="c1">//        NSArray *keyArray = [dic2 allKeys];</span>
+<span class="c1">//        NSArray *valueArray = [dic2 allValues];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, keyArray);</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, valueArray);</span>
+
+        <span class="c1">//可变字典</span>
+        <span class="bp">NSMutableDictionary</span> <span class="o">*</span><span class="n">dic1</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSMutableDictionary</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithObjectsAndKeys</span><span class="p">:</span><span class="s">@&quot;v1&quot;</span><span class="p">,</span> <span class="s">@&quot;k1&quot;</span><span class="p">,</span> <span class="s">@&quot;v2&quot;</span><span class="p">,</span> <span class="s">@&quot;k2&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+        <span class="bp">NSMutableDictionary</span> <span class="o">*</span><span class="n">dic2</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSMutableDictionary</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithObjectsAndKeys</span><span class="p">:</span><span class="s">@&quot;v3&quot;</span><span class="p">,</span> <span class="s">@&quot;k3&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">dic1</span> <span class="nl">addEntriesFromDictionary</span><span class="p">:</span><span class="n">dic2</span><span class="p">];</span><span class="c1">//字典中添加字典</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">dic1</span><span class="p">);</span>
+        <span class="p">[</span><span class="n">dic1</span> <span class="nl">setValue</span><span class="p">:</span><span class="s">@&quot;v4&quot;</span> <span class="nl">forKey</span><span class="p">:</span><span class="s">@&quot;k4&quot;</span><span class="p">];</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">dic1</span><span class="p">);</span>
+<span class="c1">//        [dic1 removeObjectForKey:@&quot;k2&quot;];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, dic1);</span>
+<span class="c1">//        NSArray *arr1 = [NSArray arrayWithObjects:@&quot;k1&quot;, @&quot;k4&quot;, nil];</span>
+<span class="c1">//        [dic1 removeObjectsForKeys:arr1];//删除字典对象，索引来自数组</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, dic1);</span>
+
+        <span class="c1">//遍历字典</span>
+        <span class="c1">//第一种</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="p">[</span><span class="n">dic1</span> <span class="n">count</span><span class="p">];</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="bp">NSString</span> <span class="o">*</span><span class="n">val</span> <span class="o">=</span> <span class="p">[</span><span class="n">dic1</span> <span class="nl">objectForKey</span><span class="p">:[[</span><span class="n">dic1</span> <span class="n">allKeys</span><span class="p">]</span> <span class="nl">objectAtIndex</span><span class="p">:</span><span class="n">index</span><span class="p">]];</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">//第二种(推荐)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">id</span> <span class="n">key</span> <span class="k">in</span> <span class="n">dic1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">dic1</span> <span class="nl">objectForKey</span><span class="p">:</span><span class="n">key</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="c1">//第三种</span>
+        <span class="bp">NSEnumerator</span> <span class="o">*</span><span class="n">en</span> <span class="o">=</span> <span class="p">[</span><span class="n">dic1</span> <span class="n">keyEnumerator</span><span class="p">];</span>
+        <span class="kt">id</span> <span class="n">key</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">key</span> <span class="o">=</span> <span class="p">[</span><span class="n">en</span> <span class="n">nextObject</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">dic1</span> <span class="nl">objectForKey</span><span class="p">:</span><span class="n">key</span><span class="p">]);</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="p">[</span><span class="n">en</span> <span class="n">nextObject</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>NSSet</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  main.m</span>
+<span class="c1">//  NSSet</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 14-1-4.</span>
+<span class="c1">//  Copyright (c) 2014年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+    <span class="k">@autoreleasepool</span> <span class="p">{</span>
+        <span class="c1">//不可变集合NSSet</span>
+<span class="c1">//        NSSet *set1 = [NSSet setWithObjects:@&quot;one&quot;, @&quot;two&quot;, @&quot;three&quot;, nil];</span>
+<span class="c1">//        NSSet *set2 = [[NSSet alloc] initWithObjects:@&quot;two&quot;, @&quot;three&quot;, nil];</span>
+<span class="c1">//        NSArray *arr1 = [NSArray arrayWithObjects:@&quot;one&quot;, @&quot;two&quot;, @&quot;three&quot;, nil];</span>
+<span class="c1">//        NSSet *set3 = [NSSet setWithArray:arr1];</span>
+<span class="c1">//        NSSet *set4 = [NSSet setWithSet:set2];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, set1);</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, set2);</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, set3);</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, set4);</span>
+<span class="c1">//        NSLog(@&quot;%ld&quot;, [set1 count]);</span>
+<span class="c1">//        NSArray *arr2 = [set1 allObjects];</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, arr2);</span>
+<span class="c1">//        NSLog(@&quot;%@&quot;, [set1 anyObject]);//获取任意一个对象</span>
+<span class="c1">//        //是否包含某个对象</span>
+<span class="c1">//        if ([set1 containsObject:@&quot;one&quot;]) {</span>
+<span class="c1">//            NSLog(@&quot;set1 containsObject:@\&quot;one\&quot;&quot;);</span>
+<span class="c1">//        }</span>
+<span class="c1">//        //两个集合是否有交集</span>
+<span class="c1">//        if ([set1 intersectsSet:set2]) {</span>
+<span class="c1">//            NSLog(@&quot;set1 intersectsSet:set2&quot;);</span>
+<span class="c1">//        }</span>
+<span class="c1">//        //是否是某个集合的自己</span>
+<span class="c1">//        if ([set2 isSubsetOfSet:set1]) {</span>
+<span class="c1">//            NSLog(@&quot;set2 isSubsetOfSet:set1&quot;);</span>
+<span class="c1">//        }</span>
+<span class="c1">//        //两个集合是否有相同的元素</span>
+<span class="c1">//        if ([set1 isEqualToSet:set3]) {</span>
+<span class="c1">//            NSLog(@&quot;set1 isEqualToSet:set3&quot;);</span>
+<span class="c1">//        }</span>
+
+        <span class="bp">NSMutableSet</span> <span class="o">*</span><span class="n">set1</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSMutableSet</span> <span class="nl">setWithObjects</span><span class="p">:</span><span class="s">@&quot;one&quot;</span><span class="p">,</span> <span class="s">@&quot;two&quot;</span><span class="p">,</span> <span class="s">@&quot;three&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+        <span class="bp">NSMutableSet</span> <span class="o">*</span><span class="n">set2</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSMutableSet</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithObjects</span><span class="p">:</span><span class="s">@&quot;two&quot;</span><span class="p">,</span> <span class="s">@&quot;three&quot;</span><span class="p">,</span> <span class="s">@&quot;11&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+        <span class="bp">NSArray</span> <span class="o">*</span><span class="n">arr1</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSArray</span> <span class="nl">arrayWithObjects</span><span class="p">:</span><span class="s">@&quot;one&quot;</span><span class="p">,</span> <span class="s">@&quot;two&quot;</span><span class="p">,</span> <span class="s">@&quot;three&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+        <span class="bp">NSMutableSet</span> <span class="o">*</span><span class="n">set3</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSMutableSet</span> <span class="nl">setWithArray</span><span class="p">:</span><span class="n">arr1</span><span class="p">];</span>
+<span class="c1">//        [set1 minusSet:set2];//从set1中去掉set2中相同的对象</span>
+<span class="c1">//        [set1 intersectSet:set2];//计算set1和set2的交集结果放在set1</span>
+<span class="c1">//        [set1 unionSet:set2];//计算set1和set2的并集结果放在set1</span>
+<span class="c1">//        [set1 addObject:@&quot;four&quot;];//向集合添加对象</span>
+<span class="c1">//        [set1 removeObject:@&quot;two&quot;];//删除对象</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">set2</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">set3</span><span class="p">);</span>
+        <span class="c1">//遍历集合</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">id</span> <span class="n">obj</span> <span class="k">in</span> <span class="n">set1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+
+      <div class="readall"><a href="/posts/11.html" id="post-readall">阅读全文&nbsp;<i class="fa fa-chevron-right"></i></a></div>
+    </div>
+  </section>
+</div>
+
+<div class="posts">
+  <section class="post">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/posts/10.html">Objective-c学习笔记：03-面向对象基础</a></h1>
+      <p class="post-meta">
+        <i class="fa fa-calendar"></i>
+        2014年01月01日
+        <i class="space"></i>
+        <i class="fa fa-tags"></i>
+        <a class="post-category" href="/page/category.html#objective-c">objective-c</a>
+      </p>
+    </header>
+    <div class="post-main">
+      <p>之前有过Java、PHP的基础，面向对象已经是非常熟悉了，主要是要来熟悉Objective-c的不同之处。</p>
+
+<p>User.h</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  User.h</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="k">@interface</span> <span class="nc">User</span> : <span class="bp">NSObject</span> <span class="p">{</span>
+<span class="c1">//声明两个实例变量 访问权限控制规则和Java相同</span>
+<span class="k">@protected</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+<span class="k">@public</span>
+    <span class="kt">int</span> <span class="n">height</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//如果要在外部使用点记语法，需对属性进行如下声明，这样省去了getter setter方法的编写，非常方便。</span>
+<span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">readwrite</span><span class="p">)</span> <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+<span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">)</span> <span class="kt">int</span> <span class="n">height</span><span class="p">;</span>
+
+<span class="c1">//自定义方法</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">print</span><span class="p">;</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>User.m</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  User.m</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;User.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">User</span>
+
+<span class="c1">//若要使用点记语言，需对属性进行声明</span>
+<span class="k">@synthesize</span> <span class="n">age</span><span class="p">;</span>
+<span class="k">@synthesize</span> <span class="n">height</span><span class="p">;</span>
+
+<span class="c1">//实现自定义方法</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">print</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;User&#39;s age is %i and height is %i&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>Student.h</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  Student.h</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;User.h&quot;</span>
+
+<span class="c1">//继承User</span>
+<span class="k">@interface</span> <span class="nc">Student</span> : <span class="nc">User</span> <span class="p">{</span>
+    <span class="c1">//这里还继承父类可访问的属性</span>
+    <span class="kt">int</span> <span class="n">student_sno</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">)</span> <span class="kt">int</span> <span class="n">student_sno</span><span class="p">;</span>
+
+<span class="c1">//重写父类方法</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">print</span><span class="p">;</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>Student.m</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  Student.m</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;Student.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">Student</span>
+
+<span class="k">@synthesize</span> <span class="n">student_sno</span><span class="p">;</span>
+
+<span class="c1">//重写父类方法</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">print</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nb">super</span> <span class="n">print</span><span class="p">];</span><span class="c1">//super关键字为父类对象，跟Java一样</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Student&#39;s age is %i and height is %i and student_sno is %i&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">student_sno</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>Teacher.h</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  Teacher.h</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;User.h&quot;</span>
+
+<span class="k">@interface</span> <span class="nc">Teacher</span> : <span class="nc">User</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">teacher_sno</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">)</span> <span class="kt">int</span> <span class="n">teacher_sno</span><span class="p">;</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>Teacher.m</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  Teacher.m</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;Teacher.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">Teacher</span>
+
+<span class="k">@synthesize</span> <span class="n">teacher_sno</span><span class="p">;</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">print</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Teacher&#39;s age is %i and height is %i and teacher_sno is %i&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">teacher_sno</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>main.m</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  main.m</span>
+<span class="c1">//  Lesson_01_ObjectExtend</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-23.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+<span class="cp">#import &quot;User.h&quot;</span>
+<span class="cp">#import &quot;Student.h&quot;</span>
+<span class="cp">#import &quot;Teacher.h&quot;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+    <span class="k">@autoreleasepool</span> <span class="p">{</span>
+        <span class="n">User</span> <span class="o">*</span><span class="n">user</span> <span class="o">=</span> <span class="p">[[</span><span class="n">User</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="n">user</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span><span class="c1">//点记语法等价于[user setAge:10];</span>
+        <span class="p">[</span><span class="n">user</span> <span class="nl">setHeight</span><span class="p">:</span><span class="mi">170</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">user</span> <span class="n">print</span><span class="p">];</span>
+
+        <span class="n">User</span> <span class="o">*</span><span class="n">student</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Student</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">student</span> <span class="nl">setAge</span><span class="p">:</span><span class="mi">23</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">student</span> <span class="nl">setHeight</span><span class="p">:</span><span class="mi">172</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">student</span> <span class="n">print</span><span class="p">];</span><span class="c1">//这里是多态的实现，注意掌握多态三要素</span>
+
+        <span class="n">User</span> <span class="o">*</span><span class="n">teacher</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Teacher</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">teacher</span> <span class="nl">setAge</span><span class="p">:</span><span class="mi">24</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">teacher</span> <span class="nl">setHeight</span><span class="p">:</span><span class="mi">173</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">teacher</span> <span class="n">print</span><span class="p">];</span>
+
+        <span class="c1">// isKindOfClass 判断是不是这个类或子类的实例</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">student</span> <span class="nl">isKindOfClass</span><span class="p">:[</span><span class="n">User</span> <span class="k">class</span><span class="p">]])</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;student isKindOfClass User&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// isKindOfClass 判断是不是这个类的实例</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">student</span> <span class="nl">isMemberOfClass</span><span class="p">:[</span><span class="n">Student</span> <span class="k">class</span><span class="p">]])</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;student is member of Student&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// isKindOfClass 判断是不是类的子类</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">Student</span> <span class="nl">isSubclassOfClass</span><span class="p">:[</span><span class="n">User</span> <span class="k">class</span><span class="p">]])</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;student is subclass of user&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">([</span><span class="n">user</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">print</span><span class="p">)])</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;user can responds to print&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">//响应方法</span>
+        <span class="p">[</span><span class="n">user</span> <span class="nl">performSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">print</span><span class="p">)];</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+
+      <div class="readall"><a href="/posts/10.html" id="post-readall">阅读全文&nbsp;<i class="fa fa-chevron-right"></i></a></div>
+    </div>
+  </section>
+</div>
+
+<div class="posts">
+  <section class="post">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/posts/9.html">Objective-c学习笔记：02-数据类型与转换
+</a></h1>
+      <p class="post-meta">
+        <i class="fa fa-calendar"></i>
+        2013年12月31日
+        <i class="space"></i>
+        <i class="fa fa-tags"></i>
+        <a class="post-category" href="/page/category.html#objective-c">objective-c</a>
+      </p>
+    </header>
+    <div class="post-main">
+      <p>数据类型与转换是比较容易理解的，Objective-c跟C、Java类似，根据以往的经验，要注意运算时类型的选取和精度的考虑，复杂的问题没有，细心点就不成问题了。</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  main.m</span>
+<span class="c1">//  Lesson_01_DataType</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 13-12-31.</span>
+<span class="c1">//  Copyright (c) 2013年 Jerry. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+    <span class="k">@autoreleasepool</span> <span class="p">{</span>
+
+<span class="c1">//        int number1 = 100;</span>
+<span class="c1">//        float number2 = 99.99f;//float的声明以f结尾</span>
+<span class="c1">//        double number3 = 123.7777;</span>
+<span class="c1">//        char char1 = &#39;x&#39;;</span>
+<span class="c1">//        NSString *name = @&quot;阿杰&quot;;//指针形变量声明时变量名加*，字符串常量以@开头。</span>
+<span class="c1">//        NSLog(@&quot;number1 : %i&quot;, number1);//%i也可替换为%d</span>
+<span class="c1">//        NSLog(@&quot;number2 : %f&quot;, number2);</span>
+<span class="c1">//        NSLog(@&quot;number3 : %f&quot;, number3);//精确小数 %.2f将保留两位小数</span>
+<span class="c1">//        NSLog(@&quot;name : %@&quot;, name);//打印指针形变量用%@</span>
+<span class="c1">//        NSLog(@&quot;char1&#39;s ASCII : %d&quot;, char1);//用整型输出将输出ASCII码</span>
+<span class="c1">//        NSLog(@&quot;sizeOf number1 : %ld&quot;, sizeof(number1));//打印变量占多少字节</span>
+
+        <span class="c1">//数据类型转换</span>
+        <span class="c1">// 1、自动转换：</span>
+        <span class="c1">//   容量小的自动转换为容量大的</span>
+        <span class="c1">//   转换顺序：Byte、short、char--&gt;int--&gt;long--&gt;float--&gt;double</span>
+        <span class="c1">//   Byte、short、char之间不相互转换，首先转换为int再计算</span>
+        <span class="c1">// 2、强制转换</span>
+        <span class="c1">//   在类型转换 如：(float)(1+10)</span>
+        <span class="c1">// 注意：大转小可能会引起精度的丢失</span>
+        <span class="n">Byte</span> <span class="n">number1</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">number2</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">number3</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">number4</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">;</span>
+        <span class="n">Byte</span> <span class="n">number5</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;result : %f&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">number2</span> <span class="o">+</span> <span class="n">number3</span><span class="p">)</span> <span class="o">*</span> <span class="n">number4</span><span class="p">);</span><span class="c1">//int与double计算时int自动转换为double</span>
+        <span class="kt">int</span> <span class="n">number6</span> <span class="o">=</span> <span class="n">number1</span> <span class="o">+</span> <span class="n">number5</span><span class="p">;</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;number6 : %d&quot;</span><span class="p">,</span> <span class="n">number6</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%d&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">Byte</span><span class="p">)(</span><span class="n">number2</span> <span class="o">+</span> <span class="n">number3</span><span class="p">));</span><span class="c1">//容量大的向容量小的转换，这里超出Byte范围将造成问题</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p> </p>
+
+      <div class="readall"><a href="/posts/9.html" id="post-readall">阅读全文&nbsp;<i class="fa fa-chevron-right"></i></a></div>
+    </div>
+  </section>
+</div>
+
+<div class="posts">
+  <section class="post">
+    <header class="post-header">
+      <h1 class="post-title"><a href="/posts/8.html">Objective-c学习笔记：01-开场白</a></h1>
+      <p class="post-meta">
+        <i class="fa fa-calendar"></i>
+        2013年12月31日
+        <i class="space"></i>
+        <i class="fa fa-tags"></i>
+        <a class="post-category" href="/page/category.html#objective-c">objective-c</a>
+      </p>
+    </header>
+    <div class="post-main">
+      <p>从事Web开发已经两年了，现在想在移动互联网世界来畅游一番，从去年开始初步学习了Android，可是还是因为工作的原因，没有多余的时间和精力去深入。现在在Web开发方面，我觉得自己可以告一段落了，当前也有许多新的Web技术(Nodejs、Html5、前端各种技术等)正在兴起，Web开发的学习相对较容易，当前也是在Web开发的大部队中，用到的时候再学吧。现在就开始来IOS上尝尝鲜，有了Android的一些基础，我想可以更容易的理解IOS平台了，在这里来写下这个学习笔记，只是为了能让自己在这条路上有条不紊的坚持下去。信自己！</p>
+
+      <div class="readall"><a href="/posts/8.html" id="post-readall">阅读全文&nbsp;<i class="fa fa-chevron-right"></i></a></div>
+    </div>
+  </section>
+</div>
+
+<div class="pagination">
+  
+  
+  <a class="pagination-item newer" href="/page/7"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;上一页</a>
+  
+    
+  
+  <a class="pagination-item older" href="/page/9">下一页&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+  
+</div>
+
+    
+    <footer>Copyright&nbsp;&copy;&nbsp;2014 <a href="http://xiajie.me">Jerry's Blog</a></footer>
+
+    
+    </div>
+  </div>    
+  <div id="top">
+    <a id="rocket" href="javascript:void(0);" title="返回顶部"><i></i></a>
+  </div>
+  
+</body>
+</html>

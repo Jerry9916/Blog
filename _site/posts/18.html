@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="This is Jerry's Blog">
+  <meta name="author" content="Jerry Hsia">
+  
+  <meta name="keywords" content="Objective-c学习笔记：11-单例模式
+, Jerry's Blog, Jerry Hsia">
+  
+  
+  <title>Objective-c学习笔记：11-单例模式
+ - Jerry's Blog</title>
+  
+  
+  <link rel="canonical" href="http://xiajie.me/posts/18.html">
+  
+  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/public.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/light.js"></script>
+</head>
+<body>
+  <div id="blog">
+    <div class="sidebar">
+  <div class="profilepic">
+    <a href="/"><img src="/assets/img/avatar.jpg" alt="logo"></img></a>
+  </div>
+  <h1 class="title"><a href="/">Jerry's Blog</a></h1>
+  <h2 class="sub-title">To strive to become a habit</h2>
+  <nav id="nav">
+    <ul>
+    
+      <li><a href="/pages/timing.html"><i class="fa fa-clock-o"></i>&nbsp;时间轴</a></li>
+    
+      <li><a href="/pages/category.html"><i class="fa fa-tags"></i>&nbsp;分类</a></li>
+    
+      <li><a href="/pages/read.html"><i class="fa fa-book"></i>&nbsp;阅读</a></li>
+    
+      <li><a href="/pages/about.html"><i class="fa fa-paper-plane-o"></i>&nbsp;关于</a></li>
+    
+    </ul>
+  </nav>  
+  <nav id="sub-nav">
+    <a class="weibo " href="http://weibo.com/u/5142885740" title="新浪微博" target="_blank"><i class="fa fa-weibo"></i></a>
+    <a class="github" href="https://github.com/Jerry9916" title="GitHub" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    <a class="rss" href="/page/feed.xml" title="RSS订阅" target="_blank"><i class="fa fa-rss"></i></a>
+  </nav>
+</div>
+
+    <div class="main">
+    <header class="post-header">
+  <h1 class="post-title"><a href="/posts/18.html">Objective-c学习笔记：11-单例模式
+</a></h2>
+  <p class="post-meta">
+    <i class="fa fa-calendar"></i>
+    2014年01月05日
+    <i class="space"></i>
+    <i class="fa fa-tags"></i>
+    <a class="post-category" href="/pages/category.html#objective-c">objective-c</a>	
+  </p>
+</header>
+<div class="post-main">
+<p>User.h</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  User.h</span>
+<span class="c1">//  Lesson_11_Single</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 14-1-4.</span>
+<span class="c1">//  Copyright (c) 2014年 Jerry&lt;xiajie9916@gmail.com&gt; Blog:www.xiajie.org. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="k">@interface</span> <span class="nc">User</span> : <span class="bp">NSObject</span> <span class="o">&lt;</span><span class="bp">NSCopying</span><span class="o">&gt;</span>
+
+<span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span><span class="k">copy</span><span class="p">)</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+<span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span><span class="k">copy</span><span class="p">)</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">password</span><span class="p">;</span>
+
+<span class="p">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span> <span class="nf">shareUser</span><span class="p">;</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>User.m</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  User.m</span>
+<span class="c1">//  Lesson_11_Single</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 14-1-4.</span>
+<span class="c1">//  Copyright (c) 2014年 Jerry&lt;xiajie9916@gmail.com&gt; Blog:www.xiajie.org. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;User.h&quot;</span>
+
+<span class="k">static</span> <span class="n">User</span> <span class="o">*</span><span class="n">instance</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span><span class="c1">//存储唯一对象</span>
+
+<span class="k">@implementation</span> <span class="nc">User</span>
+
+<span class="p">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span> <span class="nf">shareUser</span> <span class="p">{</span>
+    <span class="k">@synchronized</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">instance</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="p">[[[</span><span class="nb">self</span> <span class="k">class</span><span class="p">]</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span> <span class="nf">allocWithZone:</span><span class="p">(</span><span class="k">struct</span> <span class="bp">_NSZone</span> <span class="o">*</span><span class="p">)</span><span class="nv">zone</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">instance</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">instance</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="nl">allocWithZone</span><span class="p">:</span><span class="n">zone</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span> <span class="nf">copyWithZone:</span><span class="p">(</span><span class="n">NSZone</span> <span class="o">*</span><span class="p">)</span><span class="nv">zone</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span> <span class="nf">retain</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="n">oneway</span> <span class="kt">void</span><span class="p">)</span> <span class="nf">release</span> <span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span> <span class="nf">autorelease</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">)</span> <span class="nf">retainCount</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">UINT_MAX</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@end</span></code></pre></div>
+
+
+</div>
+<div class="pagination">
+
+<a class="pagination-item newer" href="/posts/17.html"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Objective-c学习笔记：10-对象归档
+</a>
+
+
+<a class="pagination-item older" href="/posts/19.html">Objective-c学习笔记：12-KVC&KVO&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+
+</div>
+<style>#ds-reset .ds-avatar img{border-radius:50%;}</style>
+<div class="comments">
+  <div class="ds-thread" data-title="Objective-c学习笔记：11-单例模式
+" data-thread-key="/posts/18" data-url="http://xiajie.me/posts/18.html"></div>
+  <script type="text/javascript">var duoshuoQuery = {short_name:"jerry9916"};(function(){var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = '/assets/js/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+</div>
+
+    
+    <footer>Copyright&nbsp;&copy;&nbsp;2014 <a href="http://xiajie.me">Jerry's Blog</a></footer>
+
+    
+    </div>
+  </div>    
+  <div id="top">
+    <a id="rocket" href="javascript:void(0);" title="返回顶部"><i></i></a>
+  </div>
+  
+</body>
+</html>

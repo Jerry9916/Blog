@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="This is Jerry's Blog">
+  <meta name="author" content="Jerry Hsia">
+  
+  <meta name="keywords" content="Objective-c学习笔记：07-内存管理
+, Jerry's Blog, Jerry Hsia">
+  
+  
+  <title>Objective-c学习笔记：07-内存管理
+ - Jerry's Blog</title>
+  
+  
+  <link rel="canonical" href="http://xiajie.me/posts/14.html">
+  
+  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/public.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/light.js"></script>
+</head>
+<body>
+  <div id="blog">
+    <div class="sidebar">
+  <div class="profilepic">
+    <a href="/"><img src="/assets/img/avatar.jpg" alt="logo"></img></a>
+  </div>
+  <h1 class="title"><a href="/">Jerry's Blog</a></h1>
+  <h2 class="sub-title">To strive to become a habit</h2>
+  <nav id="nav">
+    <ul>
+    
+      <li><a href="/pages/timing.html"><i class="fa fa-clock-o"></i>&nbsp;时间轴</a></li>
+    
+      <li><a href="/pages/category.html"><i class="fa fa-tags"></i>&nbsp;分类</a></li>
+    
+      <li><a href="/pages/read.html"><i class="fa fa-book"></i>&nbsp;阅读</a></li>
+    
+      <li><a href="/pages/about.html"><i class="fa fa-paper-plane-o"></i>&nbsp;关于</a></li>
+    
+    </ul>
+  </nav>  
+  <nav id="sub-nav">
+    <a class="weibo " href="http://weibo.com/u/5142885740" title="新浪微博" target="_blank"><i class="fa fa-weibo"></i></a>
+    <a class="github" href="https://github.com/Jerry9916" title="GitHub" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+    <a class="rss" href="/page/feed.xml" title="RSS订阅" target="_blank"><i class="fa fa-rss"></i></a>
+  </nav>
+</div>
+
+    <div class="main">
+    <header class="post-header">
+  <h1 class="post-title"><a href="/posts/14.html">Objective-c学习笔记：07-内存管理
+</a></h2>
+  <p class="post-meta">
+    <i class="fa fa-calendar"></i>
+    2014年01月01日
+    <i class="space"></i>
+    <i class="fa fa-tags"></i>
+    <a class="post-category" href="/pages/category.html#objective-c">objective-c</a>	
+  </p>
+</header>
+<div class="post-main">
+<p>User.h</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  User.h</span>
+<span class="c1">//  Lesson_07_MemoryManage</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 14-1-1.</span>
+<span class="c1">//  Copyright (c) 2014年 Jerry&lt;xiajie9916@gmail.com&gt; Blog:www.xiajie.org. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="k">@class</span> <span class="nc">Dog</span>;
+<span class="k">@interface</span> <span class="nc">User</span> : <span class="bp">NSObject</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="kt">id</span><span class="p">;</span>
+    <span class="n">Dog</span> <span class="o">*</span><span class="n">dog</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@property</span> <span class="kt">int</span> <span class="kt">id</span><span class="p">;</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">setDog:</span><span class="p">(</span><span class="n">Dog</span> <span class="o">*</span><span class="p">)</span> <span class="nv">_dog</span><span class="p">;</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">dealloc</span><span class="p">;</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>User.m</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  User.m</span>
+<span class="c1">//  Lesson_07_MemoryManage</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 14-1-1.</span>
+<span class="c1">//  Copyright (c) 2014年 Jerry&lt;xiajie9916@gmail.com&gt; Blog:www.xiajie.org. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;User.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">User</span>
+
+<span class="k">@synthesize</span> <span class="kt">id</span><span class="p">;</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">setDog:</span><span class="p">(</span><span class="n">Dog</span> <span class="o">*</span><span class="p">)</span> <span class="nv">_dog</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">dog</span> <span class="o">!=</span> <span class="n">_dog</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//释放旧对象</span>
+        <span class="p">[</span><span class="n">dog</span> <span class="k">release</span><span class="p">];</span>
+        <span class="n">dog</span> <span class="o">=</span> <span class="p">[</span><span class="n">_dog</span> <span class="k">retain</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">dealloc</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">dog</span> <span class="k">release</span><span class="p">];</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;user dealloc, id:%d&quot;</span><span class="p">,</span> <span class="kt">id</span><span class="p">);</span>
+    <span class="p">[</span><span class="nb">super</span> <span class="n">dealloc</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>Dog.h</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  Dog.h</span>
+<span class="c1">//  Lesson_07_MemoryManage</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 14-1-1.</span>
+<span class="c1">//  Copyright (c) 2014年 Jerry&lt;xiajie9916@gmail.com&gt; Blog:www.xiajie.org. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="k">@interface</span> <span class="nc">Dog</span> : <span class="bp">NSObject</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="kt">id</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">)</span> <span class="kt">int</span> <span class="kt">id</span><span class="p">;</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">dealloc</span><span class="p">;</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>Dog.m</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  Dog.m</span>
+<span class="c1">//  Lesson_07_MemoryManage</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 14-1-1.</span>
+<span class="c1">//  Copyright (c) 2014年 Jerry&lt;xiajie9916@gmail.com&gt; Blog:www.xiajie.org. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &quot;Dog.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">Dog</span>
+<span class="k">@synthesize</span> <span class="kt">id</span><span class="p">;</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">dealloc</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;dog dealloc, id : %d&quot;</span><span class="p">,</span> <span class="kt">id</span><span class="p">);</span>
+    <span class="p">[</span><span class="nb">super</span> <span class="n">dealloc</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">@end</span></code></pre></div>
+
+<p>测试：</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="c1">//</span>
+<span class="c1">//  main.m</span>
+<span class="c1">//  Lesson_07_MemoryManage</span>
+<span class="c1">//</span>
+<span class="c1">//  Created by Jerry on 14-1-1.</span>
+<span class="c1">//  Copyright (c) 2014年 Jerry&lt;xiajie9916@gmail.com&gt; Blog:www.xiajie.org. All rights reserved.</span>
+<span class="c1">//</span>
+
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+<span class="cp">#import &quot;User.h&quot;</span>
+<span class="cp">#import &quot;Dog.h&quot;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+    <span class="k">@autoreleasepool</span> <span class="p">{</span>
+        <span class="n">User</span> <span class="o">*</span><span class="n">user</span> <span class="o">=</span> <span class="p">[[</span><span class="n">User</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span><span class="c1">//alloc后user引用计数为1</span>
+        <span class="n">user</span><span class="p">.</span><span class="kt">id</span> <span class="o">=</span> <span class="mi">2014</span><span class="p">;</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;user retainCount : %ld&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">user</span> <span class="n">retainCount</span><span class="p">]);</span><span class="c1">// 1</span>
+        <span class="c1">//[user release];//release引用计数-1,当引用计数为0时dealloc被调用</span>
+
+        <span class="c1">//对象所有权，当使用retain,alloc,allocWithZone,Copy,CopyWithZone,mutableCopy,mutableCopyWithZone得到对象时，边拥有了此对象的所有权，因此不使用该对象时应该调用对象的release方法或autorelease进行释放。</span>
+        <span class="n">Dog</span> <span class="o">*</span><span class="n">dog</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Dog</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">dog</span> <span class="nl">setId</span><span class="p">:</span><span class="mi">101</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">user</span> <span class="nl">setDog</span><span class="p">:</span><span class="n">dog</span><span class="p">];</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;dog retainCount : %ld&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">dog</span> <span class="n">retainCount</span><span class="p">]);</span><span class="c1">// 1</span>
+        <span class="p">[</span><span class="n">dog</span> <span class="k">release</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">user</span> <span class="k">release</span><span class="p">];</span>
+
+        <span class="c1">//关于内存的管理还有autoreleasepool和ARC，都比较简单</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+
+</div>
+<div class="pagination">
+
+<a class="pagination-item newer" href="/posts/13.html"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Objective-c学习笔记：06-协议</a>
+
+
+<a class="pagination-item older" href="/posts/15.html">Objective-c学习笔记：08-文件处理
+&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+
+</div>
+<style>#ds-reset .ds-avatar img{border-radius:50%;}</style>
+<div class="comments">
+  <div class="ds-thread" data-title="Objective-c学习笔记：07-内存管理
+" data-thread-key="/posts/14" data-url="http://xiajie.me/posts/14.html"></div>
+  <script type="text/javascript">var duoshuoQuery = {short_name:"jerry9916"};(function(){var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = '/assets/js/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+</div>
+
+    
+    <footer>Copyright&nbsp;&copy;&nbsp;2014 <a href="http://xiajie.me">Jerry's Blog</a></footer>
+
+    
+    </div>
+  </div>    
+  <div id="top">
+    <a id="rocket" href="javascript:void(0);" title="返回顶部"><i></i></a>
+  </div>
+  
+</body>
+</html>
