@@ -1375,6 +1375,35 @@ ul.portfolioContainer li:hover span.hoverBox .linKed {
   }
 }
 
+.aboutme .item {
+  margin-top: 10px;
+}
+
+.aboutme .item a:hover{
+  color: #FFF;
+}
+
+.aboutme .item .col-sm-2 {
+  width: 85px;
+  padding-right: 0;
+}
+
+.aboutme .item .col-sm-2 i {
+  width: 22px;
+}
+
+.aboutme .item .col-sm-2 i.fa-map-marker {
+  font-size: 1.8em;
+}
+
+.aboutme .item .col-sm-2 i.fa-mobile-phone {
+  font-size: 2em;
+}
+
+.aboutme .item .col-sm-4 {
+  padding-left: 0;
+}
+
 
 
 

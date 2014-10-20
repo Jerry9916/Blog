@@ -68,7 +68,7 @@ jQuery(
       $(document).on('scroll', function () {
         varscroll = parseInt($(document).scrollTop());
         if (menuSize != null) {
-          for (var i = 0; i < menuSize; i++) {
+          for (var i = 0; i < content.length; i++) {
             contentTop[i] = $('#' + content[i] + '').offset().top;
             function bottomView(i) {
               contentView = $('#' + content[i] + '').height() * .4;
