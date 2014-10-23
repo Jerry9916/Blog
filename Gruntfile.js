@@ -8,7 +8,7 @@ module.exports = function (grunt) {
       target: {
         options: {
           // The default commit message for the gh-pages branch
-          commitMessage: 'push'
+          commitMessage: 'Updated site'
         },
         // The folder where your gh-pages repo is
         src: '_site'
