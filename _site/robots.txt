@@ -1,3 +1,0 @@
-User-Agent: *
-
-Sitemap: http://xiajie.org/sitemap.txt
