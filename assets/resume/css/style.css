@@ -189,7 +189,7 @@ header {
 }
 
 .cb-slideshow li {
-  opacity: 0.3;
+  opacity: 0.2;
   filter: alpha(opacity=20); /* For IE8 and earlier */
 }
 
