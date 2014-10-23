@@ -15,5 +15,5 @@ module.exports = function (grunt) {
       }
     }
   });
-  grunt.registerTask('deploy', ['githubPages:target']);
+  grunt.registerTask('build', ['githubPages:target']);
 };
