@@ -1,4 +1,3 @@
-/*jslint node: true */
 'use strict';
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
@@ -7,10 +6,8 @@ module.exports = function (grunt) {
     githubPages: {
       target: {
         options: {
-          // The default commit message for the gh-pages branch
           commitMessage: 'Updated site'
         },
-        // The folder where your gh-pages repo is
         src: '_site'
       }
     }
