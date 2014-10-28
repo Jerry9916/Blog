@@ -39,7 +39,13 @@ module.exports = function (grunt) {
     },
 
     githubPages: {
-      target: {
+      blog: {
+        options: {
+          commitMessage: 'Updated site'
+        },
+        src: '.'
+      },
+      site: {
         options: {
           commitMessage: 'Updated site'
         },
