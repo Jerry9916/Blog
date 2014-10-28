@@ -5,6 +5,10 @@
   "devDependencies": {
     "grunt": "0.x.x",
     "grunt-github-pages": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-shell": "*",
     "load-grunt-tasks": "*",
     "time-grunt": "*"
   }
