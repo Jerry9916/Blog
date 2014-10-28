@@ -4,4 +4,4 @@ node_modules/
 .*
 !.gitignore
 !_site/.gitignore
-base.min.css
+assets/styles/base.min.css
