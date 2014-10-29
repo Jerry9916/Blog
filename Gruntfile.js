@@ -43,9 +43,11 @@ module.exports = function (grunt) {
         },
         files: {
           '_temp/resume/scripts/base.js': [
-            'resume/styles/bootstrap.css',
-            'resume/styles/font-awesome.css',
-            'resume/styles/style.css'
+            'resume/scripts/jquery.min.js',
+            'resume/scripts/jquery.easing.min.js',
+            'resume/scripts/jquery.easypiechart.js',
+            'resume/scripts/stickUp.js',
+            'resume/scripts/custom.js'
           ]
         }
       }
@@ -53,7 +55,7 @@ module.exports = function (grunt) {
 
     cssmin: {
       options: {
-        banner: '/* Jerry\'s blog */',
+        banner: '/* Jerry\'s blog */\n',
         keepSpecialComments: 0
       },
       blog: {
@@ -64,6 +66,18 @@ module.exports = function (grunt) {
       resume: {
         files: {
           'resume/styles/base.min.css': ['_temp/resume/styles/base.css']
+        }
+      }
+    },
+
+    uglify: {
+      options: {
+        banner: '/* Jerry\'s blog */\n',
+        keepSpecialComments: 0
+      },
+      resume: {
+        files: {
+          'resume/scripts/base.min.js': ['_temp/resume/scripts/base.js']
         }
       }
     },
@@ -89,7 +103,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('blog', ['clean:temp', 'concat:blogCss', 'cssmin:blog', 'clean:temp']);
-  grunt.registerTask('resume', ['clean:temp', 'concat:resumeCss', 'concat:resumeScript', 'cssmin:resume', 'clean:temp']);
+  grunt.registerTask('resume', ['clean:temp', 'concat:resumeCss', 'concat:resumeScript', 'cssmin:resume', 'uglify:resume', 'clean:temp']);
 
   grunt.registerTask('publish', function() {
     return grunt.task.run(['blog', 'shell:jekyllBuild', 'githubPages']);
