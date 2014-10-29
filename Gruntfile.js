@@ -9,7 +9,7 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '_temp'
+            '_temp',
           ]
         }]
       }
@@ -106,6 +106,6 @@ module.exports = function (grunt) {
   grunt.registerTask('resume', ['clean:temp', 'concat:resumeCss', 'concat:resumeScript', 'cssmin:resume', 'uglify:resume', 'clean:temp']);
 
   grunt.registerTask('publish', function() {
-    return grunt.task.run(['blog', 'shell:jekyllBuild', 'githubPages']);
+    return grunt.task.run(['blog', 'resume', 'shell:jekyllBuild', 'githubPages']);
   });
 };
