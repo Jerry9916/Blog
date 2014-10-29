@@ -5,3 +5,4 @@ node_modules/
 !.gitignore
 !_site/.gitignore
 assets/styles/base.min.css
+resume/styles/base.min.css
