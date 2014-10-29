@@ -1,7 +1,7 @@
 {
   "name": "Blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is Jerry's Blog",
   "devDependencies": {
     "grunt": "0.x.x",
     "grunt-github-pages": "*",
