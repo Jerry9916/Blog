@@ -18,7 +18,7 @@ post_format: [ ]
 //  Lesson_06_Protocol
 //
 //  Created by Jerry on 14-1-1.
-//  Copyright (c) 2014年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.org. All rights reserved.
+//  Copyright (c) 2014年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.me. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -39,7 +39,7 @@ post_format: [ ]
 //  Lesson_06_Protocol
 //
 //  Created by Jerry on 14-1-1.
-//  Copyright (c) 2014年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.org. All rights reserved.
+//  Copyright (c) 2014年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.me. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -56,7 +56,7 @@ post_format: [ ]
 //  Lesson_06_Protocol
 //
 //  Created by Jerry on 14-1-1.
-//  Copyright (c) 2014年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.org. All rights reserved.
+//  Copyright (c) 2014年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.me. All rights reserved.
 //
 
 #import "User.h"
@@ -83,7 +83,7 @@ post_format: [ ]
 //  Lesson_06_Protocol
 //
 //  Created by Jerry on 14-1-1.
-//  Copyright (c) 2014年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.org. All rights reserved.
+//  Copyright (c) 2014年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.me. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
