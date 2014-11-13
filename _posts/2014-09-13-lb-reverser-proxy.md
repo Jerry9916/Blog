@@ -1,12 +1,12 @@
 ---
 author: Jerry Hsia
-title: Nginx反向代理和负载均衡初步
+title: Web负载均衡 - Nginx反向代理
 excerpt:
 layout: post
 views:
   - 100
 category:
-  - 其他
+  - 架构&设计
 tags:
   - Linux
 post_format: [ ]
