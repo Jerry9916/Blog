@@ -18,7 +18,7 @@ post_format: [ ]
 //  Lesson_10_ObjectArchive
 //
 //  Created by Jerry on 14-1-4.
-//  Copyright (c) 2014年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.org. All rights reserved.
+//  Copyright (c) 2014年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.me. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

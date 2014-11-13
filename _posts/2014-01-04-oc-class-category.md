@@ -21,7 +21,7 @@ User.h
 //  Lesson_05_ClassCategory
 //
 //  Created by Jerry on 13-12-31.
-//  Copyright (c) 2013年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.org. All rights reserved.
+//  Copyright (c) 2013年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.me. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -53,7 +53,7 @@ User.m
 //  Lesson_05_ClassCategory
 //
 //  Created by Jerry on 13-12-31.
-//  Copyright (c) 2013年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.org. All rights reserved.
+//  Copyright (c) 2013年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.me. All rights reserved.
 //
 
 #import "User.h"
@@ -101,7 +101,7 @@ User+Study.h
 //  Lesson_05_ClassCategory
 //
 //  Created by Jerry on 13-12-31.
-//  Copyright (c) 2013年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.org. All rights reserved.
+//  Copyright (c) 2013年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.me. All rights reserved.
 //
 
 #import "User.h"
@@ -119,7 +119,7 @@ User+Study.m
 //  Lesson_05_ClassCategory
 //
 //  Created by Jerry on 13-12-31.
-//  Copyright (c) 2013年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.org. All rights reserved.
+//  Copyright (c) 2013年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.me. All rights reserved.
 //
 
 #import "User+Study.h"
@@ -141,7 +141,7 @@ User+Study.m
 //  Lesson_05_ClassCategory
 //
 //  Created by Jerry on 13-12-31.
-//  Copyright (c) 2013年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.org. All rights reserved.
+//  Copyright (c) 2013年 Jerry<xiajie9916@gmail.com> Blog:www.xiajie.me. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

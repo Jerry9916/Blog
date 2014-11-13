@@ -6,7 +6,7 @@ layout: post
 views:
   - 100
 category:
-  - other
+  - 其他
 tags:
   - Linux
 post_format: [ ]
