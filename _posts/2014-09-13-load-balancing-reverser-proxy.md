@@ -30,7 +30,7 @@ upstream server_group {
 
 ### weight
 
-指定轮询权值，Weight值越大，分配到的访问机率越高，主要用于后端每个服务器性能不均的情况下
+指定轮询权值，weight值越大，分配到的访问机率越高，主要用于后端每个服务器性能不均的情况下
 {% highlight bash %}
 upstream server_group {
    server 192.168.160.100:8080 weight=1; #分担1/3的请求
