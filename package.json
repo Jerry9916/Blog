@@ -1,13 +1,14 @@
 {
   "name": "Blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is Jerry's Blog",
   "devDependencies": {
     "grunt": "0.x.x",
     "grunt-github-pages": "*",
     "grunt-contrib-clean": "*",
     "grunt-contrib-concat": "*",
     "grunt-contrib-cssmin": "*",
+    "grunt-contrib-uglify": "*",
     "grunt-shell": "*",
     "load-grunt-tasks": "*",
     "time-grunt": "*"

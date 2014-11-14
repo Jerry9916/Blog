@@ -9,14 +9,14 @@ title: 文章分类
 <h2 class="category">分类</h2>
 <div class="category-box">
   <ul>
-    {% for item in (0..site.categories.size) %}{% unless forloop.last %}
+    {% for item in (0..site.categories.size) reversed %}{% unless forloop.first %}
     {% capture word %}{{ category[item] | strip_newlines }}{% endcapture %}
     <li class="category-box-sub"><a href="#{{ word }}">{{ word }}&nbsp;<sup>{{ site.categories[word].size }}</sup></a></li>
     {% endunless %}{% endfor %}
   </ul>
 </div>
 <hr id="line"/>
-{% for item in (0..site.categories.size) %}{% unless forloop.last %}
+{% for item in (0..site.categories.size) reversed %}{% unless forloop.first %}
 {% capture word %}{{ category[item] | strip_newlines }}{% endcapture %}
 <h2 class="category" id="{{ word }}">{{ word }}</h2>
 {% for post in site.categories[word] %}{% if post.title != null %}
