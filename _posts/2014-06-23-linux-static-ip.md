@@ -15,7 +15,9 @@ post_format: [ ]
 sudo vim /etc/network/interfaces
 {% endhighlight %}
 添加以下内容：
+
 {% highlight bash %}
+
 # The loopback network interface
 auto lo
 iface lo inet loopback
@@ -31,8 +33,11 @@ dns-nameservers 211.68.72.100 # DNS
 
 sudo ifconfig eth0 down  
 sudo ifconfig eth0 up
+
 {% endhighlight %}
+
 生效配置
+
 {% highlight bash %}
 sudo /etc/init.d/networking restart
 {% endhighlight %}
