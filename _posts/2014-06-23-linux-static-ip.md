@@ -12,7 +12,7 @@ tags:
 post_format: [ ]
 ---
 {% highlight bash %}
-sudo vim /etc/network/interfaces
+sudo vi /etc/network/interfaces
 {% endhighlight %}
 添加以下内容：
 
@@ -22,7 +22,6 @@ sudo vim /etc/network/interfaces
 auto lo
 iface lo inet loopback
 
-# The primary network interface
 auto eth0
 iface eth0 inet static  
 
@@ -30,9 +29,6 @@ address 192.168.0.188  # IP地址
 gateway 192.168.0.1    # 网关
 netmask 255.255.255.0  # 子网掩码
 dns-nameservers 211.68.72.100 # DNS
-
-sudo ifconfig eth0 down  
-sudo ifconfig eth0 up
 
 {% endhighlight %}
 
