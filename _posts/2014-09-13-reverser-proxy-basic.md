@@ -1,6 +1,6 @@
 ---
 author: Jerry Hsia
-title: Web负载均衡 - Nginx反向代理实现负载均衡
+title: Web负载均衡 - Nginx反向代理(基础篇)
 excerpt:
 layout: post
 views:
@@ -23,8 +23,8 @@ post_format: [ ]
 每个请求按时间顺序逐一分配到不同的后端服务器，如果后端某台服务器宕机，故障系统被自动剔除，使用户访问不受影响
 {% highlight bash %}
 upstream server_group {
-   server 192.168.160.100:8080;
-   server 192.168.160.101:8080;
+   server 192.168.0.121:80;
+   server 192.168.0.122:80;
 }
 {% endhighlight %}
 
@@ -33,8 +33,8 @@ upstream server_group {
 指定轮询权值，weight值越大，分配到的访问机率越高，主要用于后端每个服务器性能不均的情况下
 {% highlight bash %}
 upstream server_group {
-   server 192.168.160.100:8080 weight=1; #分担1/3的请求
-   server 192.168.160.101:8080 weight=2; #分担2/3的请求
+   server 192.168.0.121:80 weight=1; #分担1/3的请求
+   server 192.168.0.122:80 weight=2; #分担2/3的请求
 }
 {% endhighlight %}
 
@@ -44,8 +44,8 @@ upstream server_group {
 {% highlight bash %}
 upstream server_group {
    ip_hash;
-   server 192.168.160.100:8080;
-   server 192.168.160.101:8080;
+   server 192.168.0.121:80;
+   server 192.168.0.122:80;
 }
 {% endhighlight %}
 
@@ -55,8 +55,8 @@ upstream server_group {
 {% highlight bash %}
 upstream server_group {
    fair;
-   server 192.168.160.100:8080;
-   server 192.168.160.101:8080;
+   server 192.168.0.121:80;
+   server 192.168.0.122:80;
 }
 {% endhighlight %}
 
@@ -67,8 +67,8 @@ upstream server_group {
 upstream server_group {
    hash $request_uri;
    hash_method crc32;
-   server 192.168.160.100:8080;
-   server 192.168.160.101:8080;
+   server 192.168.0.121:80;
+   server 192.168.0.122:80;
 }
 {% endhighlight %}
 
@@ -77,8 +77,8 @@ upstream server_group {
 在HTTP Upstream模块中，通过server指令指定后端服务器的同时还可以设定每个后端服务器在负载均衡调度中的状态
 {% highlight bash %}
 upstream server_group {
-   server 192.168.160.100:8080 weight=1 max_fails=2 fail_timeout=30s;
-   server 192.168.160.101:8080 weight=1 max_fails=2 fail_timeout=30s;
+   server 192.168.0.121:80 weight=1 max_fails=2 fail_timeout=30s;
+   server 192.168.0.122:80 weight=1 max_fails=2 fail_timeout=30s;
    server 192.168.160.102:8080 down;
    server 192.168.160.103:8080 backup;
 }
@@ -117,25 +117,6 @@ upstream server_group {
 
 - 配置独立的Session服务器统一存储，如：数据库、Redis、Memecached。
 
-### 配置文件示例
+### 单点故障解决方案
 
-{% highlight bash %}
-server {
-    
-    # 负载均衡服务器组
-    upstream server_group {
-       server 192.168.160.100:8080 weight=1 max_fails=2 fail_timeout=30s;
-       server 192.168.160.101:8080 weight=1 max_fails=2 fail_timeout=30s;
-    }
-
-    # 转发所有php请求，支持正则表达式匹配
-    location ~ \.php$ {
-        proxy_pass http://server_group; #这里的名字和上面的server_group的名字相同
-        proxy_redirect off;
-        proxy_set_header Host $host; #用户主机
-        proxy_set_header X-Real-IP $remote_addr; #用户IP
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; #本代理服务器IP
-    }
-    
-}
-{% endhighlight %}
+由于所有的请求都通过反向代理服务器转发，方向代理服务器宕机后，将造成集群整体不能访问，这是绝对不能容忍的，解决方案是加一台备用代理服务器实现主从互备，常用的软件是keepalived。
