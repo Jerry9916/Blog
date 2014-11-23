@@ -29,31 +29,48 @@ StaticLinkList.h
 
 #define SUCCESS -1
 #define ERROR -2
-#define STATIC_MAX_SIZE 7
 
 typedef struct StaticLinkListNode {
     int data;
-    int cur;
-} SNODE, StaticLinkList[STATIC_MAX_SIZE];
+    int cur; // 后继元素在数组中的索引
+} SNODE, StaticLinkList[MAX_SIZE];
 
-// 获取下一个可用数组元素位置
-int get_next_cur(StaticLinkList list) {
+// 初始化链表
+void s_init(StaticLinkList list) {
+    for (int i = 0; i < MAX_SIZE; i++) {
+        list[i].cur = i + 1;// 默认元素在数组中的位置连续
+        list[i].data = 0;
+    }
+    list[MAX_SIZE - 1].cur = 0;// 数组最后一个元素作为链表的头结点，cur保存链表第一个元素在数组中的位置，0代表链表为空
+}
+
+// 分配存储位置
+int s_malloc(StaticLinkList list) {
     int cur = list[0].cur;
     if (cur) {
         list[0].cur = list[cur].cur;
     }
+    list[0].data++; // 将第一个数组元素的data字段用于存放链表长度
     return cur;
+}
+
+// 释放存储位置
+void s_free(StaticLinkList list, int cur) {
+    list[cur].data = 0;
+    list[cur].cur = list[0].cur;
+    list[0].cur = cur;
+    list[0].data--;
 }
 
 // 获取链表长度
 int s_size(StaticLinkList list) {
-    return list[0].data;
+    return list[0].data;// 数组第一个元素数据域存储链表长度
 }
 
 // 打印链表
 void s_print(StaticLinkList list) {
     printf("--s_print_start--\n");
-    SNODE node = list[STATIC_MAX_SIZE - 1];
+    SNODE node = list[MAX_SIZE - 1];
     while (node.cur != 0) {
         printf("%d\n", list[node.cur].data);
         node = list[node.cur];
@@ -64,7 +81,7 @@ void s_print(StaticLinkList list) {
 // 打印原始数组
 void s_print_array(StaticLinkList list) {
     printf("--s_print_array_start--\n");
-    for (int i = 0; i < STATIC_MAX_SIZE; i++) {
+    for (int i = 0; i < MAX_SIZE; i++) {
         printf("i:%d data:%d cur:%d \n", i, list[i].data, list[i].cur);
     }
     printf("--s_print_array_end--\n");
@@ -72,22 +89,20 @@ void s_print_array(StaticLinkList list) {
 
 // 添加一个元素
 int s_add(StaticLinkList list, int index, int number) {
-    if (s_size(list) == STATIC_MAX_SIZE - 2 || index > s_size(list)) return ERROR;
+    if (s_size(list) == MAX_SIZE - 2 || index > s_size(list)) return ERROR;
     int i = 0;
-    int p = STATIC_MAX_SIZE - 1;
-    SNODE node = list[p];
+    int position = MAX_SIZE - 1;
+    SNODE node = list[position];
     while (i <= index) {
         if (i == index) {
-            int next_cur = get_next_cur(list);
+            int next_cur = s_malloc(list);
             list[next_cur].data = number;
             list[next_cur].cur  = node.cur;
-            list[p].cur = next_cur;
-            
-            list[0].data++; // 将第一个数组元素的data字段用于存放链表长度
+            list[position].cur = next_cur;
             break;
         }
-        p = node.cur;
-        node = list[p];
+        position = node.cur;
+        node = list[position];
         i++;
     }
     return SUCCESS;
@@ -97,26 +112,21 @@ int s_add(StaticLinkList list, int index, int number) {
 int s_delete(StaticLinkList list, int index) {
     if (index > s_size(list) - 1) return ERROR;
     int i = 0;
-    int p = STATIC_MAX_SIZE - 1;
-    SNODE node = list[p];
+    int position = MAX_SIZE - 1;
+    SNODE node = list[position];
     while (i <= index) {
         if (i == index) {
-            list[node.cur].data = 0;
-            list[p].cur = list[node.cur].cur;
-            
-            list[node.cur].cur = list[0].cur;
-            list[0].cur = node.cur;
-            list[0].data--;
+            list[position].cur = list[node.cur].cur;
+            s_free(list, node.cur);
         }
-        p = node.cur;
-        node = list[p];
+        position = node.cur;
+        node = list[position];
         i++;
     }
     return SUCCESS;
 }
 
 #endif
-
 
 {% endhighlight %}
 
@@ -132,6 +142,8 @@ main.c
 //  Copyright (c) 2013 Jerry Hsia. All rights reserved.
 //
 
+#define MAX_SIZE 7
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "StaticLinkList.h"
@@ -140,12 +152,7 @@ int main(int argc, const char * argv[]) {
     
     StaticLinkList list;
     
-    for (int i = 0; i < STATIC_MAX_SIZE; i++) {
-        list[i].cur = i + 1;
-        list[i].data = 0;
-    }
-    
-    list[STATIC_MAX_SIZE - 1].cur = 0;
+    s_init(list);
     
     s_add(list, 0, 888);
     s_add(list, 0, 777);
@@ -155,16 +162,16 @@ int main(int argc, const char * argv[]) {
     printf("链表的长度：%d\n", s_size(list));
     s_print(list);
     
-    s_delete(list, 2);
+    s_delete(list, 1);
     s_print(list);
     
     printf("链表的长度：%d\n", s_size(list));
-    s_add(list, s_size(list), 999);
+    //s_add(list, s_size(list), 999);
     s_print(list);
+    s_print_array(list);
     
     return 0;
 }
-
 
 {% endhighlight %}
 
