@@ -58,7 +58,7 @@ int c_length(CLIST list) {
 
 // 打印链表
 void c_print(CLIST list) {
-    printf("--打印链表，链表长度：%d--\n", c_length(list));
+    printf("--打印链表，链表长度：%d\n", c_length(list));
     CNODE* node = list->rear->next;
     while (node->next != list->rear->next) {
         printf("%d\n", node->next->data);
