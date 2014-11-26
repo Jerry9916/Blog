@@ -127,6 +127,10 @@ header {
   background: #CACACA;
 }
 
+.banner .content {
+  height: 100%;
+}
+
 .bannerText {
   position: absolute;
   left: 0;
@@ -507,7 +511,7 @@ header {
   text-transform: uppercase;
 }
 
-.skilBg {
+.skil-bg {
   background: url(../images/skills.png) no-repeat 0 0;
 }
 
@@ -578,16 +582,16 @@ header {
   font-weight: 700;
 }
 
-.workDetails .rightArea {
+.work-details .right-area {
   border-left: solid 1px #eaeaea;
   padding-bottom: 47px;
 }
 
-.workDetails:last-child .rightArea {
+.work-details:last-child .rightArea {
   padding-bottom: 0px;
 }
 
-.workYear {
+.work-year {
   font-size: 17px;
   color: #fff;
   background: #ff675f;
@@ -607,7 +611,7 @@ header {
   background: url(../images/arrow-left.png) no-repeat 0 23px;
 }
 
-.exCon {
+.ex-con {
   width: auto;
   background: #f3f3f3;
   border-bottom: solid 4px #eeeeee;
@@ -616,17 +620,17 @@ header {
   text-align: left;
 }
 
-.exCon p {
+.ex-con p {
   color: #84868d;
   line-height: 21px;
 }
 
-.exCon h4 {
+.ex-con h4 {
   color: #474d5d;
   padding-bottom: 3px;
 }
 
-.exCon h5 {
+.ex-con h5 {
   color: #474d5d;
 }
 
@@ -664,12 +668,12 @@ header {
   background: url(../images/arrow-left-light.png) no-repeat 0 23px;
 }
 
-.education .exCon {
+.education .ex-con {
   background: #fafafa;
   border-bottom: solid 4px #e8e7e7;
 }
 
-.education .workDetails .rightArea {
+.education .work-details .rightArea {
   border-left-color: #e5e4e4;
 }
 
@@ -1130,13 +1134,13 @@ ul.portfolioContainer li:hover span.hoverBox .linKed {
 -------------------------------------------------------------------------------*/
 
 @media screen and (min-width: 1200px) {
-  .workYear {
+  .work-year {
     width: 140px;
     height: 140px;
     padding-top: 50px;
   }
 
-  .education .workYear {
+  .education .work-year {
     padding-top: 58px;
   }
 }
@@ -1219,11 +1223,11 @@ ul.portfolioContainer li:hover span.hoverBox .linKed {
     display: block;
   }
 
-  .workYear {
+  .work-year {
     margin: 0 auto;
   }
 
-  .workDetails .rightArea {
+  .work-details .rightArea {
     border-left: none;
   }
 
@@ -1238,7 +1242,7 @@ ul.portfolioContainer li:hover span.hoverBox .linKed {
     background: url(../images/arrow-top-light.png) no-repeat 50% 100%;
   }
 
-  .exCon {
+  .ex-con {
     margin-left: 0px;
   }
 
@@ -1576,4 +1580,9 @@ ul.portfolioContainer li:hover span.hoverBox .linKed {
   .cb-slideshow li div h3 {
     font-size: 80px
   }
+}
+
+.stuckMenu {
+  position: relative;
+  top: 0;
 }
