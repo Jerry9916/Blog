@@ -68,7 +68,7 @@ void c_print(CLIST list) {
 
 // 添加一个元素到index位置
 int c_add(CLIST list, unsigned int index, int data) {
-    printf("--在%d位置插入%d--\n", index, data);
+    printf("--在%d位置插入%d\n", index, data);
     if (index > c_length(list)) {
         return ERROR;
     }
@@ -82,7 +82,7 @@ int c_add(CLIST list, unsigned int index, int data) {
     } else {
         CNODE* node = list->rear->next;
         int i = 0;
-        while (i != index) {
+        while (i < index) {
             node = node->next;
             i++;
         }
@@ -105,7 +105,7 @@ int c_get(CLIST list, unsigned int index) {
     } else {
         CNODE* node = list->rear->next;
         int i = 0;
-        while (i != index) {
+        while (i < index) {
             node = node->next;
             i++;
         }
@@ -121,7 +121,7 @@ int c_delete(CLIST list, unsigned int index) {
     }
     int i = 0;
     CNODE* node = list->rear->next;
-    while (i != index) {
+    while (i < index) {
         node = node->next;
         i++;
     }
@@ -142,9 +142,9 @@ void c_clear(CLIST list) {
         CNODE* nextNode = node->next->next;
         free(node->next);
         node->next = nextNode;
-        head->data--;
     }
     list->rear = head;
+    head->data = 0;
 }
 #endif
 

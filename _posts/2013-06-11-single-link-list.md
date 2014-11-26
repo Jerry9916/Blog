@@ -27,6 +27,9 @@ SingleLinkList.h
 #ifndef DataStructure_SingleLinkList_h
 #define DataStructure_SingleLinkList_h
 
+#define SUCCESS -1
+#define ERROR -2
+
 typedef struct SingleLinkListNode {
     int data;
     struct SingleLinkListNode* next;
@@ -34,8 +37,21 @@ typedef struct SingleLinkListNode {
 
 typedef struct SingleLinkListNode* SLIST;
 
+// 初始化链表
+SLIST s_init() {
+    SLIST list = (SLIST)malloc(sizeof(SNODE));
+    list->data = 0;// 头结点数据域存储链表长度
+    return list;
+}
+
+// 获取链表长度
+int s_length(SLIST list) {
+    return list->data;
+}
+
 // 打印单链表
 void s_print(SLIST list) {
+    printf("--打印链表，当前链表长度%d\n", s_length(list));
     SNODE* node = list;
     while (node->next) {
         printf("%d\n", node->next->data);
@@ -44,31 +60,35 @@ void s_print(SLIST list) {
 }
 
 // 添加一个元素到index位置
-int s_add(SLIST list, int index, int number) {
-    int i = 0;
+int s_add(SLIST list, int index, int data) {
+    printf("--在%d位置插入%d\n", index, data);
+    if (index > s_length(list)) {
+        return ERROR;
+    }
     SNODE* node = list;
-    while (node && i <= index) {
-        if (i == index) {
-            SNODE* newNode = (SNODE*)malloc(sizeof(SNODE));
-            newNode->data = number;
-            newNode->next = node->next;
-            node->next = newNode;
-            return SUCCESS;
-        }
+    int i = 0;
+    while (i < index && node->next) {
         node = node->next;
         i++;
     }
-    return ERROR;
+    SNODE* newNode = (SNODE*)malloc(sizeof(SNODE));
+    newNode->data = data;
+    newNode->next = node->next;
+    node->next = newNode;
+    
+    list->data++;
+    return SUCCESS;
 }
 
 // 获取第index个元素
-int s_get(SLIST list, int index) {
+int s_get(SLIST list, unsigned int index) {
+    printf("--获取第%d个元素\n", index);
+    if (index > s_length(list) - 1) {
+        return ERROR;
+    }
     SNODE* node = list;
     int i = 0;
-    while (i <= index) {
-        if (!node) {
-            return ERROR;
-        }
+    while (i <= index && node->next) {
         node = node->next;
         i++;
     }
@@ -76,27 +96,27 @@ int s_get(SLIST list, int index) {
 }
 
 // 删除一个元素
-int s_delete(SLIST list, int index) {
+int s_delete(SLIST list, unsigned int index) {
+    printf("--删除第%d个元素\n", index);
+    int length = s_length(list);
+    if (index > length - 1 || length == 0) {
+        return ERROR;
+    }
     SNODE* node = list;
     int i = 0;
-    while (i <= index) {
-        if (node->next) {
-            if (i == index) {
-                SNODE* deleteNode = node->next;
-                if (deleteNode->next) {
-                    node->next = deleteNode->next;
-                } else {
-                    node->next = NULL;
-                }
-                return deleteNode->data;
-            }
-            node = node->next;
-            i++;
-        } else {
-            return ERROR;
-        }
+    while (i < index && node->next) {
+        node = node->next;
+        i++;
     }
-    return ERROR;
+    SNODE* deleteNode = node->next;
+    if (deleteNode->next) {
+        node->next = deleteNode->next;
+    } else {
+        node->next = NULL;
+    }
+    
+    list->data--;
+    return deleteNode->data;
 }
 
 // 清空
@@ -107,6 +127,7 @@ void s_clear(SLIST list) {
         free(node);
         node = next;
     }
+    list->data = 0;
     list->next = NULL;
 }
 #endif
@@ -116,6 +137,7 @@ void s_clear(SLIST list) {
 main.c
 
 {% highlight  c%}
+
 //
 //  main.c
 //  DataStructure
@@ -123,8 +145,6 @@ main.c
 //  Created by Jerry Hsia on 11/06/13.
 //  Copyright (c) 2013 Jerry Hsia. All rights reserved.
 //
-#define SUCCESS -1
-#define ERROR -2
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -133,43 +153,94 @@ main.c
 int main(int argc, const char * argv[]) {
     
     // 头插法
-    SLIST singleLinkList0 = (SLIST)malloc(sizeof(SNODE));
+    SLIST singleLinkList0 = s_init();
     for (int i = 0; i < 5; i++) {
         s_add(singleLinkList0, 0, i);
     }
-    
     s_print(singleLinkList0);
     
     // 尾插法
-    SLIST singleLinkList = (SLIST)malloc(sizeof(SNODE));
+    SLIST singleLinkList = s_init();
     SNODE* endNode = singleLinkList;
     for (int i = 0; i < 5; i++) {
         SNODE* node = (SNODE*)malloc(sizeof(SNODE));
         node->data = i;
         endNode->next = node;
         endNode = node;
+        singleLinkList->data++;
     }
     
-    printf("--打印\n");
     s_print(singleLinkList);
     
-    printf("--添加一个新元素\n");
     s_add(singleLinkList, 3, 5);
     s_print(singleLinkList);
     
-    printf("--获取一个元素\n");
-    printf("%d\n", s_get(singleLinkList, 0));
+    printf("%d\n", s_get(singleLinkList, 3));
     s_print(singleLinkList);
     
-    printf("--删除一个元素\n");
     s_delete(singleLinkList, 1);
     s_print(singleLinkList);
     
-    printf("--清空\n");
     s_clear(singleLinkList);
     s_print(singleLinkList);
     
     return 0;
 }
+
+
+{% endhighlight %}
+
+测试结果
+
+{% highlight  c%}
+
+--在0位置插入0
+--在0位置插入1
+--在0位置插入2
+--在0位置插入3
+--在0位置插入4
+--打印链表，链表长度：5
+4
+3
+2
+1
+0
+--在0位置插入0
+--在1位置插入1
+--在2位置插入2
+--在3位置插入3
+--在4位置插入4
+--打印链表，链表长度：5
+0
+1
+2
+3
+4
+--在3位置插入5
+--打印链表，链表长度：6
+0
+1
+2
+5
+3
+4
+--获取5位置的元素
+4
+--打印链表，链表长度：6
+0
+1
+2
+5
+3
+4
+--删除1位置元素
+--打印链表，链表长度：5
+0
+2
+5
+3
+4
+--清空链表
+--打印链表，链表长度：0
 
 {% endhighlight %}
