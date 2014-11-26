@@ -12,7 +12,7 @@ tags:
 post_format: [ ]
 ---
 
-StaticLinkList.h
+头文件CircLinkList.h
 
 {% highlight  bash%}
 
@@ -41,17 +41,24 @@ struct CircLinkList {
 
 typedef struct CircLinkList* CLIST;
 
+// 初始化链表
 CLIST c_init() {
     CLIST circLinkList = (CLIST)malloc(sizeof(CLIST));
     CNODE* node = (CNODE*)malloc(sizeof(CNODE));
-    node->next = node;
-    circLinkList->rear = node;
+    node->data = 0;// 头结点数据域存储链表长度
+    node->next = node;// 头结点指针指向头结点
+    circLinkList->rear = node;// 尾指针指向头结点
     return circLinkList;
+}
+
+// 获取链表长度
+int c_length(CLIST list) {
+    return list->rear->next->data;
 }
 
 // 打印链表
 void c_print(CLIST list) {
-    printf("--c_print\n");
+    printf("--打印链表，链表长度：%d--\n", c_length(list));
     CNODE* node = list->rear->next;
     while (node->next != list->rear->next) {
         printf("%d\n", node->next->data);
@@ -60,68 +67,82 @@ void c_print(CLIST list) {
 }
 
 // 添加一个元素到index位置
-int c_add(CLIST list, int index, int number) {
-    printf("--在%d位置插入%d\n", index, number);
-    int i = 0;
-    CNODE* node = list->rear->next;
-    while (i <= index) {
-        if (i == index) {
-            CNODE* newNode = (CNODE*)malloc(sizeof(CNODE));
-            newNode->data = number;
-            newNode->next = node->next;
-            node->next = newNode;
-            return SUCCESS;
+int c_add(CLIST list, unsigned int index, int data) {
+    printf("--在%d位置插入%d--\n", index, data);
+    if (index > c_length(list)) {
+        return ERROR;
+    }
+    CNODE* newNode = (CNODE*)malloc(sizeof(CNODE));
+    newNode->data = data;
+    if (index == c_length(list)) {// 在末尾插入，直接在尾节点后插入，时间复杂度O(1)
+        newNode->next = list->rear->next;// 新节点的指针域指向头结点
+        list->rear->next = newNode;// 旧的尾节点指针域指向新节点
+        list->rear = newNode;// 尾指针指向新节点
+        list->rear->next->data++;// 链表长度加1
+    } else {
+        CNODE* node = list->rear->next;
+        int i = 0;
+        while (i != index) {
+            node = node->next;
+            i++;
         }
-        node = node->next;
-        i++;
+        newNode->next = node->next;
+        node->next = newNode;
+        list->rear->next->data++;
+        return SUCCESS;
     }
     return ERROR;
 }
 
 // 获取第index个元素
-int c_get(CLIST list, int index) {
+int c_get(CLIST list, unsigned int index) {
     printf("--获取%d位置的元素\n", index);
-    CNODE* node = list->rear->next;
-    int i = 0;
-    while (node->next != list->rear->next && i <= index) {
-        if (i == index) {
-            return node->next->data;
-        }
-        node = node->next;
-        i++;
+    if (index > c_length(list) - 1) {
+        return ERROR;
     }
-    return ERROR;
+    if (index == c_length(list) - 1) {// 充分利用尾指针的优势
+        return list->rear->data;
+    } else {
+        CNODE* node = list->rear->next;
+        int i = 0;
+        while (i != index) {
+            node = node->next;
+            i++;
+        }
+        return node->next->data;
+    }
 }
 
 // 删除一个元素
-int c_delete(CLIST list, int index) {
+int c_delete(CLIST list, unsigned int index) {
     printf("--删除%d位置元素\n", index);
-    CNODE* node = list->rear->next;
+    if (index > c_length(list) - 1) {
+        return ERROR;
+    }
     int i = 0;
-    while (node->next != list->rear->next && i <= index) {
-        if (i == index) {
-            CNODE* deleteNode = node->next;
-            if (deleteNode->next) {
-                node->next = deleteNode->next;
-            } else {
-                node->next = NULL;
-            }
-            return deleteNode->data;
-        }
+    CNODE* node = list->rear->next;
+    while (i != index) {
         node = node->next;
         i++;
     }
-    return ERROR;
+    CNODE* deleteNode = node->next;
+    int data = deleteNode->data;
+    node->next = deleteNode->next;
+    free(deleteNode);
+    list->rear->next->data--;
+    return data;
 }
 
 // 清空
 void c_clear(CLIST list) {
     printf("--清空链表\n");
     CNODE* head = list->rear->next;
-    while (head->next != head) {
-        CNODE* nextNode = head->next->next;
-        free(head->next);
-        head->next = nextNode;
+    CNODE* node = head;
+    while (node->next != head) {
+        CNODE* nextNode = node->next->next;
+        free(node->next);
+        node->next = nextNode;
+        head->data--;
     }
     list->rear = head;
 }
@@ -129,7 +150,7 @@ void c_clear(CLIST list) {
 
 {% endhighlight %}
 
-main.c
+测试文件main.c
 
 {% highlight  c%}
 
@@ -152,18 +173,12 @@ int main(int argc, const char * argv[]) {
     for (int i = 0; i < 5; i++) {
         c_add(circLinkList0, 0, i);
     }
-    
     c_print(circLinkList0);
     
     // 尾插法
     CLIST circLinkList = c_init();
-    CNODE* head = circLinkList->rear->next;
     for (int i = 0; i < 5; i++) {
-        CNODE* node = (CNODE*)malloc(sizeof(CNODE));
-        node->data = i;
-        circLinkList->rear->next = node;
-        node->next = head;
-        circLinkList->rear = node;
+        c_add(circLinkList, c_length(circLinkList), i);
     }
     c_print(circLinkList);
 
@@ -182,30 +197,37 @@ int main(int argc, const char * argv[]) {
 }
 
 
+
 {% endhighlight %}
 
-运行结果
-{% highlight  bash%}
+测试结果
 
---在0位置插入0
---在0位置插入1
---在0位置插入2
---在0位置插入3
---在0位置插入4
---c_print
+{% highlight  c%}
+
+--在0位置插入0--
+--在0位置插入1--
+--在0位置插入2--
+--在0位置插入3--
+--在0位置插入4--
+--打印链表，链表长度：5--
 4
 3
 2
 1
 0
---c_print
+--在0位置插入0--
+--在1位置插入1--
+--在2位置插入2--
+--在3位置插入3--
+--在4位置插入4--
+--打印链表，链表长度：5--
 0
 1
 2
 3
 4
---在3位置插入5
---c_print
+--在3位置插入5--
+--打印链表，链表长度：6--
 0
 1
 2
@@ -214,7 +236,7 @@ int main(int argc, const char * argv[]) {
 4
 --获取5位置的元素
 4
---c_print
+--打印链表，链表长度：6--
 0
 1
 2
@@ -222,13 +244,13 @@ int main(int argc, const char * argv[]) {
 3
 4
 --删除1位置元素
---c_print
+--打印链表，链表长度：5--
 0
 2
 5
 3
 4
 --清空链表
---c_print
+--打印链表，链表长度：0--
 
 {% endhighlight %}
