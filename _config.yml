@@ -3,6 +3,7 @@ highlighter: pygments
 permalink: posts/:title.html
 paginate: 4
 paginate_path: page/:num
+excerpt_separator: ""
 
 blog:
     name: Jerry's Blog # 博客名称
