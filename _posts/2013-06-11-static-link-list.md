@@ -20,7 +20,7 @@ StaticLinkList.h
 //  StaticLinkList.h
 //  DataStructure
 //
-//  Created by Jerry Hsia on 11/06/13.
+//  Created by Jerry Hsia on 13/06/13.
 //  Copyright (c) 2013 Jerry Hsia. All rights reserved.
 //
 
@@ -63,66 +63,61 @@ void s_free(StaticLinkList list, int cur) {
 }
 
 // 获取链表长度
-int s_size(StaticLinkList list) {
+int s_length(StaticLinkList list) {
     return list[0].data;// 数组第一个元素数据域存储链表长度
 }
 
 // 打印链表
 void s_print(StaticLinkList list) {
-    printf("--s_print_start--\n");
+    printf("--打印链表，当前链表长度：%d\n", s_length(list));
     SNODE node = list[MAX_SIZE - 1];
     while (node.cur != 0) {
         printf("%d\n", list[node.cur].data);
         node = list[node.cur];
     }
-    printf("--s_print_end--\n");
 }
 
 // 打印原始数组
 void s_print_array(StaticLinkList list) {
-    printf("--s_print_array_start--\n");
+    printf("--打印原始数组\n");
     for (int i = 0; i < MAX_SIZE; i++) {
-        printf("i:%d data:%d cur:%d \n", i, list[i].data, list[i].cur);
+        printf("index:%d data:%d cur:%d \n", i, list[i].data, list[i].cur);
     }
-    printf("--s_print_array_end--\n");
 }
 
 // 添加一个元素
-int s_add(StaticLinkList list, int index, int number) {
-    if (s_size(list) == MAX_SIZE - 2 || index > s_size(list)) return ERROR;
+int s_add(StaticLinkList list, unsigned int index, unsigned int data) {
+    printf("--在 %d 位置插入 %d\n", index, data);
+    if (s_length(list) == MAX_SIZE - 2 || index > s_length(list)) return ERROR;
     int i = 0;
     int position = MAX_SIZE - 1;
     SNODE node = list[position];
-    while (i <= index) {
-        if (i == index) {
-            int next_cur = s_malloc(list);
-            list[next_cur].data = number;
-            list[next_cur].cur  = node.cur;
-            list[position].cur = next_cur;
-            break;
-        }
+    while (i < index) {
         position = node.cur;
         node = list[position];
         i++;
     }
+    int next_cur = s_malloc(list);
+    list[next_cur].data = data;
+    list[next_cur].cur  = node.cur;
+    list[position].cur = next_cur;
     return SUCCESS;
 }
 
 // 删除一个元素
-int s_delete(StaticLinkList list, int index) {
-    if (index > s_size(list) - 1) return ERROR;
+int s_delete(StaticLinkList list, unsigned int index) {
+    printf("--删除第 %d 个元素\n", index);
+    if (index > s_length(list) - 1) return ERROR;
     int i = 0;
     int position = MAX_SIZE - 1;
     SNODE node = list[position];
-    while (i <= index) {
-        if (i == index) {
-            list[position].cur = list[node.cur].cur;
-            s_free(list, node.cur);
-        }
+    while (i < index) {
         position = node.cur;
         node = list[position];
         i++;
     }
+    list[position].cur = list[node.cur].cur;
+    s_free(list, node.cur);
     return SUCCESS;
 }
 
@@ -138,7 +133,7 @@ main.c
 //  main.c
 //  DataStructure
 //
-//  Created by Jerry Hsia on 11/06/13.
+//  Created by Jerry Hsia on 13/06/13.
 //  Copyright (c) 2013 Jerry Hsia. All rights reserved.
 //
 
@@ -159,14 +154,12 @@ int main(int argc, const char * argv[]) {
     s_add(list, 0, 666);
     s_add(list, 1, 555);
     
-    printf("链表的长度：%d\n", s_size(list));
     s_print(list);
     
-    s_delete(list, 1);
+    s_delete(list, 3);
     s_print(list);
     
-    printf("链表的长度：%d\n", s_size(list));
-    //s_add(list, s_size(list), 999);
+    s_add(list, s_length(list), 999);
     s_print(list);
     s_print_array(list);
     
@@ -175,35 +168,36 @@ int main(int argc, const char * argv[]) {
 
 {% endhighlight %}
 
-运行结果
+测试结果
 {% highlight  bash%}
 
-链表的长度：4
---s_print_start--
+--在 0 位置插入 888
+--在 0 位置插入 777
+--在 0 位置插入 666
+--在 1 位置插入 555
+--打印链表，当前链表长度：4
 666
 555
 777
 888
---s_print_end--
---s_print_start--
+--删除第 3 个元素
+--打印链表，当前链表长度：3
 666
+555
 777
-888
---s_print_end--
-链表的长度：3
---s_print_start--
+--在 3 位置插入 999
+--打印链表，当前链表长度：4
 666
+555
 777
-888
---s_print_end--
---s_print_array_start--
-i:0 data:3 cur:4 
-i:1 data:888 cur:0 
-i:2 data:777 cur:1 
-i:3 data:666 cur:2 
-i:4 data:0 cur:5 
-i:5 data:0 cur:6 
-i:6 data:0 cur:3 
---s_print_array_end--s
+999
+--打印原始数组
+index:0 data:4 cur:5 
+index:1 data:999 cur:0 
+index:2 data:777 cur:1 
+index:3 data:666 cur:4 
+index:4 data:555 cur:2 
+index:5 data:0 cur:6 
+index:6 data:0 cur:3
 
 {% endhighlight %}
