@@ -131,8 +131,9 @@ int c_delete(CLIST list, unsigned int index) {
         i++;
     }
     CNODE* deleteNode = node->next;
-    int data = deleteNode->data;
+    if (deleteNode == list->rear) list->rear = node;// 尾节点被删除了，重新赋值尾指针
     node->next = deleteNode->next;
+    int data = deleteNode->data;
     free(deleteNode);
     list->head->data--;
     return data;
