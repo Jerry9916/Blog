@@ -36,7 +36,8 @@ typedef struct CircLinkListNode {
 } CNODE;
 
 struct CircLinkList {
-    CNODE* rear;
+    CNODE* head;// 头结点指针
+    CNODE* rear;// 尾节点指针
 };
 
 typedef struct CircLinkList* CLIST;
@@ -44,23 +45,24 @@ typedef struct CircLinkList* CLIST;
 // 初始化链表
 CLIST c_init() {
     CLIST circLinkList = (CLIST)malloc(sizeof(CLIST));
-    CNODE* node = (CNODE*)malloc(sizeof(CNODE));
-    node->data = 0;// 头结点数据域存储链表长度
-    node->next = node;// 头结点指针指向头结点
-    circLinkList->rear = node;// 尾指针指向头结点
+    CNODE* head = (CNODE*)malloc(sizeof(CNODE));
+    head->data = 0;// 头结点数据域存储链表长度
+    head->next = head;// 头结点指针指向头结点
+    circLinkList->rear = head;// 尾指针指向头结点
+    circLinkList->head = head;
     return circLinkList;
 }
 
 // 获取链表长度
 int c_length(CLIST list) {
-    return list->rear->next->data;
+    return list->head->data;
 }
 
 // 打印链表
 void c_print(CLIST list) {
     printf("--打印链表，链表长度：%d\n", c_length(list));
-    CNODE* node = list->rear->next;
-    while (node->next != list->rear->next) {
+    CNODE* node = list->head;
+    while (node->next != list->head) {
         printf("%d\n", node->next->data);
         node = node->next;
     }
@@ -75,12 +77,12 @@ int c_add(CLIST list, unsigned int index, int data) {
     CNODE* newNode = (CNODE*)malloc(sizeof(CNODE));
     newNode->data = data;
     if (index == c_length(list)) {// 在末尾插入，直接在尾节点后插入，时间复杂度O(1)
-        newNode->next = list->rear->next;// 新节点的指针域指向头结点
+        newNode->next = list->head;// 新节点的指针域指向头结点
         list->rear->next = newNode;// 旧的尾节点指针域指向新节点
         list->rear = newNode;// 尾指针指向新节点
-        list->rear->next->data++;// 链表长度加1
+        list->head->data++;// 链表长度加1
     } else {
-        CNODE* node = list->rear->next;
+        CNODE* node = list->head;
         int i = 0;
         while (i < index) {
             node = node->next;
@@ -88,7 +90,7 @@ int c_add(CLIST list, unsigned int index, int data) {
         }
         newNode->next = node->next;
         node->next = newNode;
-        list->rear->next->data++;
+        list->head->data++;
         return SUCCESS;
     }
     return ERROR;
@@ -103,7 +105,7 @@ int c_get(CLIST list, unsigned int index) {
     if (index == c_length(list) - 1) {// 充分利用尾指针的优势
         return list->rear->data;
     } else {
-        CNODE* node = list->rear->next;
+        CNODE* node = list->head;
         int i = 0;
         while (i < index) {
             node = node->next;
@@ -120,7 +122,7 @@ int c_delete(CLIST list, unsigned int index) {
         return ERROR;
     }
     int i = 0;
-    CNODE* node = list->rear->next;
+    CNODE* node = list->head;
     while (i < index) {
         node = node->next;
         i++;
@@ -129,22 +131,21 @@ int c_delete(CLIST list, unsigned int index) {
     int data = deleteNode->data;
     node->next = deleteNode->next;
     free(deleteNode);
-    list->rear->next->data--;
+    list->head->data--;
     return data;
 }
 
 // 清空
 void c_clear(CLIST list) {
     printf("--清空链表\n");
-    CNODE* head = list->rear->next;
-    CNODE* node = head;
-    while (node->next != head) {
+    CNODE* node = list->head;
+    while (node->next != list->head) {
         CNODE* nextNode = node->next->next;
         free(node->next);
         node->next = nextNode;
     }
-    list->rear = head;
-    head->data = 0;
+    list->rear = list->head;
+    list->head->data = 0;
 }
 #endif
 
@@ -181,7 +182,7 @@ int main(int argc, const char * argv[]) {
         c_add(circLinkList, c_length(circLinkList), i);
     }
     c_print(circLinkList);
-
+    
     c_add(circLinkList, 3, 5);
     c_print(circLinkList);
     
@@ -195,8 +196,6 @@ int main(int argc, const char * argv[]) {
     c_print(circLinkList);
     return 0;
 }
-
-
 
 {% endhighlight %}
 
