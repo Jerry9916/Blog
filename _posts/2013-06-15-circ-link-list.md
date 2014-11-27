@@ -76,49 +76,52 @@ int c_add(CLIST list, unsigned int index, int data) {
     }
     CNODE* newNode = (CNODE*)malloc(sizeof(CNODE));
     newNode->data = data;
+    int i;
+    CNODE* node;
     if (index == c_length(list)) {// 在末尾插入，直接在尾节点后插入，时间复杂度O(1)
-        newNode->next = list->head;// 新节点的指针域指向头结点
-        list->rear->next = newNode;// 旧的尾节点指针域指向新节点
+        node = list->rear;
+        i = c_length(list);
         list->rear = newNode;// 尾指针指向新节点
-        list->head->data++;// 链表长度加1
     } else {
-        CNODE* node = list->head;
-        int i = 0;
-        while (i < index) {
-            node = node->next;
-            i++;
-        }
-        newNode->next = node->next;
-        node->next = newNode;
-        list->head->data++;
-        return SUCCESS;
+        node = list->head;
+        i = 0;
     }
-    return ERROR;
+    while (i < index) {
+        node = node->next;
+        i++;
+    }
+    newNode->next = node->next;
+    node->next = newNode;
+    list->head->data++;
+    return SUCCESS;
 }
 
 // 获取第index个元素
 int c_get(CLIST list, unsigned int index) {
     printf("--获取%d位置的元素\n", index);
-    if (index > c_length(list) - 1) {
+    if (c_length(list) == 0 || index > c_length(list) - 1) {
         return ERROR;
     }
+    CNODE* node;
+    int i;
     if (index == c_length(list) - 1) {// 充分利用尾指针的优势
-        return list->rear->data;
+        node = list->rear;
+        i = c_length(list) - 1;
     } else {
-        CNODE* node = list->head;
-        int i = 0;
-        while (i < index) {
-            node = node->next;
-            i++;
-        }
-        return node->next->data;
+        i = 0;
+        node = list->head->next;
     }
+    while (i < index) {
+        node = node->next;
+        i++;
+    }
+    return node->data;
 }
 
 // 删除一个元素
 int c_delete(CLIST list, unsigned int index) {
     printf("--删除%d位置元素\n", index);
-    if (index > c_length(list) - 1) {
+    if (c_length(list) == 0 || index > c_length(list) - 1) {
         return ERROR;
     }
     int i = 0;
@@ -136,8 +139,9 @@ int c_delete(CLIST list, unsigned int index) {
 }
 
 // 清空
-void c_clear(CLIST list) {
+int c_clear(CLIST list) {
     printf("--清空链表\n");
+    if (c_length(list) == 0) return ERROR;
     CNODE* node = list->head;
     while (node->next != list->head) {
         CNODE* nextNode = node->next->next;
@@ -146,6 +150,7 @@ void c_clear(CLIST list) {
     }
     list->rear = list->head;
     list->head->data = 0;
+    return SUCCESS;
 }
 #endif
 
