@@ -14,7 +14,7 @@ post_format: [ ]
 
 SingleLinkList.h
 
-{% highlight  bash%}
+{% highlight  c%}
 
 //
 //  SingleLinkList.h
@@ -26,9 +26,6 @@ SingleLinkList.h
 
 #ifndef DataStructure_SingleLinkList_h
 #define DataStructure_SingleLinkList_h
-
-#define SUCCESS -1
-#define ERROR -2
 
 typedef struct SingleLinkListNode {
     int data;
@@ -148,6 +145,7 @@ main.c
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "Public.h"
 #include "SingleLinkList.h"
 
 int main(int argc, const char * argv[]) {
@@ -186,7 +184,6 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
-
 
 {% endhighlight %}
 

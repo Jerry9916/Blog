@@ -14,7 +14,7 @@ post_format: [ ]
 
 头文件CircLinkList.h
 
-{% highlight  bash%}
+{% highlight  c%}
 
 //
 //  CircLinkList.h
@@ -26,9 +26,6 @@ post_format: [ ]
 
 #ifndef DataStructure_CircLinkList_h
 #define DataStructure_CircLinkList_h
-
-#define SUCCESS -1
-#define ERROR -2
 
 typedef struct CircLinkListNode {
     int data;
@@ -165,12 +162,13 @@ int c_clear(CLIST list) {
 //  main.c
 //  DataStructure
 //
-//  Created by Jerry Hsia on 05/11/14.
+//  Created by Jerry Hsia on 15/06/13.
 //  Copyright (c) 2013 Jerry Hsia. All rights reserved.
 //
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "Public.h"
 #include "CircLinkList.h"
 
 int main(int argc, const char * argv[]) {
@@ -188,7 +186,7 @@ int main(int argc, const char * argv[]) {
         c_add(circLinkList, c_length(circLinkList), i);
     }
     c_print(circLinkList);
-    
+
     c_add(circLinkList, 3, 5);
     c_print(circLinkList);
     
