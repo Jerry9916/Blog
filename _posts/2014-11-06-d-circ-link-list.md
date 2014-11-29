@@ -27,9 +27,6 @@ post_format: [ ]
 #ifndef DataStructure_CircLinkList_h
 #define DataStructure_CircLinkList_h
 
-#define SUCCESS -1
-#define ERROR -2
-
 typedef struct CircLinkListNode {
     int data;
     struct CircLinkListNode* pre;// 前指针
@@ -199,6 +196,7 @@ void c_clear(CLIST list) {
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "Public.h"
 #include "DCircLinkList.h"
 
 int main(int argc, const char * argv[]) {
