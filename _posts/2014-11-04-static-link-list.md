@@ -20,7 +20,7 @@ StaticLinkList.h
 //  StaticLinkList.h
 //  DataStructure
 //
-//  Created by Jerry Hsia on 13/06/13.
+//  Created by Jerry Hsia on 04/11/14.
 //  Copyright (c) 2013 Jerry Hsia. All rights reserved.
 //
 
@@ -133,7 +133,7 @@ main.c
 //  main.c
 //  DataStructure
 //
-//  Created by Jerry Hsia on 13/06/13.
+//  Created by Jerry Hsia on 04/11/14.
 //  Copyright (c) 2013 Jerry Hsia. All rights reserved.
 //
 

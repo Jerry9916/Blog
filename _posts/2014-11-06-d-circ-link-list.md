@@ -20,7 +20,7 @@ post_format: [ ]
 //  DCircLinkList.h
 //  DataStructure
 //
-//  Created by Jerry Hsia on 20/06/13.
+//  Created by Jerry Hsia on 06/11/14.
 //  Copyright (c) 2013 Jerry Hsia. All rights reserved.
 //
 
@@ -193,7 +193,7 @@ void c_clear(CLIST list) {
 //  main.c
 //  DataStructure
 //
-//  Created by Jerry Hsia on 15/06/13.
+//  Created by Jerry Hsia on 06/11/14.
 //  Copyright (c) 2013 Jerry Hsia. All rights reserved.
 //
 
