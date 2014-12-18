@@ -92,12 +92,12 @@ module.exports = function (grunt) {
     },
 
     shell: {
-      jekyllBuild: {
+      build: {
         command: 'jekyll build'
       },
 
-      jekyllServe: {
-        command: 'jekyll serve'
+      publish: {
+        command: 'cd _site && git add -A && git commit -m "Update site" && git push -u origin gitcafe-pages'
       }
     }
   });
@@ -106,6 +106,6 @@ module.exports = function (grunt) {
   grunt.registerTask('resume', ['clean:temp', 'concat:resumeCss', 'concat:resumeScript', 'cssmin:resume', 'uglify:resume', 'clean:temp']);
 
   grunt.registerTask('publish', function() {
-    return grunt.task.run(['blog', 'resume', 'shell:jekyllBuild', 'githubPages']);
+    return grunt.task.run(['blog', 'resume', 'shell:build', 'shell:publish']);
   });
 };
