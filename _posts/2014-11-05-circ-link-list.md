@@ -1,6 +1,6 @@
 ---
 author: Jerry Hsia
-title: 循环链表实现
+title: 循环链表
 excerpt:
 layout: post
 views:
@@ -12,23 +12,37 @@ tags:
 post_format: [ ]
 ---
 
+### 基础篇
+
+循环链表在单链表的基础上使最后一个节点(也称尾节点)指向头节点形成闭环。
+
+![](/files/2014/circ-link-list.png)
+
+优点
+
+- 存储空间不受限制
+- 插入、删除时间复杂度O(1)
+
+缺点
+
+- 查找时间复杂度O(n)，尾节点O(1)
+
+### 实战篇
+
 头文件CircLinkList.h
 
-{% highlight  bash%}
+{% highlight  c%}
 
 //
 //  CircLinkList.h
 //  DataStructure
 //
-//  Created by Jerry Hsia on 15/06/13.
-//  Copyright (c) 2013 Jerry Hsia. All rights reserved.
+//  Created by Jerry Hsia on 11/05/14.
+//  Copyright (c) 2014 Jerry Hsia. All rights reserved.
 //
 
 #ifndef DataStructure_CircLinkList_h
 #define DataStructure_CircLinkList_h
-
-#define SUCCESS -1
-#define ERROR -2
 
 typedef struct CircLinkListNode {
     int data;
@@ -36,7 +50,8 @@ typedef struct CircLinkListNode {
 } CNODE;
 
 struct CircLinkList {
-    CNODE* rear;
+    CNODE* head;// 头结点指针
+    CNODE* rear;// 尾节点指针
 };
 
 typedef struct CircLinkList* CLIST;
@@ -44,23 +59,24 @@ typedef struct CircLinkList* CLIST;
 // 初始化链表
 CLIST c_init() {
     CLIST circLinkList = (CLIST)malloc(sizeof(CLIST));
-    CNODE* node = (CNODE*)malloc(sizeof(CNODE));
-    node->data = 0;// 头结点数据域存储链表长度
-    node->next = node;// 头结点指针指向头结点
-    circLinkList->rear = node;// 尾指针指向头结点
+    CNODE* head = (CNODE*)malloc(sizeof(CNODE));
+    head->data = 0;// 头结点数据域存储链表长度
+    head->next = head;// 头结点指针指向头结点
+    circLinkList->rear = head;// 尾指针指向头结点
+    circLinkList->head = head;
     return circLinkList;
 }
 
 // 获取链表长度
 int c_length(CLIST list) {
-    return list->rear->next->data;
+    return list->head->data;
 }
 
 // 打印链表
 void c_print(CLIST list) {
     printf("--打印链表，链表长度：%d\n", c_length(list));
-    CNODE* node = list->rear->next;
-    while (node->next != list->rear->next) {
+    CNODE* node = list->head;
+    while (node->next != list->head) {
         printf("%d\n", node->next->data);
         node = node->next;
     }
@@ -74,77 +90,82 @@ int c_add(CLIST list, unsigned int index, int data) {
     }
     CNODE* newNode = (CNODE*)malloc(sizeof(CNODE));
     newNode->data = data;
+    int i;
+    CNODE* node;
     if (index == c_length(list)) {// 在末尾插入，直接在尾节点后插入，时间复杂度O(1)
-        newNode->next = list->rear->next;// 新节点的指针域指向头结点
-        list->rear->next = newNode;// 旧的尾节点指针域指向新节点
+        node = list->rear;
+        i = c_length(list);
         list->rear = newNode;// 尾指针指向新节点
-        list->rear->next->data++;// 链表长度加1
     } else {
-        CNODE* node = list->rear->next;
-        int i = 0;
-        while (i < index) {
-            node = node->next;
-            i++;
-        }
-        newNode->next = node->next;
-        node->next = newNode;
-        list->rear->next->data++;
-        return SUCCESS;
+        node = list->head;
+        i = 0;
     }
-    return ERROR;
+    while (i < index) {
+        node = node->next;
+        i++;
+    }
+    newNode->next = node->next;
+    node->next = newNode;
+    list->head->data++;
+    return SUCCESS;
 }
 
 // 获取第index个元素
 int c_get(CLIST list, unsigned int index) {
     printf("--获取%d位置的元素\n", index);
-    if (index > c_length(list) - 1) {
+    if (c_length(list) == 0 || index > c_length(list) - 1) {
         return ERROR;
     }
+    CNODE* node;
+    int i;
     if (index == c_length(list) - 1) {// 充分利用尾指针的优势
-        return list->rear->data;
+        node = list->rear;
+        i = c_length(list) - 1;
     } else {
-        CNODE* node = list->rear->next;
-        int i = 0;
-        while (i < index) {
-            node = node->next;
-            i++;
-        }
-        return node->next->data;
+        i = 0;
+        node = list->head->next;
     }
+    while (i < index) {
+        node = node->next;
+        i++;
+    }
+    return node->data;
 }
 
 // 删除一个元素
 int c_delete(CLIST list, unsigned int index) {
     printf("--删除%d位置元素\n", index);
-    if (index > c_length(list) - 1) {
+    if (c_length(list) == 0 || index > c_length(list) - 1) {
         return ERROR;
     }
     int i = 0;
-    CNODE* node = list->rear->next;
+    CNODE* node = list->head;
     while (i < index) {
         node = node->next;
         i++;
     }
     CNODE* deleteNode = node->next;
-    int data = deleteNode->data;
+    if (deleteNode == list->rear) list->rear = node;// 尾节点被删除了，重新赋值尾指针
     node->next = deleteNode->next;
+    int data = deleteNode->data;
     free(deleteNode);
-    list->rear->next->data--;
+    list->head->data--;
     return data;
 }
 
 // 清空
-void c_clear(CLIST list) {
+int c_clear(CLIST list) {
     printf("--清空链表\n");
-    CNODE* head = list->rear->next;
-    CNODE* node = head;
-    while (node->next != head) {
+    if (c_length(list) == 0) return ERROR;
+    CNODE* node = list->head;
+    while (node->next != list->head) {
         CNODE* nextNode = node->next->next;
         free(node->next);
         node->next = nextNode;
     }
-    list->rear = head;
-    head->data = 0;
+    list->rear = list->head;
+    list->head->data = 0;
+    return SUCCESS;
 }
 #endif
 
@@ -158,12 +179,13 @@ void c_clear(CLIST list) {
 //  main.c
 //  DataStructure
 //
-//  Created by Jerry Hsia on 15/06/13.
-//  Copyright (c) 2013 Jerry Hsia. All rights reserved.
+//  Created by Jerry Hsia on 11/05/14.
+//  Copyright (c) 2014 Jerry Hsia. All rights reserved.
 //
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "Public.h"
 #include "CircLinkList.h"
 
 int main(int argc, const char * argv[]) {
@@ -195,8 +217,6 @@ int main(int argc, const char * argv[]) {
     c_print(circLinkList);
     return 0;
 }
-
-
 
 {% endhighlight %}
 
