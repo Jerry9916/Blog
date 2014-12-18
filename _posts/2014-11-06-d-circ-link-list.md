@@ -1,6 +1,6 @@
 ---
 author: Jerry Hsia
-title: 双向循环链表实现
+title: 双向循环链表
 excerpt:
 layout: post
 views:
@@ -12,23 +12,38 @@ tags:
 post_format: [ ]
 ---
 
+### 基础篇
+
+双向循环链表在循环链表的基础上给每个节点增加一个前驱指针域指向前一个节点，其中头结点的前驱指针指向尾节点。
+
+![](/files/2014/d-circ-link-list.png)
+
+优点
+
+- 存储空间不受限制
+- 插入、删除时间复杂度O(1)
+- 由于增加了前驱指针，可以灵活选择向前或向后遍历
+
+缺点
+
+- 查找时间复杂度仍为O(n)
+
+### 实战篇
+
 头文件DCircLinkList.h
 
-{% highlight  bash%}
+{% highlight  c%}
 
 //
 //  DCircLinkList.h
 //  DataStructure
 //
-//  Created by Jerry Hsia on 20/06/13.
-//  Copyright (c) 2013 Jerry Hsia. All rights reserved.
+//  Created by Jerry Hsia on 11/06/14.
+//  Copyright (c) 2014 Jerry Hsia. All rights reserved.
 //
 
 #ifndef DataStructure_CircLinkList_h
 #define DataStructure_CircLinkList_h
-
-#define SUCCESS -1
-#define ERROR -2
 
 typedef struct CircLinkListNode {
     int data;
@@ -193,12 +208,13 @@ void c_clear(CLIST list) {
 //  main.c
 //  DataStructure
 //
-//  Created by Jerry Hsia on 15/06/13.
-//  Copyright (c) 2013 Jerry Hsia. All rights reserved.
+//  Created by Jerry Hsia on 11/06/14.
+//  Copyright (c) 2014 Jerry Hsia. All rights reserved.
 //
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "Public.h"
 #include "DCircLinkList.h"
 
 int main(int argc, const char * argv[]) {
