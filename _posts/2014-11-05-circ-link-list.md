@@ -1,6 +1,6 @@
 ---
 author: Jerry Hsia
-title: 循环链表实现
+title: 循环链表
 excerpt:
 layout: post
 views:
@@ -12,23 +12,37 @@ tags:
 post_format: [ ]
 ---
 
+### 基础篇
+
+循环链表在单链表的基础上使最后一个节点(也称尾节点)指向头节点形成闭环。
+
+![](/files/2014/circ-link-list.png)
+
+优点
+
+- 存储空间不受限制
+- 插入、删除时间复杂度O(1)
+
+缺点
+
+- 查找时间复杂度O(n)，尾节点O(1)
+
+### 实战篇
+
 头文件CircLinkList.h
 
-{% highlight  bash%}
+{% highlight  c%}
 
 //
 //  CircLinkList.h
 //  DataStructure
 //
-//  Created by Jerry Hsia on 15/06/13.
-//  Copyright (c) 2013 Jerry Hsia. All rights reserved.
+//  Created by Jerry Hsia on 11/05/14.
+//  Copyright (c) 2014 Jerry Hsia. All rights reserved.
 //
 
 #ifndef DataStructure_CircLinkList_h
 #define DataStructure_CircLinkList_h
-
-#define SUCCESS -1
-#define ERROR -2
 
 typedef struct CircLinkListNode {
     int data;
@@ -165,12 +179,13 @@ int c_clear(CLIST list) {
 //  main.c
 //  DataStructure
 //
-//  Created by Jerry Hsia on 15/06/13.
-//  Copyright (c) 2013 Jerry Hsia. All rights reserved.
+//  Created by Jerry Hsia on 11/05/14.
+//  Copyright (c) 2014 Jerry Hsia. All rights reserved.
 //
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "Public.h"
 #include "CircLinkList.h"
 
 int main(int argc, const char * argv[]) {
@@ -188,7 +203,7 @@ int main(int argc, const char * argv[]) {
         c_add(circLinkList, c_length(circLinkList), i);
     }
     c_print(circLinkList);
-    
+
     c_add(circLinkList, 3, 5);
     c_print(circLinkList);
     
