@@ -1,6 +1,6 @@
 ---
 author: Jerry Hsia
-title: 静态链表实现
+title: 静态链表
 excerpt:
 layout: post
 views:
@@ -12,23 +12,38 @@ tags:
 post_format: [ ]
 ---
 
+### 基础篇
+
+静态链表是不具有指针的高级语言或不使用指针，借用数组的方式来实现的链表。
+
+![](/files/2014/static-link-list.png)
+
+优点
+
+- 插入、删除时间复杂度O(1)
+
+缺点
+
+- 由于使用数组，存储空间受限或浪费
+- 查找的时间复杂度O(n)
+
+### 实战篇
+
 StaticLinkList.h
 
-{% highlight  bash%}
+{% highlight  c%}
 
 //
 //  StaticLinkList.h
 //  DataStructure
 //
-//  Created by Jerry Hsia on 13/06/13.
-//  Copyright (c) 2013 Jerry Hsia. All rights reserved.
+//  Created by Jerry Hsia on 11/04/14.
+//  Copyright (c) 2014 Jerry Hsia. All rights reserved.
 //
 
 #ifndef DataStructure_StaticLinkList_h
 #define DataStructure_StaticLinkList_h
-
-#define SUCCESS -1
-#define ERROR -2
+#define MAX_SIZE 7
 
 typedef struct StaticLinkListNode {
     int data;
@@ -133,14 +148,13 @@ main.c
 //  main.c
 //  DataStructure
 //
-//  Created by Jerry Hsia on 13/06/13.
-//  Copyright (c) 2013 Jerry Hsia. All rights reserved.
+//  Created by Jerry Hsia on 11/04/14.
+//  Copyright (c) 2014 Jerry Hsia. All rights reserved.
 //
-
-#define MAX_SIZE 7
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "Public.h"
 #include "StaticLinkList.h"
 
 int main(int argc, const char * argv[]) {

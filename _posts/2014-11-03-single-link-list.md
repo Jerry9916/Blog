@@ -1,6 +1,6 @@
 ---
 author: Jerry Hsia
-title: 单链表实现
+title: 单链表
 excerpt:
 layout: post
 views:
@@ -12,23 +12,39 @@ tags:
 post_format: [ ]
 ---
 
+### 基础篇
+
+单链表是线性表的一种链式存储结构，链表中的节点除了存储数据外，还存储指向下一节点的指针。
+
+头结点：放在链表开头的一个固定节点，数据域为空或存储其他信息，指针域(头指针)指向第一个数据节点。
+
+![](/files/2014/single-link-list.png)
+
+优点
+
+- 数据存储无空间限制
+- 插入删除时间复杂度O(1)
+
+缺点
+
+- 查询时间复杂度O(n)
+
+### 实战篇
+
 SingleLinkList.h
 
-{% highlight  bash%}
+{% highlight  c%}
 
 //
 //  SingleLinkList.h
 //  DataStructure
 //
-//  Created by Jerry Hsia on 11/06/13.
-//  Copyright (c) 2013 Jerry Hsia. All rights reserved.
+//  Created by Jerry Hsia on 11/03/14.
+//  Copyright (c) 2014 Jerry Hsia. All rights reserved.
 //
 
 #ifndef DataStructure_SingleLinkList_h
 #define DataStructure_SingleLinkList_h
-
-#define SUCCESS -1
-#define ERROR -2
 
 typedef struct SingleLinkListNode {
     int data;
@@ -142,12 +158,13 @@ main.c
 //  main.c
 //  DataStructure
 //
-//  Created by Jerry Hsia on 11/06/13.
-//  Copyright (c) 2013 Jerry Hsia. All rights reserved.
+//  Created by Jerry Hsia on 11/03/14.
+//  Copyright (c) 2014 Jerry Hsia. All rights reserved.
 //
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "Public.h"
 #include "SingleLinkList.h"
 
 int main(int argc, const char * argv[]) {
@@ -186,7 +203,6 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
-
 
 {% endhighlight %}
 
