@@ -4,6 +4,6 @@ node_modules/
 .*
 !.gitignore
 !_site/.gitignore
-assets/styles/base.min.css
-resume/styles/base.min.css
-resume/scripts/base.min.js
+assets/styles/*.min.css
+resume/styles/*.min.css
+resume/scripts/*.min.js
