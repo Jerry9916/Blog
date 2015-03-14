@@ -10,6 +10,7 @@
   icon:  fa fa-book
   title: 阅读
 
-- href: /resume/index.html
+- href: http://resume.xiajie.me
   icon: fa fa-paper-plane-o
+  newblank: true
   title: 关于
