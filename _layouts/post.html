@@ -7,7 +7,7 @@ post: true
   <h1 class="post-title"><a href="{{ page.url }}">{{ page.title }}</a></h2>
   <p class="post-meta">
     <i class="fa fa-calendar"></i>
-    {{ page.date | date: "%Y" }}年{{ page.date | date: "%m" }}月{{ page.date | date: "%d" }}日
+    {{ page.date | date: "%Y" }}-{{ page.date | date: "%m" }}-{{ page.date | date: "%d" }}
     <i class="space"></i>
     <i class="fa fa-tags"></i>
     <a class="post-category" href="/pages/category.html#{{ page.categories }}">{{ page.categories }}</a>	
@@ -23,7 +23,7 @@ post: true
   </a>
   {% else %}
   <span class="pagination-item newer">
-    上一篇&nbsp;<i class="fa fa-chain-broken"></i>
+    {{site.lang.prev_post}}&nbsp;<i class="fa fa-chain-broken"></i>
   </span>
   {% endif %}
   {% if page.next %}
@@ -32,7 +32,7 @@ post: true
   </a>
   {% else %}
   <span class="pagination-item older">
-    下一篇&nbsp;<i class="fa fa-chain-broken"></i>
+    {{site.lang.next_post}}&nbsp;<i class="fa fa-chain-broken"></i>
   </span>
   {% endif %}
 </div>
