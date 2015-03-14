@@ -11,7 +11,7 @@ blog:
     description: This is Jerry's Blog # 博客描述
     title: Jerry's Blog # 网页标题
     url: http://xiajie.me # 博客地址
-    
+
 author:
     name: 夏杰 # 作者名称
     nickname: Jerry Hsia
