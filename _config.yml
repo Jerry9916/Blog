@@ -11,7 +11,6 @@ blog:
     description: This is Jerry's Blog # 博客描述
     title: Jerry's Blog # 网页标题
     url: http://xiajie.me # 博客地址
-    duoshuo: jerry9916 # 多说ID
 author:
     name: Jerry Hsia # 作者名称
     email: xiajie9916@gmail.com # 邮箱地址
