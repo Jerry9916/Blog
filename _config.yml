@@ -11,13 +11,15 @@ blog:
     description: This is Jerry's Blog # 博客描述
     title: Jerry's Blog # 网页标题
     url: http://xiajie.me # 博客地址
-    duoshuo: jerry9916 # 多说ID
+
 author:
-    name: Jerry Hsia # 作者名称
+    name: 夏杰 # 作者名称
+    nickname: Jerry Hsia
     email: xiajie9916@gmail.com # 邮箱地址
     weibo: http://weibo.com/Jerry9916 # 微博地址
     github: https://github.com/JerryHsia # GitHub地址
-    logo: /assets/images/avatar.jpg # logo地址
-    douban:
-        name: 88880966 # 豆瓣账号ID
-        key:  0fe4cdb47009b0a72fae691d501d11f5  # 豆瓣API Key
+    avatar: /assets/images/avatar.jpg # logo地址
+
+douban:
+    name: 88880966 # 豆瓣账号ID
+    key:  0fe4cdb47009b0a72fae691d501d11f5  # 豆瓣API Key
