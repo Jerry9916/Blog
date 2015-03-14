@@ -21,7 +21,11 @@ module.exports = function (grunt) {
           '_temp/blog/styles/base.css': [
             'assets/styles/font-awesome.css',
             'assets/styles/main.css',
-            'assets/styles/page.css'
+            'assets/styles/responsive.css',
+            'assets/styles/category.css',
+            'assets/styles/nprocess.css',
+            'assets/styles/rocket.css',
+            'assets/styles/code.css'
           ]
         }
       },
