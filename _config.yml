@@ -6,20 +6,35 @@ paginate_path: page/:num
 excerpt_separator: ""
 
 blog:
-    name: Jerry's Blog # 博客名称
-    sign: To strive to become a habit # 博客签名
-    description: This is Jerry's Blog # 博客描述
-    title: Jerry's Blog # 网页标题
-    url: http://xiajie.me # 博客地址
+  name: Jerry's Blog
+  sign: To strive to become a habit
+  description: This is Jerry's blog
+  title: Jerry's blog
+  url: http://xiajie.me
 
 author:
-    name: 夏杰 # 作者名称
-    nickname: Jerry Hsia
-    email: xiajie9916@gmail.com # 邮箱地址
-    weibo: http://weibo.com/Jerry9916 # 微博地址
-    github: https://github.com/JerryHsia # GitHub地址
-    avatar: /assets/images/avatar.jpg # logo地址
+  name: 夏杰
+  nickname: Jerry Hsia
+  email: xiajie9916@gmail.com
+  weibo: http://weibo.com/Jerry9916
+  github: https://github.com/JerryHsia
+  resume: http://resume.xiajie.me
+  avatar: /assets/images/avatar.jpg
 
 douban:
-    name: 88880966 # 豆瓣账号ID
-    key:  0fe4cdb47009b0a72fae691d501d11f5  # 豆瓣API Key
+  name: 88880966
+  key:  0fe4cdb47009b0a72fae691d501d11f5
+
+lang:
+  timing: 时间轴
+  category: 分类
+  read: 阅读
+  about: 关于
+  weibo: 新浪微博
+  github: Github
+  to_top: 返回顶部
+  read_all: 阅读全文
+  prev_post: 上一篇
+  next_post: 下一篇
+  prev_page: 上一页
+  next_page: 下一页
