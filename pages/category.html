@@ -5,7 +5,7 @@ title: 文章分类
 
 {% capture categories %}{% for category in site.categories %}{{ category | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
 {% assign category = categories | split:',' | sort %}
-<h2 class="category">分类</h2>
+<h2 class="category">{{site.lang.category}}</h2>
 <div class="category-box">
   <ul>
     {% for item in (0..site.categories.size) reversed %}{% unless forloop.first %}
