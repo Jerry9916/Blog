@@ -16,7 +16,7 @@ post_format: [ ]
 
 双向循环链表在循环链表的基础上给每个节点增加一个前驱指针域指向前一个节点，其中头结点的前驱指针指向尾节点。
 
-![](/files/2014/d-circ-link-list.png)
+![](/files/2014/d-circ-link-list.jpg)
 
 优点
 
