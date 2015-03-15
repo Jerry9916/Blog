@@ -31,7 +31,7 @@
 .timing {
   position: relative;
   margin-left: 70px;
-  font-size: 18px;
+  font-size: 16px;
   height: 6em;
 }
 
@@ -126,6 +126,7 @@
   font-weight: 600;
   text-transform: Capitalize;
   margin-top: 35px;
+  font-size: 20px;
 }
 
 .category-box-sub, .category-sub {
@@ -133,14 +134,14 @@
 }
 
 .category-box-sub {
-  font-size: 20px;
+  font-size: 18px;
   margin-left: -38px;
 }
 
 .category-sub {
   color: #1abc9c;
   letter-spacing: 1px;
-  font-size: 18px;
+  font-size: 16px;
   margin-left: -39px;
 }
 
