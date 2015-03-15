@@ -223,4 +223,4 @@ vrrp_instance VI_1 {
 
 附截图一张：
 
-![](/files/2014/proxy-example.png)
+![](/files/2014/proxy-example.jpg)
