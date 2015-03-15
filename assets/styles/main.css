@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2.3em;
+  font-size: 1.6em;
 }
 
 h3 {
@@ -166,8 +166,8 @@ a:link {
 
 .title {
   font-family: segoepr;
-  font-size: 40px;
-  margin-top: -3%;
+  font-size: 28px;
+  margin-top: 0;
 }
 
 .title a {
@@ -186,11 +186,11 @@ a:link {
 
 .sub-title {
   font-family: segoepr;
-  font-size: 20px;
+  font-size: 16px;
   color: lightgray;
   font-style: italic;
   text-shadow: 0px 0px 2px;
-  margin-top: -9%;
+  margin-top: -10px;
   margin-bottom: 0;
   letter-spacing: 0;
 }
@@ -338,7 +338,7 @@ a:link {
 
 .post-meta {
   color: #999;
-  font-size: 18px;
+  font-size: 15px;
   margin-top: -20px;
   margin-bottom: 30px;
   letter-spacing: 1px;
@@ -364,9 +364,9 @@ a:link {
 #post-readall {
   color: #fff;
   background: #4d85d1;
-  font-size: 17px;
+  font-size: 13px;
   margin-left: 0;
-  padding: 6px 20px;
+  padding: 6px 15px;
   border-radius: 4px;
   border-bottom: 0;
   letter-spacing: 2px;
@@ -386,8 +386,9 @@ a:link {
 }
 
 .pagination-item {
+  font-size: 14px;
   background: #fff;
-  padding: 8px 50px;
+  padding: 5px 30px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
@@ -422,7 +423,7 @@ a.pagination-item:hover {
 }
 
 footer {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
   text-align: center;
   margin-top: 7.5em;
@@ -431,7 +432,7 @@ footer {
 
 .post-main {
   color: #525d67;
-  font-size: 18px;
+  font-size: 14px;
   letter-spacing: 1px;
   line-height: 1.8;
   margin-top: -10px;
@@ -499,5 +500,3 @@ sup {
   vertical-align: super;
   padding: 0;
 }
-
-
