@@ -10,13 +10,13 @@
     width: 140px;
   }
 
-  .title {
+  /*.title {
     font-size: 35px;
   }
 
   .sub-title {
     font-size: 22px;
-  }
+  }*/
 
   #nav {
     margin: 7% 0 7% -20%;
@@ -29,13 +29,13 @@
     width: 130px;
   }
 
-  .title {
+  /*.title {
     font-size: 32px;
   }
 
   .sub-title {
     font-size: 20px;
-  }
+  }*/
 
   #nav {
     margin: 7% 0 7% -25%;
@@ -58,13 +58,13 @@
     width: 120px;
   }
 
-  .title {
+  /*.title {
     font-size: 30px;
   }
 
   .sub-title {
     font-size: 18px;
-  }
+  }*/
 
   #nav {
     margin: 6% 0 6% -28%;
@@ -81,13 +81,13 @@
     width: 110px;
   }
 
-  .title {
+  /*.title {
     font-size: 28px;
   }
 
   .sub-title {
     font-size: 16px;
-  }
+  }*/
 
   #nav {
     margin: 6% 0 6% -33%;
@@ -124,13 +124,13 @@
   }
 
   .title {
-    font-size: 32px;
+    /*font-size: 32px;*/
     line-height: 1;
     margin-top: 5px;
   }
 
   .sub-title {
-    font-size: 20px;
+    /*font-size: 20px;*/
     margin-top: -10px;
     line-height: 1;
   }
