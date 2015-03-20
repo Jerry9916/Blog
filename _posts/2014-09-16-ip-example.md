@@ -36,7 +36,7 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet static  
 
-address 192.168.0.N  # IP地址
+address 192.168.0.N  # IP地址，N分别为119~122
 gateway 192.168.0.1    # 网关
 netmask 255.255.255.0  # 子网掩码
 dns-nameservers 211.68.72.100 # DNS
@@ -63,7 +63,6 @@ net.ipv4.conf.eth0.send_redirects=1
 配置keepalived，编辑/etc/keepalived/keepalived.conf，修改为以下内容
 
 {% highlight bash %}
-!Configuration File for keepalived
 global_defs {
    
    # 定义接收邮箱
