@@ -25,6 +25,12 @@ douban:
   name: 88880966
   key:  0fe4cdb47009b0a72fae691d501d11f5
 
+duoshuo: 
+  enable: true
+  name: jerry9916
+
+
+
 lang:
   timing: 时间轴
   category: 分类
