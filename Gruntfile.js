@@ -2,6 +2,19 @@
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
+
+  function addZero(number) {
+    return number < 10 ? ('0' + number) : number;
+  }
+
+  function getDateTime() {
+    var date = new Date();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    
+    return date.getFullYear() + '-' + addZero(month) + '-' + addZero(date.getDate()) + ' ' + date.getHours() + ':' + addZero(date.getMinutes()) + ':' + addZero(date.getSeconds());
+  }
+
   grunt.initConfig({
 
     clean: {
@@ -53,7 +66,7 @@ module.exports = function (grunt) {
     githubPages: {
       site: {
         options: {
-          commitMessage: 'Updated site'
+          commitMessage: 'Update site at ' + getDateTime()
         },
         src: '_site'
       }
