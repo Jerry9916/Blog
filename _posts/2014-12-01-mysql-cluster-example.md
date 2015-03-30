@@ -12,7 +12,7 @@ tags:
 post_format: [ ]
 ---
 
-基于MySQL Cluster的基本理论，接下进行MySQL的实战。
+基于MySQL Cluster的基本理论，接下来进行MySQL Cluster的实战。
 
 ## 规划
 
@@ -26,6 +26,7 @@ SQL节点1(SQL1)    |  192.168.0.121(db4)
 SQL节点2(SQL2)     | 192.168.0.122(db5)
 
 操作系统：Ubuntu 14.04 LTS
+
 软件：[mysql-cluster-gpl-7.4.5-linux-glibc2.5-x86_64.tar.gz](http://dev.mysql.com/downloads/cluster)
 
 ## 配置管理节点
