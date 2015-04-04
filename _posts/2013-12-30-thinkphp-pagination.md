@@ -1,6 +1,6 @@
 ---
 author: Jerry Hsia
-title: 我改进的ThinkPHP分页类
+title: ThinkPHP改进的分页类
 excerpt:
 layout: post
 views:
@@ -11,7 +11,8 @@ tags:
   - PHP
 post_format: [ ]
 ---
-ThinkPHP是国内流行的MVC框架，官方的分页类 是把分页的显示字符串硬编码到函数中了，这在MVC开发模式中显然不合适，我在此进行了改进，改进的分页类Page.class.php如下：
+ThinkPHP是国内流行的MVC框架，官方的分页类是把分页的模板硬编码到函数中了，这在MVC开发模式中显然不合适，我在此进行了改进，改进的分页类Page.class.php如下：
+
 {% highlight php %}
 <?php
 // +----------------------------------------------------------------------
