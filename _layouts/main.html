@@ -25,13 +25,11 @@
   <script type="text/javascript" src="/assets/scripts/base.min.js"></script>
 </head>
 <body>
-  <div id="blog">
-    {% include sidebar.html %}
-    <div class="main">
-      {{ content }}
-      {% include footer.html %}
-    </div>
-  </div>    
+  {% include sidebar.html %}
+  <div class="main">
+    {{ content }}
+    {% include footer.html %}
+  </div>   
   <div id="top">
     <a id="rocket" href="javascript:void(0);" title="{{site.lang.to_top}}"><i></i></a>
   </div>
