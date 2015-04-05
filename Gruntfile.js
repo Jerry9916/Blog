@@ -36,7 +36,7 @@ module.exports = function (grunt) {
             'assets/styles/sidebar.css',
             'assets/styles/main.css',
             'assets/styles/page.css',
-            'assets/styles/nprocess.css',
+            'assets/styles/nprogress.css',
             'assets/styles/rocket.css',
             'assets/styles/code.css',
             'assets/styles/responsive.css'

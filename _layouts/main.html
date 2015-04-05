@@ -22,14 +22,16 @@
   {% endif %}
   <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/assets/styles/base.min.css">
-  <script type="text/javascript" src="/assets/scripts/base.min.js"></script>
+  <script type="text/javascript" src="/assets/scripts/jquery.min.js"></script>
+  <script type="text/javascript" src="/assets/scripts/nprogress.js"></script>
+  <script type="text/javascript" src="/assets/scripts/base.js"></script>
 </head>
 <body>
   {% include sidebar.html %}
   <div class="main">
     {{ content }}
     {% include footer.html %}
-  </div>   
+  </div>
   <div id="top">
     <a id="rocket" href="javascript:void(0);" title="{{site.lang.to_top}}"><i></i></a>
   </div>
