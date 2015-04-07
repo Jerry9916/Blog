@@ -3,6 +3,7 @@ $(document).ready(function() {
     setTimeout(function() {
         NProgress.done()
     }, 500);
+
     $(window).scroll(function() {
         if ($(window).scrollTop() >= 200) {
             $("#top").fadeIn(500)
@@ -10,6 +11,7 @@ $(document).ready(function() {
             $("#top").fadeOut(500)
         }
     });
+    
     $("#rocket").click(function() {
         $("#rocket").addClass("launch");
         $("html, body").animate({

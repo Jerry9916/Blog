@@ -24,6 +24,11 @@
   <link rel="stylesheet" href="/assets/styles/base.min.css">
   <script type="text/javascript" src="/assets/scripts/jquery.min.js"></script>
   <script type="text/javascript" src="/assets/scripts/nprogress.js"></script>
+  {% if page.post == true %}
+  <script type="text/javascript">var isPost = true;</script>
+  {% else %}
+  <script type="text/javascript">var isPost = false;</script>
+  {% endif %}
   <script type="text/javascript" src="/assets/scripts/base.js"></script>
 </head>
 <body>

@@ -109,6 +109,6 @@ module.exports = function (grunt) {
   grunt.registerTask('build', ['clean', 'concat', 'cssmin', 'clean']);
 
   grunt.registerTask('publish', function() {
-    return grunt.task.run(['blog', 'shell:jekyllBuild', 'githubPages']);
+    return grunt.task.run(['shell:jekyllBuild', 'build', 'githubPages']);
   });
 };
