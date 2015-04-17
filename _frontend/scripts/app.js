@@ -1,3 +1,6 @@
-/**
- * Created by Jerry on 4/17/15.
- */
+$(document).ready(function() {
+  NProgress.set(0.2);
+  setTimeout(function() {
+    NProgress.done()
+  }, 500);
+});
