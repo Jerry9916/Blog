@@ -30,7 +30,7 @@ gulp.task('html', function () {
 gulp.task('less', function () {
   return gulp.src(app.src + 'lesses/*.less')
     .pipe($.less())
-    .pipe($.autoprefixer(''))
+    .pipe($.autoprefixer('last 2 versions'))
     .pipe(gulp.dest(app.src + 'styles/'))
     .pipe($.size());
 });
@@ -49,7 +49,7 @@ gulp.task('watch', function () {
 
 gulp.task('connect', function () {
   $.connect.server({
-    root: app.env == 'dev' ? './' : app.dist,
+    root: app.env == 'dev' ? app.src : app.dist,
     port: 4000,
     livereload: true
   });
