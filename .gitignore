@@ -1,9 +1,5 @@
+.DS_Store
+.idea
+
 _site/
-_temp/
-node_modules/
-.*
-!.gitignore
-!_site/.gitignore
-assets/styles/*.min.css
-resume/styles/*.min.css
-resume/scripts/*.min.js
+node_modules
