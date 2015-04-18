@@ -29,6 +29,9 @@ duoshuo:
   enable: true
   name: jerry9916
 
+qiniu:
+  files: http://7xj4ee.com1.z0.glb.clouddn.com/
+
 
 
 lang:

@@ -21,24 +21,15 @@
   <link rel="canonical" href="{{ site.blog.url }}{{ page.url }}">
   {% endif %}
   <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="/assets/styles/base.min.css">
-  <script type="text/javascript" src="/assets/scripts/jquery.min.js"></script>
-  <script type="text/javascript" src="/assets/scripts/nprogress.js"></script>
-  {% if page.post == true %}
-  <script type="text/javascript">var isPost = true;</script>
-  {% else %}
-  <script type="text/javascript">var isPost = false;</script>
-  {% endif %}
-  <script type="text/javascript" src="/assets/scripts/base.js"></script>
+  <link rel="stylesheet" href="/assets/styles/app.min.css">
 </head>
 <body>
-  {% include sidebar.html %}
-  <div class="main">
+  <div class="container-fluid row">
+    {% include sidebar.html %}
+    <div class="col-md-9 col-md-offset-3 right-content">
     {{ content }}
-    {% include footer.html %}
+    </div>
   </div>
-  <div id="top">
-    <a id="rocket" href="javascript:void(0);" title="{{site.lang.to_top}}"><i></i></a>
-  </div>
+  <script type="text/javascript" src="/assets/scripts/app.min.js"></script>
 </body>
 </html>
