@@ -60,6 +60,12 @@ gulp.task('font', function () {
   gulp.src(app.components + 'font-awesome/fonts/*')
     .pipe(gulp.dest(dist + 'fonts'))
     .pipe($.size());
+
+  if (app.env == 'prod') {
+    gulp.src(app.src + '/fonts/*')
+      .pipe(gulp.dest(app.dist + 'fonts'))
+      .pipe($.size());
+  }
 });
 
 gulp.task('image', function () {

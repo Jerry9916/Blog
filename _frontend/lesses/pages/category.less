@@ -1,0 +1,23 @@
+#p-category {
+  .title {
+    color: @brand-success;
+    .text-shadow;
+  }
+  ul {
+    padding-left: 0;
+    li {
+      margin-bottom: 10px;
+      list-style: none;
+      color: @brand-success;
+      font-size: @font-size-larger;
+      a {
+        letter-spacing: 2px;
+        .text-shadow;
+        color: @brand-primary;
+        &:hover {
+          color: darken(@brand-primary, 10%);
+        }
+      }
+    }
+  }
+}

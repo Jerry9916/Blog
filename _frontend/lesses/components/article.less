@@ -3,7 +3,7 @@
     font-weight: 600;
   }
 
-  .info {
+  .meta {
     font-size: @font-size-larger;
 
     span {
@@ -14,6 +14,7 @@
   .content {
     margin-top: 15px;
     line-height: 2;
+    letter-spacing: 1px;
 
     td {
       padding: 4px 10px;
@@ -30,9 +31,14 @@
         margin: 0;
       }
     }
+
+    img {
+      max-width: 100%;
+    }
   }
 
   .bottom {
+    overflow: hidden;
     margin-top: 15px;
   }
 }

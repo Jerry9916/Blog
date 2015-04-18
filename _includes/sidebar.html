@@ -1,36 +1,35 @@
-<div class="sidebar">
-  <div class="profilepic">
-    <a href="/"><img src="{{ site.author.avatar }}" alt="avatar"></img></a>
+<div class="col-md-3 sidebar">
+  <div class="avatar">
+    <img src="{{ site.author.avatar }}" class="img-circle" />
   </div>
-  <h1 class="title"><a href="/">{{ site.author.nickname }}</a></h1>
-  <h2 class="sub-title">{{ site.blog.sign }}</h2>
-  <nav id="nav">
-    <ul>
-      <li>
-        <a href="/pages/timing.html">
-          <i class="fa fa-clock-o"></i>&nbsp;{{ site.lang.timing }}
-        </a>
-      </li>
-      <li>
-        <a href="/pages/category.html">
-          <i class="fa fa-tags"></i>&nbsp;{{site.lang.category}}
-        </a>
-      </li>
-      <li>
-        <a href="/pages/read.html">
-          <i class="fa fa-book"></i>&nbsp;{{site.lang.read}}
-        </a>
-      </li>
-      <li>
-        <a href="{{site.author.resume}}" target="_blank">
-          <i class="fa fa-paper-plane-o"></i>&nbsp;{{site.lang.about}}
-        </a>
-      </li>
-    </ul>
-  </nav>  
-  <nav id="sub-nav">
-    <a class="email" href="mailto:{{ site.author.email }}" title="{{ site.lang.email}}" target="_blank"><i class="fa fa-at"></i></a>
-    <a class="weibo" href="{{ site.author.weibo }}" title="{{ site.lang.weibo}}" target="_blank"><i class="fa fa-weibo"></i></a>
-    <a class="github" href="{{ site.author.github }}" title="{{ site.lang.github}}" target="_blank"><i class="fa fa-github fa-2x"></i></a>
-  </nav>
+  <div class="info">
+    <h1 class="username">{{ site.author.nickname }}</h1>
+    <p class="sign">{{ site.blog.sign }}</p>
+  </div>
+  <div class="list-group">
+    <a href="/pages/timing.html" class="list-group-item"><i class="fa fa-clock-o"></i> {{ site.lang.timing }}</a>
+    <a href="/pages/category.html" class="list-group-item"><i class="fa fa-list"></i> {{site.lang.category}}</a>
+    <a href="/pages/read.html" class="list-group-item"><i class="fa fa-book"></i> {{site.lang.read}}</a>
+    <a href="{{site.author.resume}}" target="_blank" class="list-group-item"><i class="fa fa-paper-plane-o"></i> {{site.lang.about}}</a>
+  </div>
+  <div class="links">
+    <a href="mailto:{{ site.author.email }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+        <i class="fa fa-at fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+    <a href="{{ site.author.weibo }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x text-success"></i>
+        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+    <a href="{{ site.author.github }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-github fa-stack-2x"></i>
+      </span>
+    </a>
+  </div>
 </div>
