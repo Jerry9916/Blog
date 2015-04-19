@@ -2,7 +2,7 @@ markdown: kramdown
 highlighter: pygments
 permalink: posts/:title.html
 paginate: 4
-paginate_path: page/:num
+paginate_path: pages/:num.html
 excerpt_separator: ""
 
 blog:
@@ -17,9 +17,8 @@ author:
   nickname: Jerry Hsia
   email: xiajie9916@gmail.com
   weibo: http://weibo.com/Jerry9916
-  github: https://github.com/JerryHsia
+  github: https://github.com/jerryhsia
   resume: http://resume.xiajie.me
-  avatar: /assets/images/avatar.jpg
 
 douban:
   name: 88880966
@@ -29,8 +28,11 @@ duoshuo:
   enable: true
   name: jerry9916
 
-qiniu:
-  files: http://7xj4ee.com1.z0.glb.clouddn.com/
+static:
+  files: http://7xj4ee.com1.z0.glb.clouddn.com/files
+  images: /assets/images
+  styles: /assets/styles
+  scripts: /assets/scripts
 
 
 
