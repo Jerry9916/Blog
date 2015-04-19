@@ -16,7 +16,7 @@ post_format: [ ]
 
 循环链表在单链表的基础上使最后一个节点(也称尾节点)指向头节点形成闭环。
 
-![](/files/2014/circ-link-list.jpg)
+![]({{site.static.files}}/circ-link-list.jpg)
 
 优点
 
