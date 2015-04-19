@@ -1,0 +1,44 @@
+#p-time {
+  .title {
+    color: @brand-success;
+    .text-shadow;
+  }
+  ul {
+    padding-left: 0;
+    li {
+      position: relative;
+      height: 80px;
+      margin-bottom: 10px;
+      list-style: none;
+      color: @brand-success;
+      font-size: @font-size-larger;
+      .date {
+        float: left;
+      }
+      a {
+        float: left;
+        margin-left: 40px;
+        letter-spacing: 2px;
+        .text-shadow;
+        color: @brand-primary;
+        &:hover {
+          color: darken(@brand-primary, 10%);
+        }
+      }
+      i {
+        position: absolute;
+        left: 56px;
+        top: 4px;
+      }
+      &:before {
+        content: "";
+        width: 5px;
+        height: 80%;
+        left: 60px;
+        top: 25px;
+        background: #e6e6e6;
+        position: absolute;
+      }
+    }
+  }
+}

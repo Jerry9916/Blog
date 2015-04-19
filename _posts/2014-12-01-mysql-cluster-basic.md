@@ -18,7 +18,7 @@ MySQL Cluster是MySQL适合于分布式计算环境的高实用、高冗余版�
 
 MySQL Cluster是一种技术，该技术允许在无共享的系统中部署“内存中”数据库的 Cluster。通过无共享体系结构，系统能够使用廉价的硬件，而且对软硬件无特殊要求。此外，由于每个组件有自己的内存和磁盘，不存在单点故障。MySQL Cluster由一组计算机构成，每台计算机上均运行着多种进程，包括MySQL服务器，NDB Cluster 的数据节点，管理服务器，以及（可能）专门的数据访问程序。关于 Cluster 中这些组件的关系，请参见下图：
 
-![](/files/2015/mysql-cluster.jpg)
+![]({{ site.static.files }}/mysql-cluster.jpg)
 
 所有的这些节点构成一个完成的MySQL集群体系。数据保存在“NDB存储服务器”的存储引擎中，表（结构）则保存在“MySQL服务器”中。应用程序通过“MySQL服务器”访问这些数据表，集群管理服务器通过管理工具(ndb_mgmd)来管理“NDB存储服务器”。
 通过将MySQL Cluster引入开放源码世界，MySQL为所有需要它的人员提供了具有高可用性、高性能和可缩放性的Cluster 数据管理。
