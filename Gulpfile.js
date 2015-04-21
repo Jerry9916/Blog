@@ -10,6 +10,7 @@ var app = {
   src: '_frontend/',
   components: '_frontend/bower_components/',
   dist: '_site/assets/',
+  site: '_site/',
   env: 'dev'
 };
 
@@ -89,8 +90,16 @@ gulp.task('usemin', ['less'], function () {
     .pipe($.size());
 });
 
+
+gulp.task('htmlmin', function () {
+  gulp.src([app.site + '*.html', app.site + 'pages/**/*.html', app.site + 'posts/**/*.html'])
+    .pipe($.htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest(app.site))
+    .pipe($.size());
+});
+
 gulp.task('serve', ['jshint', 'less', 'font', 'connect', 'watch']);
 
 gulp.task('build', ['env:prod', 'jshint', 'clean'], function() {
-  gulp.start('font', 'image', 'usemin');
+  gulp.start(/*'htmlmin', */'font', 'image', 'usemin');
 });
