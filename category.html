@@ -1,6 +1,6 @@
 ---
 layout: main
-title: 文章分类
+title: {{site.lang.category}}
 ---
 
 {% capture categories %}{% for category in site.categories %}{{ category | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
