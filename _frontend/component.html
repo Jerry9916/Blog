@@ -46,7 +46,7 @@
               <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
             </span>
           </a>
-          <a href="#">
+          <a href="#" class="github">
             <span class="fa-stack fa-lg">
               <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
               <i class="fa fa-github fa-stack-2x"></i>
@@ -57,7 +57,7 @@
       <!--Sidebar end-->
       <div class="col-md-9 col-md-offset-3 right-content">
         <!--Article start-->
-        <div class="articles">
+        <div id="page-index" class="articles">
           <div class="article">
             <h1 class="title"><a href="#">MySQL Cluster(配置篇)</a></h1>
             <div class="meta">
@@ -185,12 +185,33 @@
         </div>
         <!--Time end-->
         <div class="hr"></div>
+        <!--Books start-->
+        <div id="page-books">
+        </div>
+        <!--Books end-->
       </div>
+    </div>
+    <div id="totop" class="totop">
+      <a class="rocket" href="javascript:void(0);" title="{{site.lang.to_top}}"><i></i></a>
     </div>
     <!-- build:js scripts/app.min.js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/nprogress/nprogress.js"></script>
+    <script src="scripts/douban.js"></script>
     <script src="scripts/app.js"></script>
     <!-- endbuild -->
+    <script>
+      var options = {
+        id: "page-books",
+        user: "88880966",
+        key: "0fe4cdb47009b0a72fae691d501d11f5",
+        sections: [
+          {title: '在读', status: "reading"},
+          {title: '读过', status: "read"},
+          {title: '想读', status: "wish"}
+        ]
+      };
+      var dbapi = new DoubanApi(options);dbapi.show();
+    </script>
   </body>
 </html>
