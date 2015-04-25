@@ -156,14 +156,14 @@
             <a href="#" role="button" class="btn btn-danger">Web前端</a>
           </div>
           <div class="list">
-            <h2 class="title">PHP</h2>
+            <h2 class="title"><i class="fa fa-calendar"></i> PHP</h2>
             <ul>
               <li>2015-04-17 <i class="fa fa-angle-double-right"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
               <li>2015-04-17 <i class="fa fa-angle-double-right"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
               <li>2015-04-17 <i class="fa fa-angle-double-right"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
             </ul>
 
-            <h2 class="title">Web前端</h2>
+            <h2 class="title"><i class="fa fa-calendar"></i> Web前端</h2>
             <ul>
               <li>2015-04-17 <i class="fa fa-angle-double-right"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
               <li>2015-04-17 <i class="fa fa-angle-double-right"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
@@ -175,13 +175,11 @@
         <div class="hr"></div>
         <!--Time start-->
         <div id="page-timing" role="tabpanel">
-          <div class="list">
-            <h2 class="title">2015</h2>
-            <ul>
-              <li><span class="date">04-17</span> <i class="fa fa-circle"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
-              <li><span class="date">04-17</span> <i class="fa fa-circle"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
-            </ul>
-          </div>
+          <ul class="list">
+            <li class="item"><span class="date">04-17</span> <i class="fa fa-circle"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
+            <li class="year"><h2><i class="fa fa-calendar"></i> 2015</h2></li>
+            <li class="item"><span class="date">04-17</span> <i class="fa fa-circle"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
+          </ul>
         </div>
         <!--Time end-->
         <div class="hr"></div>
@@ -201,7 +199,9 @@
     <script src="scripts/app.js"></script>
     <!-- endbuild -->
     <script>
-      var options = {
+
+
+      var dbOptions = {
         id: "page-books",
         user: "88880966",
         key: "0fe4cdb47009b0a72fae691d501d11f5",
@@ -211,7 +211,8 @@
           {title: '想读', status: "wish"}
         ]
       };
-      var dbapi = new DoubanApi(options);dbapi.show();
+      var dbapi = new DoubanApi(dbOptions);
+      dbapi.run();
     </script>
   </body>
 </html>

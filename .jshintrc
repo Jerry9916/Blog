@@ -17,9 +17,6 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
-    "$": true,
-    "NProgress": true,
-    "totop": true,
-    "rocket": true
+    "$": true
   }
 }

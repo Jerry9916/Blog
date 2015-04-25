@@ -2,19 +2,19 @@
 title: {{site.lang.books}}
 layout: main
 pid: page-books
-script: var dbapi = new DoubanApi(options);dbapi.show();
+script: var dbapi = new DoubanApi(dbOptions);dbapi.run();
 ---
 
 <div id="books"></div>
 <script>
-  var options = {
-    place: "books",
-    user: "{{ site.douban.name }}",
-    api: "{{ site.douban.key }}",
-    books: [
-      {title: '在读', status: "reading", num: 50},
-      {title: '读过', status: "read", num: 50},
-      {title: '想读', status: "wish", num: 50}
+  var dbOptions = {
+    id: "page-books",
+    user: "88880966",
+    key: "0fe4cdb47009b0a72fae691d501d11f5",
+    sections: [
+      {title: '在读', status: "reading"},
+      {title: '读过', status: "read"},
+      {title: '想读', status: "wish"}
     ]
   };
 </script>

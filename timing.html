@@ -5,18 +5,16 @@ pid: page-timing
 script:
 ---
 
-<div>
+<ul class="list">
 {% for post in site.posts reverse %}
 {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
-{% if year != y %}{% assign year = y %}<h1 class="year">{{ post.date | date: "%Y" }}</h1>{% endif %}
-<div class="timing">
-  <time class="time">{{ post.date | date: "%m" }}-{{ post.date | date: "%d" }}</time>
-  <div class="link"><a href="{{ post.url }}">{{post.title}}</a></div>
-  <div class="point-time "></div>
-</div>
+{% if year != y %}
+{% assign year = y %}
+<li class="year"><h2><i class="fa fa-calendar"></i> {{ post.date | date: "%Y" }}</h2></li>
+{% endif %}
+<li class="item"><span class="date">{{ post.date | date: "%m" }}-{{ post.date | date: "%d" }}</span> <i class="fa fa-circle"></i> <a href="{{ post.url }}">{{post.title}}</a></li>
 {% endfor %}
-</div>
-<br/>
+</ul>
 <script>
 $(function() {
   var tags_a = $(".point-time");
