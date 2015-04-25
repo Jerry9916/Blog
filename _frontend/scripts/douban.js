@@ -29,7 +29,7 @@ DoubanApi.prototype.makeJson = function (json) {
   return items;
 };
 
-DoubanApi.prototype.show = function () {
+DoubanApi.prototype.run = function () {
   for (var i in this.options.sections) {
     this.makeSection(this.options.sections[i]);
   }

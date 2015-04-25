@@ -1,16 +1,14 @@
 #page-timing {
-  .title {
-    color: @brand-success;
-    .text-shadow;
-  }
-  ul {
+  .list {
     padding-left: 0;
     li {
+      list-style: none;
+    }
+    .item {
       position: relative;
       overflow: hidden;
       height: 80px;
       margin-bottom: 3px;
-      list-style: none;
       color: @brand-success;
       font-size: @font-size-larger;
       .date {
@@ -40,6 +38,11 @@
         top: 25px;
         background-color: @gray;
       }
+    }
+    .year {
+      margin: 15px 0;
+      .text-shadow;
+      color: @brand-success;
     }
   }
 }
