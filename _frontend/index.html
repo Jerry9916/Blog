@@ -1,60 +1,216 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>Indexs</title>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Jerry's Blog</title>
+    <link rel="icon" href="/favicon.ico">
+    <!-- build:css styles/app.min.css -->
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="bower_components/nprogress/nprogress.css">
+    <link rel="stylesheet" href="styles/app.css">
+    <!-- endbuild -->
+  </head>
 
-  <!-- build:css styles/app.min.css -->
-  <link rel="stylesheet" href="styles/bootstrap.css">
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
-  <link rel="stylesheet" href="styles/app.css">
-  <!-- endbuild -->
+  <body>
+    <div class="container-fluid row">
+      <!--Sidebar start-->
+      <div class="col-md-3 sidebar">
+        <div class="avatar">
+          <a href="#"><img src="images/avatar.jpg" class="img-circle" /></a>
+        </div>
+        <div class="info">
+          <h1 class="username">Jerry Hsia</h1>
+          <p class="sign">To strive to become a habit</p>
+        </div>
+        <div class="list-group">
+          <a href="#" class="list-group-item"><i class="fa fa-calendar"></i> 时间轴</a>
+          <a href="#" class="list-group-item"><i class="fa fa-list"></i> 目录</a>
+          <a href="#" class="list-group-item"><i class="fa fa-book"></i> 书架</a>
+          <a href="#" class="list-group-item"><i class="fa fa-paper-plane-o"></i> 关于</a>
+        </div>
+        <div class="links">
+          <a href="#">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-at fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="#">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x text-success"></i>
+              <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="#" class="github">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+              <i class="fa fa-github fa-stack-2x"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+      <!--Sidebar end-->
+      <div class="col-md-9 col-md-offset-3 right-content">
+        <!--Article start-->
+        <div id="page-index" class="articles">
+          <div class="article">
+            <h1 class="title"><a href="#">MySQL Cluster(配置篇)</a></h1>
+            <div class="meta">
+              <span><i class="fa fa-list"></i> <a href="#">数据库</a></span>
+              <span><i class="fa fa-calendar"></i> 2015-04-17</span>
+            </div>
+            <div class="content">
+              <h1>一级标题</h1>
+              <h2>一级标题</h2>
+              <h3>三级标题</h3>
+              <table>
+                <tbody>
+                <tr>
+                  <td>节点</td>
+                  <td>IP地址</td>
+                </tr>
+                <tr>
+                  <td>管理节点(MGM)</td>
+                  <td>192.168.0.118(db1)</td>
+                </tr>
+                <tr>
+                  <td>数据节点1(NDBD1)</td>
+                  <td>192.168.0.119(db2)</td>
+                </tr>
+                <tr>
+                  <td>数据节点2(NDBD2)</td>
+                  <td>192.168.0.120(db3)</td>
+                </tr>
+                <tr>
+                  <td>SQL节点1(SQL1)</td>
+                  <td>192.168.0.121(db4)</td>
+                </tr>
+                <tr>
+                  <td>SQL节点2(SQL2)</td>
+                  <td>192.168.0.122(db5)</td>
+                </tr>
+                </tbody>
+              </table>
+              <p>
+                反向代理服务的核心工作主要是转发HTTP请求，扮演了浏览器端和后台Web服务器中转的角色。因为它工作在HTTP层（应用层），也就是网络七层结构中的第七层，因此也被称为“七层负载均衡”。可以做反向代理的软件很多，比较常见的一种是Nginx。
+              </p>
+              <ul>
+                <li>
+                  <p>使用ip_hash调度</p>
+                </li>
+                <li>
+                  <p>配置转发规则，分析Cookie决定转发到的服务器，这样会消耗更多的CPU，也增加了代理服务器的负担。</p>
+                </li>
+                <li>
+                  <p>配置独立的Session服务器统一存储，如：数据库、Redis、Memecached。</p>
+                </li>
+              </ul>
+              <p><a href="#">Jerry's Blog</a></p>
+            </div>
+            <div class="bottom">
+              <a href="#" class="btn btn-primary btn-md">
+                阅读全文 <i class="fa fa-chevron-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="article">
+            <h1 class="title"><a href="#">MySQL Cluster(配置篇)</a></h1>
+            <div class="meta">
+              <span><i class="fa fa-list"></i> <a href="#">数据库</a></span>
+              <span><i class="fa fa-calendar"></i> 2015-04-17</span>
+            </div>
+            <div class="content">
+              <h1>一级标题</h1>
+              <h2>一级标题</h2>
+              <h3>三级标题</h3>
+            </div>
+            <div class="bottom">
+              <a href="#" class="btn btn-primary btn-md">
+                阅读全文 <i class="fa fa-chevron-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!--Article end-->
+        <div class="hr"></div>
+        <!--Pagination start-->
+        <div class="pagination">
+          <a href="#" class="btn btn-primary pull-left">
+            <i class="fa fa-chevron-left"></i> 上一页
+          </a>
+          <a href="#" class="btn btn-primary pull-right">
+            下一页 <i class="fa fa-chevron-right"></i>
+          </a>
+        </div>
+        <!--pagination end-->
+        <div class="hr"></div>
+        <!--Category start-->
+        <div id="page-category" role="tabpanel">
+          <div class="nav">
+            <a href="#" role="button" class="btn btn-default">PHP</a>
+            <a href="#" role="button" class="btn btn-danger">Web前端</a>
+          </div>
+          <div class="list">
+            <h2 class="title"><i class="fa fa-calendar"></i> PHP</h2>
+            <ul>
+              <li>2015-04-17 <i class="fa fa-angle-double-right"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
+              <li>2015-04-17 <i class="fa fa-angle-double-right"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
+              <li>2015-04-17 <i class="fa fa-angle-double-right"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
+            </ul>
 
-  <style>
-    table {
-      border-color: #DDD;
-    }
-
-    table caption {
-      font-size: 24px;
-      font-weight: 700;
-    }
-
-    table td {
-      font-size: 14px;
-      padding: 8px;
-      border-color: #DDD;
-    }
-  </style>
-</head>
-
-<body>
-<div class="container" style="margin-top: 0">
-  <table border="1" width="100%" class="table table-bordered">
-    <caption>Indexs</caption>
-    <thead>
-    <tr>
-      <td width="30%" align="left">File</td>
-      <td width="70%" align="left">Link</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td align="left">组件</td>
-      <td align="left"><a href="component.html">component.html</a></td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- build:js scripts/app.min.js -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/nprogress/nprogress.js"></script>
-<script src="scripts/app.js"></script>
-<!-- endbuild -->
-</body>
+            <h2 class="title"><i class="fa fa-calendar"></i> Web前端</h2>
+            <ul>
+              <li>2015-04-17 <i class="fa fa-angle-double-right"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
+              <li>2015-04-17 <i class="fa fa-angle-double-right"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
+              <li>2015-04-17 <i class="fa fa-angle-double-right"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
+            </ul>
+          </div>
+        </div>
+        <!--Category end-->
+        <div class="hr"></div>
+        <!--Time start-->
+        <div id="page-timing" role="tabpanel">
+          <ul class="list">
+            <li class="item"><span class="date">04-17</span> <i class="fa fa-circle"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
+            <li class="year"><h2><i class="fa fa-calendar"></i> 2015</h2></li>
+            <li class="item"><span class="date">04-17</span> <i class="fa fa-circle"></i> <a href="#">ThinkPHP连续插入数据的BUG</a></li>
+          </ul>
+        </div>
+        <!--Time end-->
+        <div class="hr"></div>
+        <!--Books start-->
+        <div id="page-books">
+        </div>
+        <!--Books end-->
+      </div>
+    </div>
+    <div id="totop" class="totop">
+      <a class="rocket" href="javascript:void(0);" title="{{site.lang.to_top}}"><i></i></a>
+    </div>
+    <!-- build:js scripts/app.min.js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/nprogress/nprogress.js"></script>
+    <script src="scripts/douban.js"></script>
+    <script src="scripts/app.js"></script>
+    <!-- endbuild -->
+    <script>
+      var dbOptions = {
+        id: "page-books",
+        user: "88880966",
+        key: "0fe4cdb47009b0a72fae691d501d11f5",
+        sections: [
+          {title: '在读', status: "reading"},
+          {title: '读过', status: "read"},
+          {title: '想读', status: "wish"}
+        ]
+      };
+      var dbapi = new DoubanApi(dbOptions);
+      dbapi.run();
+    </script>
+  </body>
 </html>
