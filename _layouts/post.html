@@ -4,37 +4,40 @@ post: true
 pid: page-post
 ---
 
-<header class="post-header">
-  <h1 class="post-title"><a href="{{ page.url }}">{{ page.title }}</a></h2>
-  <p class="post-meta">
-    <i class="fa fa-calendar"></i>
-    {{ page.date | date: "%Y" }}-{{ page.date | date: "%m" }}-{{ page.date | date: "%d" }}
-    <i class="space"></i>
-    <i class="fa fa-tags"></i>
-    <a class="post-category" href="/pages/category.html#{{ page.categories }}">{{ page.categories }}</a>	
-  </p>
-</header>
-<div class="post-main">
-  {{ content }}
+<div class="article">
+  <h1 class="title"><a href="{{ post.url }}">{{ post.title }}</a></h1>
+  <div class="meta">
+      <span>
+        <i class="fa fa-calendar"></i>
+        {{ post.date | date: "%Y" }}-{{ post.date | date: "%m" }}-{{ post.date | date: "%d" }}
+      </span>
+      <span>
+        <i class="fa fa-tags"></i>
+        <a class="post-category" href="/pages/category.html#{{ post.categories }}">{{ post.categories }}</a>
+      </span>
+  </div>
+  <div class="content">
+    {{ content }}
+  </div>
 </div>
 <div class="pagination">
   {% if page.previous %}
-  <a class="pagination-item newer" href="{{ BASE_PATH }}{{ page.previous.url }}">
-    <i class="fa fa-arrow-left"></i>&nbsp;&nbsp;{{ page.previous.title }}
+  <a class="btn btn-primary pull-left" href="{{ BASE_PATH }}{{ page.previous.url }}">
+    <i class="fa fa-arrow-left"></i> {{ page.previous.title }}
   </a>
   {% else %}
-  <span class="pagination-item newer">
-    {{site.lang.prev_post}}&nbsp;<i class="fa fa-chain-broken"></i>
-  </span>
+  <button class="btn btn-primary pull-left" disabled>
+    {{site.lang.prev_post}} <i class="fa fa-chain-broken"></i>
+  </button>
   {% endif %}
   {% if page.next %}
-  <a class="pagination-item older" href="{{ BASE_PATH }}{{ page.next.url }}">
-    {{ page.next.title }}&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>
+  <a class="btn btn-primary pull-right" href="{{ BASE_PATH }}{{ page.next.url }}">
+    {{ page.next.title }} <i class="fa fa-arrow-right"></i>
   </a>
   {% else %}
-  <span class="pagination-item older">
-    {{site.lang.next_post}}&nbsp;<i class="fa fa-chain-broken"></i>
-  </span>
+  <button class="btn btn-primary pull-right" disabled>
+    {{site.lang.next_post}} <i class="fa fa-chain-broken"></i>
+  </button>
   {% endif %}
 </div>
 {% include duoshuo.html %}

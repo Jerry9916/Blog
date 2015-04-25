@@ -6,12 +6,12 @@ pid: page-category
 
 {% capture categories %}{% for category in site.categories %}{{ category | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
 {% assign category = categories | split:',' | sort %}
-<div class="nav">
+<!--<div class="nav">
   {% for item in (0..site.categories.size) reversed %}{% unless forloop.first %}
   {% capture word %}{{ category[item] | strip_newlines }}{% endcapture %}
   <a href="#{{ word }}" role="button" class="btn btn-default">{{ word }} ({{ site.categories[word].size }})</a>
   {% endunless %}{% endfor %}
-</div>
+</div>-->
 <div class="list">
 {% for item in (0..site.categories.size) reversed %}
 {% unless forloop.first %}
