@@ -182,15 +182,19 @@
         <div id="page-books">
         </div>
         <!--Books end-->
+        <!--Duoshuo start-->
+        <div class="ds-thread duoshuo" data-title="测试" data-thread-key="/index" data-url="http://xiajie.me"></div>
+        <!--Duoshuo end-->
       </div>
     </div>
     <div id="totop" class="totop">
-      <a class="rocket" href="javascript:void(0);" title="{{site.lang.to_top}}"><i></i></a>
+      <a class="rocket" href="javascript:void(0);" title="回到顶部"><i></i></a>
     </div>
     <!-- build:js scripts/app.min.js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/nprogress/nprogress.js"></script>
     <script src="scripts/douban.js"></script>
+    <script src="scripts/duoshuo.js"></script>
     <script src="scripts/app.js"></script>
     <!-- endbuild -->
     <script>
@@ -206,6 +210,9 @@
       };
       var dbapi = new DoubanApi(dbOptions);
       dbapi.run();
+
+      var duoshuoQuery = {short_name: 'jerry9916'};
+      (new Duoshuo()).run();
     </script>
   </body>
 </html>

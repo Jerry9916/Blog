@@ -1,31 +1,22 @@
 .totop {
   display: none;
   position: fixed;
-  _position: absolute;
   z-index: 5;
-}
-
-@media (max-width: 650px) {
-  .rocket {
-    bottom: 25px;
-    right: 20px;
-  }
 }
 
 .rocket {
   display: block;
   position: fixed;
-  _position: absolute;
+  bottom: 70px;
+  right: 15px;
   width: 26px;
   height: 48px;
-  bottom: 40px;
-  right: 35px;
   background: url("../images/top.png") no-repeat 50% -62px;
   transition: transform 1.5s ease-in;
   i {
     display: block;
-    margin-top: 46px;
     height: 14px;
+    margin-top: 46px;
     background: url("../images/top.png") no-repeat 50% 100%;
     transform-origin: 50% 0;
   }
