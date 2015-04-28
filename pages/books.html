@@ -2,7 +2,8 @@
 title: 书架
 layout: main
 pid: page-books
-script: var dbapi = new DoubanApi(dbOptions);dbapi.run();
+script:
+  <script>var dbapi = new DoubanApi(dbOptions);dbapi.run();</script>
 ---
 
 <div id="books"></div>

@@ -50,7 +50,7 @@ gulp.task('watch', function () {
 
 gulp.task('connect', function () {
   $.connect.server({
-    root: app.env == 'dev' ? app.src : app.dist,
+    root: app.env == 'dev' ? app.src : app.site,
     port: 4000,
     livereload: true
   });
@@ -90,16 +90,27 @@ gulp.task('usemin', ['less'], function () {
     .pipe($.size());
 });
 
-
 gulp.task('htmlmin', function () {
-  gulp.src([app.site + '*.html', app.site + 'pages/**/*.html', app.site + 'posts/**/*.html'])
+  gulp.src(app.site + '*.html')
     .pipe($.htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest(app.site))
+    .pipe($.size());
+
+  gulp.src(app.site + 'pages/*.html')
+    .pipe($.htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest(app.site + 'pages/'))
+    .pipe($.size());
+
+  gulp.src(app.site + 'posts/*.html')
+    .pipe($.htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest(app.site + 'posts/'))
     .pipe($.size());
 });
 
 gulp.task('serve', ['jshint', 'less', 'font', 'connect', 'watch']);
 
 gulp.task('build', ['env:prod', 'jshint', 'clean'], function() {
-  gulp.start(/*'htmlmin', */'font', 'image', 'usemin');
+  return gulp.start('htmlmin', 'font', 'image', 'usemin');
 });
+
+gulp.task('prod', ['env:prod', 'connect']);
