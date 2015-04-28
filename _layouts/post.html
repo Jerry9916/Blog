@@ -3,7 +3,7 @@ layout: main
 post: true
 pid: page-post
 script:
-  <script>duoshuo();</script>
+  <script>(new Duoshuo()).run();</script>
 ---
 
 <div class="article">
@@ -42,15 +42,4 @@ script:
   </button>
   {% endif %}
 </div>
-<div class="ds-thread duoshuo" data-title="{{ page.title }}" data-thread-key="{{ page.id }}" data-url="{{ site.blog.url }}{{ page.url }}"></div>
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"{{ site.duoshuo.name }}"};
-function duoshuo() {
-  var ds = document.createElement('script');
-  ds.type = 'text/javascript';ds.async = true;
-  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-  ds.charset = 'UTF-8';
-  (document.getElementsByTagName('head')[0] 
-   || document.getElementsByTagName('body')[0]).appendChild(ds);
-}
-</script>
+{% include duoshuo.html %}
