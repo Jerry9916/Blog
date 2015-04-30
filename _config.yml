@@ -6,6 +6,7 @@ permalink: posts/:title.html
 excerpt_separator: ""
 
 blog:
+  version: 2.0.0
   name: Jerry's Blog
   sign: To strive to become a habit
   description: This is Jerry's blog
