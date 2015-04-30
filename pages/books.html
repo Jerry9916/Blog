@@ -6,12 +6,16 @@ script:
   <script>var dbapi = new DoubanApi(dbOptions);dbapi.run();</script>
 ---
 
-<div id="books"></div>
+<div id="books">
+  <div class="loading">
+    <i class="fa fa-refresh fa-spin fa-3x"></i>
+  </div>
+</div>
 <script>
   var dbOptions = {
     id: "page-books",
-    user: "88880966",
-    key: "0fe4cdb47009b0a72fae691d501d11f5",
+    user: "{{site.douban.name}}",
+    key: "{{site.douban.key}}",
     sections: [
       {title: '在读', status: "reading"},
       {title: '读过', status: "read"},

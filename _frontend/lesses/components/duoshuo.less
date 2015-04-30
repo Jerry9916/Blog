@@ -1,4 +1,8 @@
 .duoshuo {
+  a {
+    //color: @link-color !important;
+  }
+
   .ds-meta {
     display: none !important;
   }
@@ -27,6 +31,25 @@
     }
     .ds-replybox {
       padding-left: 40px !important;
+    }
+    .ds-comments-info {
+      border-bottom: 1px solid @gray;
+      .ds-comments-tab-duoshuo {
+        border: none !important;
+        font-size: @font-size-larger !important;
+        font-weight: bold;
+        background: none !important;
+        .ds-highlight {
+          color: @brand-primary !important;
+        }
+      }
+    }
+    .ds-comments {
+      li {
+        &:first-child {
+          border-top: none !important;
+        }
+      }
     }
   }
 }

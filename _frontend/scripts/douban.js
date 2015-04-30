@@ -1,6 +1,9 @@
 'use strict';
 function DoubanApi(options) {
   this.options = options;
+  this.main = $('#' + this.options.id);
+  this.body = $('body');
+  this.count = 0;
 }
 
 DoubanApi.prototype.makeUrl = function (status) {
@@ -38,11 +41,15 @@ DoubanApi.prototype.run = function () {
 DoubanApi.prototype.makeSection = function (section) {
   var callback = section.status + 'Show';
   this[callback] = function (json) {
-    var main = $('#' + this.options.id);
-    var html = '<div class="books"><h2 class="title">'+section.title+'</h2>';
+    var html = '<div class="books"><h2 class="title"><i class="fa fa-book"></i> '+section.title+'</h2>';
     html += '<ul>'+this.makeList(this.makeJson(json))+'</ul>';
     html += '</div>';
-    main.append(html);
+    if (this.count === 0) {
+      this.main.html(html);
+    } else {
+      this.main.append(html);
+    }
+    this.count++;
   };
-  $('<script/>').attr('src', this.makeUrl(section.status)).attr('charset', 'utf-8').appendTo($('head')[0]);
+  $('<script/>').attr('src', this.makeUrl(section.status)).attr('charset', 'utf-8').appendTo(this.body);
 };
