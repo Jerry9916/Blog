@@ -24,7 +24,7 @@ script:
 </div>
 <div class="pagination">
   {% if page.previous %}
-  <a class="btn btn-primary pull-left" href="{{ BASE_PATH }}{{ page.previous.url }}">
+  <a class="btn btn-primary pull-left" href="{{ page.previous.url }}">
     <i class="fa fa-arrow-left"></i> {{ page.previous.title }}
   </a>
   {% else %}
@@ -33,7 +33,7 @@ script:
   </button>
   {% endif %}
   {% if page.next %}
-  <a class="btn btn-primary pull-right" href="{{ BASE_PATH }}{{ page.next.url }}">
+  <a class="btn btn-primary pull-right" href="{{ page.next.url }}">
     {{ page.next.title }} <i class="fa fa-arrow-right"></i>
   </a>
   {% else %}

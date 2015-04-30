@@ -1,5 +1,6 @@
 .DS_Store
 .idea
+.tmp
 _site/*
 !_site/.gitignore
 
