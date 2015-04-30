@@ -319,4 +319,4 @@ sudo /sbin/route add -host $VIP dev lo:0
 
 附上截图一张
 
-![]({{site.static.files}}/ip-example.jpg)
+![]({{site.static.files}}ip-example.jpg)

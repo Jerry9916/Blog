@@ -3,14 +3,13 @@
 var path = require('path');
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
-
 var pkg = require('./package.json');
 
 var app = {
   src: '_frontend/',
   components: '_frontend/bower_components/',
-  dist: '_site/assets/',
-  site: '_site/',
+  dist: '_site/',
+  tmp: '.tmp/',
   env: 'dev'
 };
 
@@ -20,20 +19,10 @@ gulp.task('env:prod', function () {
 
 gulp.task('clean', function (callback) {
   var del = require('del');
-  return del([app.dist+'**/*'], {force: true}, callback);
-});
-
-gulp.task('html', function () {
-  gulp.src('*.html')
-    .pipe($.connect.reload());
-});
-
-gulp.task('less', function () {
-  return gulp.src(app.src + 'lesses/*.less')
-    .pipe($.less())
-    .pipe($.autoprefixer('last 2 versions'))
-    .pipe(gulp.dest(app.src + 'styles/'))
-    .pipe($.size());
+  var map = [
+    app.tmp
+  ];
+  return del(map, {force: true}, callback);
 });
 
 gulp.task('jshint', function () {
@@ -43,17 +32,22 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch([app.src + 'lesses/**/*.less'], ['less', 'html']);
-  gulp.watch([app.src + '*.html'], ['html']);
-  gulp.watch([app.src + 'scripts/*.js'], ['jshint', 'html']);
+  gulp.watch([app.src + 'lesses/**/*.less'], ['less', 'reload']);
+  gulp.watch([app.src + '*.html'], ['reload']);
+  gulp.watch([app.src + 'scripts/*.js'], ['jshint', 'reload']);
 });
 
 gulp.task('connect', function () {
   $.connect.server({
-    root: app.env == 'dev' ? app.src : app.site,
+    root: app.env == 'dev' ? app.src : app.dist,
     port: 4000,
     livereload: true
   });
+});
+
+gulp.task('reload', function () {
+  gulp.src('*.html')
+    .pipe($.connect.reload());
 });
 
 gulp.task('font', function () {
@@ -80,8 +74,16 @@ gulp.task('image', function () {
     .pipe($.size());
 });
 
+gulp.task('less', function () {
+  return gulp.src(app.src + 'lesses/*.less')
+    .pipe($.less())
+    .pipe($.autoprefixer('last 2 versions'))
+    .pipe(gulp.dest(app.src + 'styles/'))
+    .pipe($.size());
+});
+
 gulp.task('usemin', ['less'], function () {
-  gulp.src(app.src + 'index.html')
+  return gulp.src(app.src + 'index.html')
     .pipe($.usemin({
       css: ['concat', $.csso()],
       js: [$.uglify()]
@@ -90,27 +92,40 @@ gulp.task('usemin', ['less'], function () {
     .pipe($.size());
 });
 
-gulp.task('htmlmin', function () {
-  gulp.src(app.site + '*.html')
-    .pipe($.htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest(app.site))
-    .pipe($.size());
+/*gulp.task('rev', ['usemin'], function () {
+  var RevAll = require('gulp-rev-all');
+  var revAll = new RevAll({
+    fileNameManifest: 'manifest.json',
+    transformFilename: function (file, hash) {
+      var ext = path.extname(file.path);
+      return hash.substr(0, 8) + '.'  + path.basename(file.path, ext) + ext;
+    }
+  });
+  return gulp.src([app.tmp + 'styles/*', app.tmp + 'scripts/*'])
+    .pipe(revAll.revision())
+    .pipe(gulp.dest(app.dist))
+    .pipe(revAll.manifestFile())
+    .pipe(gulp.dest(app.tmp));
+});*/
 
-  gulp.src(app.site + 'pages/*.html')
-    .pipe($.htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest(app.site + 'pages/'))
-    .pipe($.size());
+//gulp.task('replace', ['rev'], function () {
+//  var manifest = require('./' + app.tmp + 'manifest.json');
+//  return gulp.src([app.dist + '{pages,posts}/**/*.html', app.dist + '*.html', app.tmp+'*.html'])
+//    .pipe($.fingerprint(manifest))
+//    .pipe(gulp.dest(app.dist));
+//});
 
-  gulp.src(app.site + 'posts/*.html')
+gulp.task('htmlmin', ['usemin'], function () {
+  gulp.src([app.dist + '{pages,posts}/**/*.html', app.dist + '*.html'])
     .pipe($.htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest(app.site + 'posts/'))
+    .pipe(gulp.dest(app.dist))
     .pipe($.size());
 });
 
 gulp.task('serve', ['jshint', 'less', 'font', 'connect', 'watch']);
 
 gulp.task('build', ['env:prod', 'jshint', 'clean'], function() {
-  return gulp.start('htmlmin', 'font', 'image', 'usemin');
+  return gulp.start('htmlmin', 'font', 'image');
 });
 
 gulp.task('prod', ['env:prod', 'connect']);
