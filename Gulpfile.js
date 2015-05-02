@@ -8,7 +8,8 @@ var pkg = require('./package.json');
 var app = {
   src: '_frontend/',
   components: '_frontend/bower_components/',
-  dist: '_site/',
+  dist: '_site/assets/',
+  site: '_site/',
   tmp: '.tmp/',
   env: 'dev'
 };
@@ -20,7 +21,8 @@ gulp.task('env:prod', function () {
 gulp.task('clean', function (callback) {
   var del = require('del');
   var map = [
-    app.tmp
+    app.tmp,
+    app.dist
   ];
   return del(map, {force: true}, callback);
 });
@@ -39,7 +41,7 @@ gulp.task('watch', function () {
 
 gulp.task('connect', function () {
   $.connect.server({
-    root: app.env == 'dev' ? app.src : app.dist,
+    root: app.env == 'dev' ? app.src : app.site,
     port: 4000,
     livereload: true
   });
@@ -116,9 +118,9 @@ gulp.task('usemin', ['less'], function () {
 //});
 
 gulp.task('htmlmin', ['usemin'], function () {
-  gulp.src([app.dist + '{pages,posts}/**/*.html', app.dist + '*.html'])
+  gulp.src([app.site + '{pages,posts}/**/*.html', app.site + '*.html'])
     .pipe($.htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest(app.dist))
+    .pipe(gulp.dest(app.site))
     .pipe($.size());
 });
 

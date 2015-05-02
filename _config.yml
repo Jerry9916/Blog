@@ -4,6 +4,7 @@ permalink: posts/:title.html
 excerpt_separator: ""
 
 blog:
+  version: 2.0.0
   name: Jerry's Blog
   sign: To strive to become a habit
   description: This is Jerry's blog
@@ -20,9 +21,9 @@ author:
 
 static: 
   files: http://7xj4ee.com1.z0.glb.clouddn.com/files/
-  images: /images/
-  styles: /styles/
-  scripts: /scripts/
+  images: /assets/images/
+  styles: /assets/styles/
+  scripts: /assets/scripts/
 
 douban:
   name: 88880966
