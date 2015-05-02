@@ -1,4 +1,5 @@
 node_modules
+Gulpfile.js
 bower.json
 package.json
 README.md
