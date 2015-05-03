@@ -16,7 +16,7 @@ post_format: [ ]
 
 静态链表是不具有指针的高级语言或不使用指针，借用数组的方式来实现的链表。
 
-![]({{site.static.files}}static-link-list.jpg)
+![]({{site.blog.static}}files/static-link-list.jpg)
 
 优点
 

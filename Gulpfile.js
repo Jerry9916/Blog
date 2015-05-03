@@ -1,14 +1,15 @@
 'use strict';
-
 var path = require('path');
 var gulp = require('gulp');
+var RevAll = require('gulp-rev-all');
 var $ = require('gulp-load-plugins')();
 var pkg = require('./package.json');
 
 var app = {
+  static: 'http://7xj4ee.com1.z0.glb.clouddn.com/',
   src: '_frontend/',
   components: '_frontend/bower_components/',
-  dist: '_site/assets/',
+  dist: '_dist/',
   site: '_site/',
   tmp: '.tmp/',
   env: 'dev'
@@ -84,50 +85,42 @@ gulp.task('less', function () {
     .pipe($.size());
 });
 
-gulp.task('usemin', ['less'], function () {
-  return gulp.src(app.src + 'index.html')
-    .pipe($.usemin({
-      css: ['concat', $.csso()],
-      js: [$.uglify()]
-    }))
-    .pipe(gulp.dest(app.dist))
-    .pipe($.size());
-});
-
-/*gulp.task('rev', ['usemin'], function () {
-  var RevAll = require('gulp-rev-all');
+gulp.task('useref', ['less'], function () {
+  var assets = $.useref.assets();
   var revAll = new RevAll({
-    fileNameManifest: 'manifest.json',
+    dontRenameFile: ['.html'] ,
+    prefix: '/',
     transformFilename: function (file, hash) {
       var ext = path.extname(file.path);
       return hash.substr(0, 8) + '.'  + path.basename(file.path, ext) + ext;
     }
   });
-  return gulp.src([app.tmp + 'styles/*', app.tmp + 'scripts/*'])
+  return gulp.src(app.src + 'index.html')
+    .pipe(assets)
+    .pipe($.if('*.js', $.uglify()))
+    .pipe($.if('*.css', $.csso()))
+    .pipe(assets.restore())
+    .pipe($.useref())
     .pipe(revAll.revision())
-    .pipe(gulp.dest(app.dist))
+    .pipe($.if('*.js', gulp.dest(app.dist)))
+    .pipe($.if('*.css', gulp.dest(app.dist)))
     .pipe(revAll.manifestFile())
     .pipe(gulp.dest(app.tmp));
-});*/
+});
 
-//gulp.task('replace', ['rev'], function () {
-//  var manifest = require('./' + app.tmp + 'manifest.json');
-//  return gulp.src([app.dist + '{pages,posts}/**/*.html', app.dist + '*.html', app.tmp+'*.html'])
-//    .pipe($.fingerprint(manifest))
-//    .pipe(gulp.dest(app.dist));
-//});
-
-gulp.task('htmlmin', ['usemin'], function () {
-  gulp.src([app.site + '{pages,posts}/**/*.html', app.site + '*.html'])
+gulp.task('final', ['useref'], function () {
+  var manifest = require('./' + app.tmp + 'rev-manifest.json');
+  return gulp.src([app.site + '{pages,posts}/**/*.html', app.site + '*.html'])
+    .pipe($.fingerprint(manifest))
+    .pipe($.replace(/(href|src){1}="(styles|scripts){1}/ig, '$1="' + app.static + '$2'))
     .pipe($.htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest(app.site))
-    .pipe($.size());
+    .pipe(gulp.dest(app.site));
 });
 
 gulp.task('serve', ['jshint', 'less', 'font', 'connect', 'watch']);
 
 gulp.task('build', ['env:prod', 'jshint', 'clean'], function() {
-  return gulp.start('htmlmin', 'font', 'image');
+  return gulp.start('final', 'font', 'image');
 });
 
 gulp.task('prod', ['env:prod', 'connect']);

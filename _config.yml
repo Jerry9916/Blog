@@ -4,12 +4,12 @@ permalink: posts/:title.html
 excerpt_separator: ""
 
 blog:
-  version: 2.0.0
   name: Jerry's Blog
   sign: To strive to become a habit
   description: This is Jerry's blog
   title: Jerry's blog
   url: http://xiajie.me
+  static: http://7xj4ee.com1.z0.glb.clouddn.com/
 
 author:
   name: 夏杰
@@ -18,12 +18,6 @@ author:
   weibo: http://weibo.com/Jerry9916
   github: https://github.com/jerryhsia
   resume: http://resume.xiajie.me
-
-static: 
-  files: http://7xj4ee.com1.z0.glb.clouddn.com/files/
-  images: /assets/images/
-  styles: /assets/styles/
-  scripts: /assets/scripts/
 
 douban:
   name: 88880966

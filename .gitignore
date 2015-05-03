@@ -2,6 +2,7 @@
 .idea
 .tmp
 _site/*
+_dist
 !_site/.gitignore
 
 node_modules
