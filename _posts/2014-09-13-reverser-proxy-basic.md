@@ -14,7 +14,7 @@ post_format: [ ]
 
 反向代理服务的核心工作主要是转发HTTP请求，扮演了浏览器端和后台Web服务器中转的角色。因为它工作在HTTP层（应用层），也就是网络七层结构中的第七层，因此也被称为“七层负载均衡”。可以做反向代理的软件很多，比较常见的一种是Nginx。
 
-![Nginx反向代理]({{site.static.files}}load-balancing-nginx.jpg)
+![Nginx反向代理]({{site.blog.static}}files/load-balancing-nginx.jpg)
 
 ## 负载均衡模块(HTTP Upstream)目前支持4种调度算法
 

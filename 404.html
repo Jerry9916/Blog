@@ -13,7 +13,7 @@
         height: 100%;
         margin: 0;
         padding: 0;
-        background: #67ace4 url("images/404_cloud.png") repeat-x bottom;
+        background: #67ace4 url("{{site.blog.static}}images/404_cloud.png") repeat-x bottom;
         color: #fff;
         text-align: center;
         font-size: 24px;
@@ -26,14 +26,14 @@
   </head>
   <body>
     <div id="container">
-      <img src="images/404_error.png" />
+      <img src="{{site.blog.static}}images/404_error.png" />
       <p>找不到页面了...</p>
       <p id="view"></p>
     </div>
     <script type="text/javascript">
       var time = 5;
       setInterval(function testTime() {
-        view.innerHTML = t + " 秒后跳转至首页...";
+        view.innerHTML = time + " 秒后跳转至首页...";
         if(time == 1) {
           location = "/";
         }

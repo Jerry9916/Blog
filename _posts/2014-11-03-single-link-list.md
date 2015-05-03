@@ -18,7 +18,7 @@ post_format: [ ]
 
 头结点：放在链表开头的一个固定节点，数据域为空或存储其他信息，指针域(头指针)指向第一个数据节点。
 
-![]({{site.static.files}}single-link-list.jpg)
+![]({{site.blog.static}}files/single-link-list.jpg)
 
 优点
 
