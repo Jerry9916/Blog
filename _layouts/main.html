@@ -27,7 +27,9 @@
   <div class="container-fluid row">
     {% include sidebar.html %}
     <div class="col-md-9 col-md-offset-3 right-content" id="{{page.pid}}">
-    {{ content }}
+      <div class="right-main">
+        {{ content }}
+      </div>
     </div>
   </div>
   <div id="totop" class="totop">

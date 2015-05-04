@@ -1,8 +1,27 @@
 body {
-  min-height: 1000px;
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  //-webkit-font-smoothing: antialiased;
+  //-moz-osx-font-smoothing: grayscale;
+  .container-fluid {
+    height: 100%;
+  }
+}
+
+.left-content {
+  position: fixed;
+  height: 100%;
+}
+
+.right-content {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-right: 0;
+  .right-main {
+    overflow: hidden;
+    padding: 10px 25px;
+    background-color: #FFFFFF;
+    box-shadow: 0 -1px 5px -2px @gray-dark;
+  }
 }
 
 a:hover, a:focus, a:active {
@@ -51,9 +70,4 @@ h1, h2, h3 {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #00C208;
-}
-
-.right-content {
-  padding-left: 30px;
-  padding-right: 30px;
 }
