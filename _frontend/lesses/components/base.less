@@ -7,23 +7,6 @@ body {
   }
 }
 
-.left-content {
-  position: fixed;
-  height: 100%;
-}
-
-.right-content {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-right: 0;
-  .right-main {
-    overflow: hidden;
-    padding: 10px 25px;
-    background-color: #FFFFFF;
-    box-shadow: 0 -1px 5px -2px @gray-dark;
-  }
-}
-
 a:hover, a:focus, a:active {
   outline: 0;
 }
@@ -70,4 +53,31 @@ h1, h2, h3 {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #00C208;
+}
+
+.left-content {
+  position: fixed;
+  height: 100%;
+}
+
+.right-content {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-right: 0;
+}
+
+.right-main {
+  overflow: hidden;
+  padding: 10px 25px;
+  background-color: #FFFFFF;
+  box-shadow: 0 -1px 5px -2px @gray-dark;
+  .copyright {
+    width: 100%;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 13px;
+    .at {
+      font-size: @font-size-large;
+    }
+  }
 }

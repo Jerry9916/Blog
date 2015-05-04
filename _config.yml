@@ -4,7 +4,7 @@ permalink: posts/:title.html
 excerpt_separator: ""
 
 blog:
-  name: Jerry's Blog
+  name: Jerry's BLOG
   sign: To strive to become a habit
   description: This is Jerry's blog
   title: Jerry's blog
