@@ -7,9 +7,11 @@ var pkg = require('./package.json');
 
 var app = {
   static: 'http://7xj4ee.com1.z0.glb.clouddn.com/',
+  //static: '/',
   src: '_frontend/',
   components: '_frontend/bower_components/',
   dist: '_dist/',
+  //dist: '_site/',
   site: '_site/',
   tmp: '.tmp/',
   env: 'dev'
@@ -23,7 +25,10 @@ gulp.task('clean', function (callback) {
   var del = require('del');
   var map = [
     app.tmp,
-    app.dist
+    app.dist + 'fonts/',
+    app.dist + 'images/',
+    app.dist + 'styles/',
+    app.dist + 'scripts/'
   ];
   return del(map, {force: true}, callback);
 });

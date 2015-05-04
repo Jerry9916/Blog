@@ -4,12 +4,13 @@ permalink: posts/:title.html
 excerpt_separator: ""
 
 blog:
-  name: Jerry's BLOG
+  name: Jerry's blog
   sign: To strive to become a habit
   description: This is Jerry's blog
   title: Jerry's blog
   url: http://xiajie.me
   static: http://7xj4ee.com1.z0.glb.clouddn.com/
+  #static: /
 
 author:
   name: 夏杰

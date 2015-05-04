@@ -199,7 +199,7 @@
           <!--Loading end-->
           <!--Copyright start-->
           <div class="copyright">
-            Jerry's Blog <span class="at">&copy;</span> <script>document.write(new Date().getFullYear());</script> <span class="tongji"><script src="http://js.users.51.la/17610862.js"></script></span>
+            Jerry's Blog&nbsp;<span class="at">&copy;</span>&nbsp;<script>document.write(new Date().getFullYear());</script>&nbsp;<span class="tongji"><script src="http://js.users.51.la/17610862.js"></script></span>
           </div>
           <!--Copyright end-->
         </div>
@@ -234,9 +234,8 @@
 
       function makeColor() {
         var colors = ['text-primary', 'text-success', 'text-danger', 'text-info', ''];
-        $('#page-timing .fa-circle').each(function() {
-          var index = Math.ceil(Math.random()*5) - 1;
-          $(this).addClass(colors[index]);
+        $('#page-timing .fa-circle').each(function(index) {
+          $(this).addClass(colors[index%5]);
         });
       }
       makeColor();

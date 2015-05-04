@@ -19,9 +19,8 @@ script:
 <script>
   function makeColor() {
     var colors = ['text-primary', 'text-success', 'text-danger', 'text-info', ''];
-    $('#page-timing .fa-circle').each(function() {
-      var index = Math.ceil(Math.random()*5) - 1;
-      $(this).addClass(colors[index]);
+    $('#page-timing .fa-circle').each(function(index) {
+      $(this).addClass(colors[index%5]);
     });
   }
 </script>
