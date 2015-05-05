@@ -8,22 +8,22 @@ pid: page-index
   {% for post in site.posts %}
   {% if forloop.index < 3 %}
   <div class="article">
-    <h1 class="title"><a href="{{ post.url }}">{{ post.title }}</a></h1>
+    <h1 class="title"><a href="{{post.url}}">{{post.title}}</a></h1>
     <div class="meta">
       <span>
         <i class="fa fa-calendar"></i>
-        {{ post.date | date: "%Y" }}-{{ post.date | date: "%m" }}-{{ post.date | date: "%d" }}
+        {{post.date | date: "%Y"}}-{{post.date | date: "%m"}}-{{post.date | date: "%d"}}
       </span>
       <span>
         <i class="fa fa-tags"></i>
-        <a class="post-category" href="/pages/category.html#{{ post.categories }}">{{ post.categories }}</a>
+        <a class="post-category" href="/pages/category.html#{{post.categories}}">{{post.categories}}</a>
       </span>
     </div>
     <div class="content">
-      {{ post.content | split:'<!-- more -->'| first }}
+      {{post.content | split:'<!-- more -->'| first}}
     </div>
     <div class="bottom">
-      <a href="{{ post.url }}" class="btn btn-primary">
+      <a href="{{post.url}}" class="btn btn-primary">
         {{site.lang.read_all}} <i class="fa fa-angle-double-right"></i>
       </a>
     </div>

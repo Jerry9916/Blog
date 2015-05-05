@@ -85,7 +85,7 @@ gulp.task('image', function () {
 gulp.task('less', function () {
   return gulp.src(app.src + 'lesses/*.less')
     .pipe($.less())
-    .pipe($.autoprefixer('last 2 versions'))
+    .pipe($.autoprefixer())
     .pipe(gulp.dest(app.src + 'styles/'))
     .pipe($.size());
 });
