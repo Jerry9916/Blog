@@ -41,7 +41,7 @@ DoubanApi.prototype.run = function () {
 DoubanApi.prototype.makeSection = function (section) {
   var callback = section.status + 'Show';
   this[callback] = function (json) {
-    var html = '<div class="books"><h2 class="title"><i class="fa fa-book"></i> '+section.title+'</h2>';
+    var html = '<div class="books"><h2 class="title">'+section.title+'</h2>';
     html += '<ul>'+this.makeList(this.makeJson(json))+'</ul>';
     html += '</div>';
     if (this.count === 0) {

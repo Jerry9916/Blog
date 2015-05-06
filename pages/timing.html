@@ -11,7 +11,7 @@ script:
 {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
 {% if year != y %}
 {% assign year = y %}
-<li class="year"><h2><i class="fa fa-calendar"></i> {{ post.date | date: "%Y" }}</h2></li>
+<li class="year"><h2>{{ post.date | date: "%Y" }}</h2></li>
 {% endif %}
 <li class="item"><span class="date">{{ post.date | date: "%m" }}-{{ post.date | date: "%d" }}</span> <i class="fa fa-circle"></i> <a href="{{ post.url }}" target="_blank">{{post.title}}</a></li>
 {% endfor %}

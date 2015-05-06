@@ -8,8 +8,9 @@ pid: page-index
   {% for post in site.posts %}
   {% if forloop.index < 3 %}
   <div class="article">
-    <h1 class="title"><a href="{{post.url}}">{{post.title}}</a></h1>
-    <div class="meta">
+    <div class="head">
+      <h1 class="title"><a href="{{post.url}}">{{post.title}}</a></h1>
+      <div class="meta">
       <span>
         <i class="fa fa-calendar"></i>
         {{post.date | date: "%Y"}}-{{post.date | date: "%m"}}-{{post.date | date: "%d"}}
@@ -18,11 +19,12 @@ pid: page-index
         <i class="fa fa-tags"></i>
         <a class="post-category" href="/pages/category.html#{{post.categories}}">{{post.categories}}</a>
       </span>
+      </div>
     </div>
-    <div class="content">
+    <div class="body">
       {{post.content | split:'<!-- more -->'| first}}
     </div>
-    <div class="bottom">
+    <div class="foot">
       <a href="{{post.url}}" class="btn btn-primary">
         {{site.lang.read_all}} <i class="fa fa-angle-double-right"></i>
       </a>
