@@ -7,8 +7,9 @@ script:
 ---
 
 <div class="article">
-  <h1 class="title"><a href="{{page.url}}">{{page.title}}</a></h1>
-  <div class="meta">
+  <div class="head">
+    <h1 class="title"><a href="{{page.url}}">{{page.title}}</a></h1>
+    <div class="meta">
       <span>
         <i class="fa fa-calendar"></i>
         {{page.date | date: "%Y"}}-{{page.date | date: "%m"}}-{{page.date | date: "%d"}}
@@ -17,8 +18,9 @@ script:
         <i class="fa fa-tags"></i>
         <a class="post-category" href="/pages/category.html#{{page.categories}}">{{page.categories}}</a>
       </span>
+    </div>
   </div>
-  <div class="content">
+  <div class="body">
     {{content}}
   </div>
 </div>
