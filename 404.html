@@ -8,7 +8,7 @@ layout: null
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <title>页面找不到了</title>
+    <title>{{site.lang.page_not_found}}</title>
     <style type="text/css">
       html {
         height: 100%;
@@ -31,13 +31,13 @@ layout: null
   <body>
     <div id="container">
       <img src="{{site.blog.static}}images/404_error.png" />
-      <p>找不到页面了...</p>
+      <p>{{site.lang.page_not_found}}</p>
       <p id="view"></p>
     </div>
     <script type="text/javascript">
       var time = 5;
       setInterval(function testTime() {
-        view.innerHTML = time + " 秒后跳转至首页...";
+        view.innerHTML = time + " {{site.lang.redrect_tip}}...";
         if(time == 1) {
           location = "/";
         }

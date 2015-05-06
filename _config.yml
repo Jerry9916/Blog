@@ -5,16 +5,16 @@ excerpt_separator: ""
 
 blog:
   name: Jerry's blog
-  sign: To strive to become a habit
   description: This is Jerry's blog
   title: Jerry's blog
   url: http://xiajie.me
-  static: http://7xj4ee.com1.z0.glb.clouddn.com/
-  #static: /
+  #static: http://7xj4ee.com1.z0.glb.clouddn.com/
+  static: /
 
 author:
   name: 夏杰
   nickname: Jerry
+  sign: To strive to become a habit
   email: xiajie9916@gmail.com
   weibo: http://weibo.com/Jerry9916
   qq: 82269916
@@ -44,3 +44,5 @@ lang:
   next_post: 下一篇
   prev_page: 上一页
   next_page: 下一页
+  page_not_found: 页面找不到了
+  redrect_tip: 秒后跳转到首页

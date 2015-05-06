@@ -6,12 +6,12 @@ var $ = require('gulp-load-plugins')();
 var pkg = require('./package.json');
 
 var app = {
-  static: 'http://7xj4ee.com1.z0.glb.clouddn.com/',
-  //static: '/',
+  //static: 'http://7xj4ee.com1.z0.glb.clouddn.com/',
+  static: '/',
   src: '_frontend/',
   components: '_frontend/bower_components/',
-  dist: '_dist/',
-  //dist: '_site/',
+  //dist: '_dist/',
+  dist: '_site/',
   site: '_site/',
   tmp: '.tmp/',
   env: 'dev'
