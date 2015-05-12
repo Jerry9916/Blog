@@ -122,7 +122,7 @@ gulp.task('final', ['useref'], function () {
     .pipe(gulp.dest(app.site));
 });
 
-gulp.task('serve', ['jshint', 'less', 'font', 'connect', 'watch']);
+gulp.task('default', ['jshint', 'less', 'font', 'connect', 'watch']);
 
 gulp.task('build', ['env:prod', 'jshint', 'clean'], function() {
   return gulp.start('final', 'font', 'image');
