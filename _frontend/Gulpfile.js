@@ -8,11 +8,10 @@ var pkg = require('./package.json');
 var app = {
   static: 'http://7xkon6.com1.z0.glb.clouddn.com/',
   //static: '/',
-  src: '_frontend/',
-  components: '_frontend/bower_components/',
-  dist: '_dist/',
-  //dist: '_site/',
-  site: '_site/',
+  src: './',
+  components: 'components/',
+  dist: '../_dist/',
+  site: '../_site/',
   tmp: '.tmp/',
   env: 'dev'
 };
