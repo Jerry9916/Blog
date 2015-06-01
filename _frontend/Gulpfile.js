@@ -7,9 +7,8 @@ var pkg = require('./package.json');
 
 var app = {
   static: 'http://7xkon6.com1.z0.glb.clouddn.com/',
-  //static: '/',
   src: './',
-  components: 'components/',
+  components: 'bower_components/',
   dist: '../_dist/',
   site: '../_site/',
   tmp: '.tmp/',
@@ -46,7 +45,7 @@ gulp.task('watch', function () {
 
 gulp.task('connect', function () {
   $.connect.server({
-    root: app.env == 'dev' ? app.src : app.site,
+    root: app.env == 'dev' ? './' : app.site,
     port: 4000,
     livereload: true
   });
@@ -72,11 +71,11 @@ gulp.task('font', function () {
 
 gulp.task('image', function () {
   gulp.src(app.src + 'images/*')
-    .pipe($.imagemin({
+    /*.pipe($.imagemin({
       optimizationLevel: 3,
       progressive: true,
       interlaced: true
-    }))
+    }))*/
     .pipe(gulp.dest(app.dist + 'images'))
     .pipe($.size());
 });
