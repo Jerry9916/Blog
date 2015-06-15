@@ -15,9 +15,13 @@
     padding-bottom: 0 !important;
   }
 
+  .ds-highlight {
+    color: @brand-success !important;
+  }
+
   #ds-reset {
     .ds-post-button {
-      background-color: @brand-primary !important;
+      background-color: @brand-success !important;
     }
     .ds-avatar {
       margin-left: 0 !important;
@@ -33,15 +37,18 @@
       padding-left: 40px !important;
     }
     .ds-comments-info {
-      border-bottom: 1px solid @gray;
+      border-bottom: 1px solid @border-color;
       .ds-comments-tab-duoshuo {
         border: none !important;
         font-size: @font-size-larger !important;
         font-weight: bold;
         background: none !important;
         .ds-highlight {
-          color: @brand-primary !important;
+          color: @brand-success !important;
         }
+      }
+      .ds-current {
+        color: @brand-success !important;
       }
     }
     .ds-comments {
@@ -50,6 +57,15 @@
           border-top: none !important;
         }
       }
+      .ds-user-name {
+        color: @brand-success !important;
+      }
+    }
+  }
+
+  #ds-bubble {
+    a {
+      color: @brand-success !important;
     }
   }
 }
