@@ -26,20 +26,20 @@ script:
 </div>
 <div class="pagination">
   {% if page.previous %}
-  <a class="btn btn-primary pull-left" href="{{page.previous.url}}">
+  <a class="btn btn-success pull-left" href="{{page.previous.url}}">
     <i class="fa fa-arrow-left"></i> {{page.previous.title}}
   </a>
   {% else %}
-  <button class="btn btn-primary pull-left" disabled>
+  <button class="btn btn-success pull-left" disabled>
     {{site.lang.prev_post}} <i class="fa fa-chain-broken"></i>
   </button>
   {% endif %}
   {% if page.next %}
-  <a class="btn btn-primary pull-right" href="{{page.next.url}}">
+  <a class="btn btn-success pull-right" href="{{page.next.url}}">
     {{page.next.title}} <i class="fa fa-arrow-right"></i>
   </a>
   {% else %}
-  <button class="btn btn-primary pull-right" disabled>
+  <button class="btn btn-success pull-right" disabled>
     {{site.lang.next_post}} <i class="fa fa-chain-broken"></i>
   </button>
   {% endif %}
