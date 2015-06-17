@@ -1,0 +1,6 @@
+#! /bin/bash
+
+jekyll build && 
+cd _frontend && 
+gulp build && 
+cd ..
