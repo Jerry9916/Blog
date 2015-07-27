@@ -6,7 +6,7 @@ var $ = require('gulp-load-plugins')();
 var pkg = require('./package.json');
 
 var app = {
-  static: 'http://7xj4ee.com1.z0.glb.clouddn.com/',
+  static: 'http://7xkon6.com1.z0.glb.clouddn.com/',
   //static: '/',
   src: '_frontend/',
   components: '_frontend/bower_components/',
