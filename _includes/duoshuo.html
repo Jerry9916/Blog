@@ -1,4 +1,7 @@
 <div class="ds-thread duoshuo" data-title="{{page.title}}" data-thread-key="{{page.id}}" data-url="{{site.blog.url}}{{page.url}}"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"{{site.duoshuo.name}}"};
+document.onload = function() {
+    (new Duoshuo()).run();
+};
 </script>
