@@ -11,7 +11,7 @@ tags:
   - PHP
 post_format: [ ]
 ---
-1、首先要安装autoconf。
+## 1、首先要安装autoconf。
 
 下载地址：[http://ftp.gnu.org/gnu/autoconf/][1]
 
@@ -22,7 +22,7 @@ make
 sudo make install
 {% endhighlight %}
 
-2、安装mcrpty扩展。
+## 2、安装mcrpty扩展。
 
 Mcrypt是一个功能强大的加密算法扩展库，它持20多种加密算法和8种加密模式。Mac OS X中，需要先安装这个库然后再安装PHP扩展。
 
@@ -56,7 +56,8 @@ extension=/usr/lib/php/extensions/no-debug-non-zts-20100525/mcrypt.so
 {% endhighlight %}
  
 
-**注：在mac mavericks下可能有下列问题**
+### 注：在mac mavericks下可能有下列问题
+
 {% highlight bash %}
 grep: /usr/include/php/main/php.h: No such file or directory
 
@@ -72,10 +73,10 @@ Zend Module Api No:
 
 Zend Extension Api No:
 {% endhighlight %}
-解决方法：
+### 解决方法
 {% highlight bash %}
 ln -s /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/include /usr/include
 {% endhighlight %}
- [1]: http://ftp.gnu.org/gnu/autoconf/ "http://ftp.gnu.org/gnu/autoconf/"
- [2]: http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/ "http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/"
- [3]: http://cn2.php.net/get/php-5.4.24.tar.bz2/from/a/mirror "http://cn2.php.net/get/php-5.4.24.tar.bz2/from/a/mirror"
+[1]: http://ftp.gnu.org/gnu/autoconf/ "http://ftp.gnu.org/gnu/autoconf/"
+[2]: http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/ "http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/"
+[3]: http://cn2.php.net/get/php-5.4.24.tar.bz2/from/a/mirror "http://cn2.php.net/get/php-5.4.24.tar.bz2/from/a/mirror"
