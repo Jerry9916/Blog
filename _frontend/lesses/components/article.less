@@ -4,7 +4,7 @@
   border-bottom: 1px dashed @gray;
 
   .head {
-    .border-left(@brand-primary);
+    .border-left(@brand-success);
   }
 
   .title {
@@ -13,6 +13,10 @@
   }
 
   .meta {
+    color: @gray;
+    a {
+      color: @gray;
+    }
     span {
       margin-right: 15px;
     }
@@ -29,11 +33,20 @@
     }
 
     a {
-      text-decoration: underline;
+      display: inline-block;
+      line-height: 1.5;
+      border-bottom: 1px solid @gray;
+      font-weight: bolder;
+      &:hover {
+        border-color: @link-hover-color;
+      }
     }
 
     ul {
-      padding-left: 20px;
+      .border-left(@brand-success);
+      li {
+        list-style: none;
+      }
       p {
         margin: 0;
       }
@@ -42,10 +55,15 @@
     img {
       max-width: 100%;
     }
+
+    table {
+      margin-bottom: 10px;
+    }
   }
 
   .foot {
     overflow: hidden;
     margin-top: 15px;
+    .btn-hover;
   }
 }
