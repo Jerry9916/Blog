@@ -32,7 +32,7 @@
     "gulp-replace": "0.5.3",
     "gulp-rev-all": "0.8.18",
     "gulp-size": "1.2.1",
-    "gulp-uglify": "1.2.0",
+    "gulp-uglify": "1.0.0",
     "gulp-usemin": "0.3.11",
     "gulp-useref": "1.1.2",
     "jshint-stylish": "1.0.2"

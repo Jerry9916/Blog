@@ -8,14 +8,14 @@ blog:
   description: This is Jerry's Blog
   title: Jerry's Blog
   url: http://xiajie.me
-  static: http://7xkon6.com1.z0.glb.clouddn.com/
-  #static: /
+  #static: http://7xkon6.com1.z0.glb.clouddn.com/
+  static: /
 
 author:
   name: 夏杰
   nickname: Jerry
   sign: To strive to become a habit
-  email: jerry9916@qq.com
+  email: jerry@xiajie.me
   weibo: http://weibo.com/Jerry9916
   qq: 82269916
   weixin: clever_jerry
