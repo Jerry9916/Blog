@@ -8,8 +8,8 @@ blog:
   description: This is Jerry's Blog
   title: Jerry's Blog
   url: http://xiajie.me
-  #static: http://7xkon6.com1.z0.glb.clouddn.com/
-  static: /
+  static: http://7xkon6.com1.z0.glb.clouddn.com/
+  #static: /
 
 author:
   name: 夏杰
